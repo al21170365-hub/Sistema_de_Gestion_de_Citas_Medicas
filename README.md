@@ -61,6 +61,7 @@ http://localhost:9797
 
 ### 📋 DOCTORES
 1. **Obtener todos los doctores**
+   
    GET /api/doctores
 
    Respuesta:
@@ -96,6 +97,7 @@ http://localhost:9797
    }   
    ```
 2. **Obtener doctor por ID**
+   
    GET /api/doctores/D001
 
    Respuesta:
@@ -124,6 +126,7 @@ http://localhost:9797
    }
    ```
 3. **Obtener doctores por especialidad**
+   
    GET /api/doctores/especialidad/:especialidad
 
    Respuesta:
@@ -154,6 +157,7 @@ http://localhost:9797
    }
    ```
 4. **Crear nuevo doctor**
+   
    POST /api/doctores
 
    Requerimientos:
@@ -220,6 +224,7 @@ http://localhost:9797
    
 ### 👥 PACIENTES
 5. **Obtener todos los pacientes**
+   
    GET /api/pacientes
 
    Respuesta:
@@ -255,6 +260,7 @@ http://localhost:9797
    }
    ```
 6. **Obtener paciente por ID**
+   
    GET /api/pacientes/:id
 
    Respuesta:
@@ -279,6 +285,7 @@ http://localhost:9797
    }
    ```
 7. **Crear nuevo paciente**
+    
    POST /api/pacientes
 
    Requerimientos:
@@ -327,6 +334,7 @@ http://localhost:9797
    }
    ```
 8. **Actualizar paciente**
+   
    PUT /api/pacientes:id
 
    Requerimientos:
@@ -361,6 +369,7 @@ http://localhost:9797
    }
    ```
 9. **Obtener historial de citas del paciente**
+    
    GET /api/pacientes/:id/historial
 
    Respuesta:
@@ -400,6 +409,7 @@ http://localhost:9797
    
 ### 📅 CITAS
 10. **Obtener todas las citas (con filtros opcionales)**
+    
    GET /api/citas?fecha=2025-11-10&estado=programada
 
    Respuesta(filtro exitoso):
@@ -484,6 +494,7 @@ http://localhost:9797
    }
    ```
 11. **Obtener cita por ID**
+    
    GET /api/citas/:id
 
    Respuesta:
@@ -509,6 +520,7 @@ http://localhost:9797
    }
    ```
 12. **Crear nueva cita**
+    
     POST /api/citas
 
     Requerimientos:
@@ -588,6 +600,7 @@ http://localhost:9797
    }
    ```
 13. **Cancelar cita**
+    
    PUT /api/citas/:id/cancelar
 
    Respuesta:
@@ -621,6 +634,7 @@ http://localhost:9797
    }
    ```
 14. **Obtener agenda del doctor**
+    
    GET /api/citas/doctor/:doctorId
 
    Respuesta:
@@ -659,6 +673,7 @@ http://localhost:9797
 
 ### 📊 ESTADÍSTICAS
 15. **Doctores con más citas**
+    
     GET /api/estadisticas/doctores
 
     Respuesta:
@@ -674,6 +689,7 @@ http://localhost:9797
 
 ### 🔍 FILTROS ESPECIALES
 16. **Doctores disponibles por fecha y hora**
+    
    GET /api/doctoresf/disponibles?fecha=2025-11-10&hora=10:00
 
    Respuesta:
@@ -705,6 +721,7 @@ http://localhost:9797
    }
    ```
 17. **Próximas citas (del día siguiente)**
+    
     GET /api/proximas
 
     Respuesta(fecha actual 2025-11-10):
