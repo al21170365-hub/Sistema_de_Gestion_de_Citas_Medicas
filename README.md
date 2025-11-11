@@ -408,28 +408,10 @@ http://localhost:9797
    ```
    
 ### 📅 CITAS
-10. **Obtener todas las citas (con filtros opcionales)**
+10. **Obtener todas las citas**
     
-   GET /api/citas?fecha=2025-11-10&estado=programada
-
-   Respuesta(filtro exitoso):
-   ```json
-   {
-       "success": true,
-       "message": "Filtro exitoso",
-       "data": [
-           {
-               "id": "C001",
-               "pacienteId": "P001",
-               "doctorId": "D001",
-               "fecha": "2025-11-10",
-               "hora": "16:00",
-               "motivo": "Revisión general",
-               "estado": "programada"
-           }
-       ]
-   }
-   ```
+   GET /api/citas
+   
    Respuesta(filtro no exitoso):
    ```json
    {
@@ -686,9 +668,23 @@ http://localhost:9797
        ]
    }
    ```
+16. **Especialidad mas pedida**
+
+    GET /api/estadisticas/especialidades
+
+    Respuesta:
+   ```json
+   {
+       "seccess": true,
+       "mesage": "Estadistica de especialidades extraida exitosamente",
+       "data": [
+           "Pediatra"
+       ]
+   }
+   ```
 
 ### 🔍 FILTROS ESPECIALES
-16. **Doctores disponibles por fecha y hora**
+17. **Doctores disponibles por fecha y hora**
     
    GET /api/doctoresf/disponibles?fecha=2025-11-10&hora=10:00
 
@@ -720,7 +716,31 @@ http://localhost:9797
      "message": "Doctor no tiene cita en esa fecah o hora"
    }
    ```
-17. **Próximas citas (del día siguiente)**
+18. **Obtener todas las citas (con filtros opcionales)**
+
+   GET /api/citas?fecha=2025-11-10&estado=programada
+
+   Respuesta:
+   ```json
+   {
+       "success": true,
+       "message": "Filtro exitoso",
+       "data": [
+           {
+               "id": "C001",
+               "pacienteId": "P001",
+               "doctorId": "D001",
+               "fecha": "2025-11-10",
+               "hora": "16:00",
+               "motivo": "Revisión general",
+               "estado": "programada"
+           }
+       ]
+   }
+   ```
+
+### ❗️ Notificaciones
+19. **Próximas citas (del día siguiente)**
     
     GET /api/proximas
 
