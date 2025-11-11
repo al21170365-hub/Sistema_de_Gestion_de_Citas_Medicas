@@ -23,6 +23,7 @@
 ### Prerrequisitos
 - Node.js
 - npm
+- docker(si gusta)
 
 ### Pasos de Instalación
 
@@ -36,7 +37,7 @@
    ```bash
    nmp start dev
 
-### Pasos de Instalación con Docker
+### Pasos de Instalación con Docker(si gusta)
 
 1. **Clonar el repositorio**
    ```bash
