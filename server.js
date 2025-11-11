@@ -52,9 +52,9 @@ app.get('/api/doctores/especialidad/:especialidad', (req,res) => {
     const doctor = obtenerDoctoresEspecialidad(req.params.especialidad)
 
     if(!doctor) {
-	return res.status(400).json({
+	return res.status(404).json({
 	    success: false,
-	    message: 'Doctor no encontrado'
+	    message: 'Especialidad de Doctor no encontrado'
 	})
     }
     res.status(200).json({
@@ -340,6 +340,26 @@ app.get('/api/estadisticas/doctores', (req,res) => {
     res.status(200).json({
 	seccess: true,
 	mesage: 'Estadistica de daoctores extraida exitosamente',
+	data: doctores.map(u => u[0])
+    })
+})
+app.get('/api/estadisticas/especialidades', (req,res) => {
+    const citas = obtenerCitas()
+    const count = citas.reduce((resultado, cita) => {
+	const id = cita.doctorId
+	const especialidad = obtenerDoctoresId(id).especialidad
+	if(!resultado[especialidad]) {
+	    resultado[especialidad] = 0
+	}
+	resultado[especialidad]++
+	return resultado
+    }, {})
+    const max = Math.max(...Object.values(count))
+    const doctores = Object.entries(count).filter(([id,cantidad]) => cantidad === max)
+    
+    res.status(200).json({
+	seccess: true,
+	mesage: 'Estadistica de especialidades extraida exitosamente',
 	data: doctores.map(u => u[0])
     })
 })

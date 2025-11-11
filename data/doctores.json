@@ -22,5 +22,17 @@
       "Jueves",
       "Sábado"
     ]
+  },
+  {
+    "id": "D003",
+    "nombre": "Dra. Ana Rodríguez",
+    "especialidad": "Pediatr",
+    "horarioInicio": "08:00",
+    "horarioFin": "16:00",
+    "diasDisponibles": [
+      "Martes",
+      "Jueves",
+      "Sábado"
+    ]
   }
 ]

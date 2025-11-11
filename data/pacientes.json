@@ -1,10 +1,10 @@
 [
   {
     "id": "P001",
-    "nombre": "María González",
-    "edad": 1,
+    "nombre": "Lazcano",
+    "edad": 35,
     "telefono": "555-0101",
-    "email": "maria@gemail.com",
+    "email": "maria.g@email.com",
     "fechaRegistro": "2024-11-1"
   },
   {
