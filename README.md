@@ -35,3 +35,18 @@
 3. **Iniciar el API**
    ```bash
    nmp start dev
+
+### Pasos de Instalación con Docker
+
+1. **Clonar el repositorio**
+   ```bash
+   git clone https://github.com/al21170365-hub/Sistema_de_Gestion_de_Citas_Medicas.git
+2. **Dirigirte a la carpeta**
+   ```bash
+   cd Sistema_de_Gestion_de_Citas_Medicas
+3. **Crear imagen docker**
+   ```bash
+   docker build -t node-app .
+4. **Inicializar el contenedor**
+   ```bash
+   docker run -p 9797:9797 node-app
