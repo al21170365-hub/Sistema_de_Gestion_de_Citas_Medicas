@@ -22,8 +22,5 @@
 
 1. **Clonar el repositorio**
    ```bash
-   1. git clone https://github.com/usuario/gestion-estudiantes.git
-   cd gestion-estudiantes
-
-   2. 
-   
+   https://github.com/al21170365-hub/Sistema_de_Gestion_de_Citas_Medicas.git
+   cd Sistema_de_Gestion_de_Citas_Medicas
