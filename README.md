@@ -98,7 +98,7 @@ http://localhost:9797
    ```
 2. **Obtener doctor por ID**
    
-   GET /api/doctores/D001
+   GET /api/doctores/:id
 
    Respuesta:
    ```json
@@ -335,7 +335,7 @@ http://localhost:9797
    ```
 8. **Actualizar paciente**
    
-   PUT /api/pacientes:id
+   PUT /api/pacientes/:id
 
    Requerimientos:
    ```json
