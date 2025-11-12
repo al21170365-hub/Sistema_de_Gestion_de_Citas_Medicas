@@ -790,3 +790,5 @@ http://localhost:9797
      "message": "Citas no encontradas"
    }
    ```
+
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAtiaOuaFGUPWwx4wA_xvxzA0-ZmzEmReE9oXdkJD10keS0ItoSp_Jocd_pYGmMOoYXmrvgZtfPenmLiPU-8hkkAFCXIFWQDQuhGNsw52DjQ&s=10" width="200" height="150" alt="Texto alternativo">
