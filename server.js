@@ -29,6 +29,12 @@ app.get('/', (req,res) => {
 })
 app.get('/api/doctores', (req,res) => {
     const doctores = obtenerDoctores()
+    if(!doctores) {
+	return res.status(404).json({
+	    success: false,
+	    message: 'No se encuentra ningun doctor registrado'
+	})
+    }
     res.json({
 	success: true,
 	data: doctores
@@ -99,6 +105,12 @@ app.post('/api/doctores', (req,res) => {
 //=====================================================================================================================
 app.get('/api/pacientes', (req,res) => {
     const pacientes = obtenerPacientes()
+    if(!pacientes) {
+	return res.status(404).json({
+	    success: false,
+	    message: 'No se encuentra ningun paciente registrado'
+	})
+    }
     res.json({
 	success: true,
 	data: pacientes
@@ -347,11 +359,11 @@ app.get('/api/estadisticas/especialidades', (req,res) => {
     const citas = obtenerCitas()
     const count = citas.reduce((resultado, cita) => {
 	const id = cita.doctorId
-	const especialidad = obtenerDoctoresId(id).especialidad
-	if(!resultado[especialidad]) {
-	    resultado[especialidad] = 0
+	const doctor = obtenerDoctoresId(id)
+	if(!resultado[doctor.especialidad]) {
+	    resultado[doctor.especialidad] = 0
 	}
-	resultado[especialidad]++
+	resultado[doctor.especialidad]++
 	return resultado
     }, {})
     const max = Math.max(...Object.values(count))
