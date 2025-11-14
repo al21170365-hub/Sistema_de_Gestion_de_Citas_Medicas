@@ -13,6 +13,23 @@ const leerDB_DOCTORES = () => {
 	return {}
     }
 }
+const leerDB_PACIENTES = () => {
+    try {
+	const data = fs.readFileSync(DB_PACIENTES, 'utf-8')
+	return JSON.parse(data)
+    }catch(error) {
+	return {}
+    }
+}
+const leerDB_CITAS = () => {
+    try {
+	const data = fs.readFileSync(DB_CITAS, 'utf-8')
+	return JSON.parse(data)
+    }catch(error) {
+	return {}
+    }
+}
+//===============================================================================================================
 const escribirDB_DOCTORES = (data) => {
     try {
 	fs.writeFileSync(DB_DOCTORES,JSON.stringify(data,null,2),'utf-8')
@@ -46,15 +63,11 @@ const crearDoctor = (nombre, especialidad, horarioInicio, horarioFin, diasDispon
     escribirDB_DOCTORES(db)
     return nuevoDoctor
 }
-//===============================================================================================================
-const leerDB_PACIENTES = () => {
-    try {
-	const data = fs.readFileSync(DB_PACIENTES, 'utf-8')
-	return JSON.parse(data)
-    }catch(error) {
-	return {}
-    }
+const agendaDoctor = (id) => {
+    const db = leerDB_CITAS()
+    return db.filter(u => u.doctorId === id)
 }
+//===============================================================================================================
 const escribirDB_PACIENTES = (data) => {
     try {
 	fs.writeFileSync(DB_PACIENTES,JSON.stringify(data,null,2),'utf-8')
@@ -97,15 +110,11 @@ const actualizarPaciente = (id,nombre,edad,telefono,email) => {
     escribirDB_PACIENTES(db)
     return db[index]
 }
-//===============================================================================================================
-const leerDB_CITAS = () => {
-    try {
-	const data = fs.readFileSync(DB_CITAS, 'utf-8')
-	return JSON.parse(data)
-    }catch(error) {
-	return {}
-    }
+const obtenerHistorialCitasId = (id) => {
+    const db = leerDB_CITAS()
+    return db.filter(u => u.pacienteId === id)
 }
+//===============================================================================================================
 const escribirDB_CITAS = (data) => {
     try {
 	fs.writeFileSync(DB_CITAS,JSON.stringify(data,null,2),'utf-8')
@@ -139,14 +148,6 @@ const cancelarCita = (id) => {
     db[index].estado = "cancelada"
     escribirDB_CITAS(db)
     return db[index]
-}
-const obtenerHistorialCitasId = (id) => {
-    const db = leerDB_CITAS()
-    return db.filter(u => u.pacienteId === id)
-}
-const agendaDoctor = (id) => {
-    const db = leerDB_CITAS()
-    return db.filter(u => u.doctorId === id)
 }
 const obtenerCitaHoraFecha = (hora,fecha) => {
     const db = leerDB_CITAS()
