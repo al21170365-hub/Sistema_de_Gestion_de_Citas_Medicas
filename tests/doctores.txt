@@ -1,0 +1,78 @@
+####################CORRECT####################
+{
+    "nombre": "Dra. Laura Vidal",
+    "especialidad": "Dermatóloga",
+    "horarioInicio": "10:00",
+    "horarioFin": "19:00",
+    "diasDisponibles": [
+        "Lunes",
+        "Martes",
+        "Jueves"
+    ]
+}
+{
+    "nombre": "Dr. Javier Solís",
+    "especialidad": "Ortopedista",
+    "horarioInicio": "07:30",
+    "horarioFin": "15:30",
+    "diasDisponibles": [
+        "Miércoles",
+        "Viernes",
+        "Sábado"
+    ]
+}
+{
+    "nombre": "Dra. Elena Castillo",
+    "especialidad": "Ginecóloga",
+    "horarioInicio": "08:30",
+    "horarioFin": "17:00",
+    "diasDisponibles": [
+        "Lunes",
+        "Miércoles",
+        "Viernes"
+    ]
+}
+####################DOCTOR CON ESPECIALIDAD YA EXISTENTE####################
+{
+    "nombre": "Dra. Elena Castillo",
+    "especialidad": "Ginecóloga",
+    "horarioInicio": "08:30",
+    "horarioFin": "17:00",
+    "diasDisponibles": [
+        "Lunes",
+        "Miércoles",
+        "Viernes"
+    ]
+}
+####################HORA INCORECTA####################
+{
+    "nombre": "Dr. Lazcano",
+    "especialidad": "Ginecóloga",
+    "horarioInicio": "18:30",
+    "horarioFin": "17:00",
+    "diasDisponibles": [
+        "Lunes",
+        "Miércoles",
+        "Viernes"
+    ]
+}
+####################DIAS DISPOVIBLES####################
+{
+    "nombre": "Dr. Lazcano",
+    "especialidad": "Ginecóloga",
+    "horarioInicio": "08:30",
+    "horarioFin": "17:00",
+    "diasDisponibles": []
+}
+####################FALTA DE DATOS####################
+{
+    "nombre": "Dr. Lazcano",
+    "especialidad": "Ginecóloga",
+    "horarioInicio": "",
+    "horarioFin": "17:00",
+    "diasDisponibles": [
+        "Lunes",
+        "Miércoles",
+        "Viernes"
+    ]
+}

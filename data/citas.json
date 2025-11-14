@@ -3,54 +3,45 @@
     "id": "C001",
     "pacienteId": "P001",
     "doctorId": "D001",
-    "fecha": "2025-11-10",
-    "hora": "16:00",
-    "motivo": "Revisión general",
+    "fecha": "2025-12-15",
+    "hora": "11:00",
+    "motivo": "Consulta por dermatitis",
     "estado": "programada"
   },
   {
     "id": "C002",
     "pacienteId": "P002",
-    "doctorId": "D002",
-    "fecha": "2025-11-11",
+    "doctorId": "D003",
+    "fecha": "2025-12-19",
     "hora": "10:30",
-    "motivo": "Consulta por fiebre",
+    "motivo": "Control ginecológico anual",
     "estado": "programada"
   },
   {
     "id": "C003",
     "pacienteId": "P003",
-    "doctorId": "D001",
-    "fecha": "2025-11-12",
-    "hora": "14:15",
-    "motivo": "Control mensual",
+    "doctorId": "D002",
+    "fecha": "2025-12-24",
+    "hora": "09:00",
+    "motivo": "Dolor en rodilla derecha",
     "estado": "programada"
   },
   {
     "id": "C004",
     "pacienteId": "P001",
-    "doctorId": "D002",
-    "fecha": "2025-11-13",
-    "hora": "11:00",
-    "motivo": "Vacunación",
+    "doctorId": "D003",
+    "fecha": "2026-01-05",
+    "hora": "14:00",
+    "motivo": "Seguimiento de tratamiento",
     "estado": "programada"
   },
   {
     "id": "C005",
-    "pacienteId": "P003",
-    "doctorId": "D002",
-    "fecha": "2025-11-15",
-    "hora": "09:45",
-    "motivo": "Resultados de análisis",
-    "estado": "programada"
-  },
-  {
-    "id": "C006",
-    "pacienteId": "P003",
-    "doctorId": "D002",
-    "fecha": "2025-11-18",
-    "hora": "10:00",
-    "motivo": "Resultados de análisis",
+    "pacienteId": "P002",
+    "doctorId": "D001",
+    "fecha": "2026-01-12",
+    "hora": "16:30",
+    "motivo": "Revisión de lunar sospechoso",
     "estado": "programada"
   }
 ]

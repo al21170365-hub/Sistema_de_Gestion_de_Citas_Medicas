@@ -1,38 +1,38 @@
 [
   {
     "id": "D001",
-    "nombre": "Dr. Carlos Méndez",
-    "especialidad": "Cardiologo",
-    "horarioInicio": "09:00",
-    "horarioFin": "18:00",
+    "nombre": "Dra. Laura Vidal",
+    "especialidad": "Dermatóloga",
+    "horarioInicio": "10:00",
+    "horarioFin": "19:00",
     "diasDisponibles": [
       "Lunes",
-      "Miércoles",
-      "Viernes"
+      "Martes",
+      "Jueves"
     ]
   },
   {
     "id": "D002",
-    "nombre": "Dra. Ana Rodríguez",
-    "especialidad": "Pediatra",
-    "horarioInicio": "08:00",
-    "horarioFin": "16:00",
+    "nombre": "Dr. Javier Solís",
+    "especialidad": "Ortopedista",
+    "horarioInicio": "07:30",
+    "horarioFin": "15:30",
     "diasDisponibles": [
-      "Martes",
-      "Jueves",
+      "Miércoles",
+      "Viernes",
       "Sábado"
     ]
   },
   {
     "id": "D003",
-    "nombre": "Dra. Ana Rodríguez",
-    "especialidad": "Pediatr",
-    "horarioInicio": "08:00",
-    "horarioFin": "16:00",
+    "nombre": "Dra. Elena Castillo",
+    "especialidad": "Ginecóloga",
+    "horarioInicio": "08:30",
+    "horarioFin": "17:00",
     "diasDisponibles": [
-      "Martes",
-      "Jueves",
-      "Sábado"
+      "Lunes",
+      "Miércoles",
+      "Viernes"
     ]
   }
 ]

@@ -1,0 +1,46 @@
+####################CORRECT####################
+{
+  "nombre": "Carlos Rodríguez",
+  "edad": 42,
+  "telefono": "555-0102",
+  "email": "carlos.rodriguez@email.com",
+  "fechaRegistro": "2024-10-15"
+}
+{
+  "nombre": "Ana Martínez",
+  "edad": 28,
+  "telefono": "555-0103",
+  "email": "ana.martinez@email.com",
+  "fechaRegistro": "2024-09-22"
+}
+{
+  "nombre": "David Chen",
+  "edad": 51,
+  "telefono": "555-0104",
+  "email": "david.chen@email.com",
+  "fechaRegistro": "2024-11-05"
+}
+####################MISMO EMAIL####################
+{
+  "nombre": "David Chen",
+  "edad": 51,
+  "telefono": "555-0104",
+  "email": "david.chen@email.com",
+  "fechaRegistro": "2024-11-05"
+}
+####################EDAD MENOR QUE 1####################
+{
+  "nombre": "David Chen",
+  "edad": 0,
+  "telefono": "555-0104",
+  "email": "davidChen.chen@email.com",
+  "fechaRegistro": "2024-11-05"
+}
+####################FALTAN DATOS####################
+{
+  "nombre": "David Chen",
+  "edad": 30,
+  "telefono": "",
+  "email": "davidChen.chen@email.com",
+  "fechaRegistro": "2024-11-05"
+}

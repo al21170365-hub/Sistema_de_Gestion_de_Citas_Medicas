@@ -29,7 +29,7 @@ app.get('/', (req,res) => {
 })
 app.get('/api/doctores', (req,res) => {
     const doctores = obtenerDoctores()
-    if(!doctores) {
+    if(doctores.length === 0) {
 	return res.status(404).json({
 	    success: false,
 	    message: 'No se encuentra ningun doctor registrado'
@@ -57,7 +57,7 @@ app.get('/api/doctores/:id', (req,res) => {
 app.get('/api/doctores/especialidad/:especialidad', (req,res) => {
     const doctor = obtenerDoctoresEspecialidad(req.params.especialidad)
 
-    if(!doctor) {
+    if(doctor.length === 0) {
 	return res.status(404).json({
 	    success: false,
 	    message: 'Especialidad de Doctor no encontrado'
@@ -77,7 +77,7 @@ app.post('/api/doctores', (req,res) => {
 	    message: `La especialidad ${especialidad} ya tiene al doctor ${nombre}`
 	})
     }
-    if(new Date(horarioInicio) >= new Date(horarioFin)) {
+    if(horarioInicio >= horarioFin) {
 	return res.status(400).json({
 	    success: false,
 	    message: `El horario de inicio ${horarioInicio} tiene que ser menor que el horario fin ${horarioFin}`
@@ -105,7 +105,7 @@ app.post('/api/doctores', (req,res) => {
 //=====================================================================================================================
 app.get('/api/pacientes', (req,res) => {
     const pacientes = obtenerPacientes()
-    if(!pacientes) {
+    if(pacientes.length === 0) {
 	return res.status(404).json({
 	    success: false,
 	    message: 'No se encuentra ningun paciente registrado'
@@ -183,10 +183,17 @@ app.get('/api/pacientes/:id/historial', (req,res) => {
     const historial = obtenerHistorialCitasId (
 	req.params.id,
     )
-    if(!historial) {
+    const p = obtenerPacientesId(req.params.id)
+    if(!p) {
 	return res.status(404).json({
 	    success: false,
-	    message: 'Citas no encontradas'
+	    message: 'Paciente no encontrado'
+	})
+    }
+    if(historial.length === 0) {
+	return res.status(404).json({
+	    success: false,
+	    message: 'Paciente no a tenido citas'
 	})
     }
     res.status(200).json({
@@ -200,11 +207,24 @@ app.get('/api/citas', (req,res) => {
     const { fecha, estado } = req.query
     
     const citas = obtenerCitas()
+    if(citas.length === 0) {
+	return res.status(404).json({
+	    "success": false,
+	    "message": "No se encuentra ninguna cita registrada"
+	})
+    }
     const filtro = citas.filter(cita => {
         const coincideFecha = !fecha || cita.fecha === fecha
         const coincideEstado = !estado || cita.estado === estado
         return coincideFecha && coincideEstado
     })
+
+    if(filtro.length === 0) {
+	return res.status(404).json({
+	    "success": false,
+	    "message": "Cita no encontrada"
+	})
+    }
     
     res.json({
         success: true,
@@ -307,6 +327,12 @@ app.post('/api/citas', (req,res) => {
 })
 app.put('/api/citas/:id/cancelar', (req,res) => {
     const existe = obtenerCitasId(req.params.id)
+    if(!existe) {
+	return res.status(404).json({
+	    "success": false,
+	    "message": "Cita no encontrada"
+	})
+    }
     if(existe.estado !== "programada") {
 	return res.status(400).json({
 	    success: false,
@@ -330,6 +356,12 @@ app.put('/api/citas/:id/cancelar', (req,res) => {
 })
 app.get('/api/citas/doctor/:doctorId', (req,res) => {
     const citas = agendaDoctor(req.params.doctorId)
+    if(citas.length === 0) {
+	return res.status(404).json({
+	    success: false,
+	    message: 'No se encuentra cita agendada'
+	})
+    }
     res.json({
 	success: true,
 	data: citas
@@ -349,6 +381,13 @@ app.get('/api/estadisticas/doctores', (req,res) => {
     const max = Math.max(...Object.values(count))
     const doctores = Object.entries(count).filter(([id,cantidad]) => cantidad === max)
     
+    if(doctores.length === 0) {
+	return res.status(404).json({
+	    "success":false,
+	    "message": "No se encontraron citas para obtener estadisticas"
+	})
+    }
+
     res.status(200).json({
 	seccess: true,
 	mesage: 'Estadistica de daoctores extraida exitosamente',
@@ -368,7 +407,14 @@ app.get('/api/estadisticas/especialidades', (req,res) => {
     }, {})
     const max = Math.max(...Object.values(count))
     const doctores = Object.entries(count).filter(([id,cantidad]) => cantidad === max)
-    
+       
+    if(doctores.length === 0) {
+	return res.status(404).json({
+	    "success":false,
+	    "message": "No se encontraron citas para obtener estadisticas"
+	})
+    }
+
     res.status(200).json({
 	seccess: true,
 	mesage: 'Estadistica de especialidades extraida exitosamente',
@@ -396,11 +442,26 @@ app.get('/api/doctoresf/disponibles', (req, res) => {
     }
 
     const doctores = obtenerDoctores()
+
+    if(doctores.length === 0) {
+        return res.status(404).json({
+            "success": false,
+            "message": "No hay doctores registrado"
+        })
+    }
+    
     const filtro = doctores.filter(doctor => {
         const coincideFecha = !fecha || doctor.diasDisponibles.find(u => u === nameD(fechaN))
         const coincideHora = !hora || doctor.horarioInicio <= hora && hora <= doctor.horarioFin
         return coincideFecha && coincideHora
     })
+
+    if(filtro.length === 0) {
+        return res.status(404).json({
+            "success": false,
+            "message": "No hay doctor disponible"
+        })
+    }
 
     res.status(200).json({
         success: true,
@@ -414,6 +475,13 @@ app.get('/api/proximas', (req,res) => {
     const today = getTomorrow()
     
     const tomorrow = citas.filter(u => today === u.fecha)
+
+    if(tomorrow.length === 0) {
+	return res.status(404).json({
+	    "success": false,
+	    "message": "No hay citas el dia de manana"
+	})
+    }
 
     res.status(200).json({
 	success: true,
