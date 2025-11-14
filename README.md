@@ -96,9 +96,16 @@ http://localhost:9797
        ]
    }   
    ```
-2. **Obtener doctor por ID**
+   Respuesta(error):
+   ```json
+   {
+     "success": false,
+     "message": "No se encuentra ningun doctor registrado"
+   }
+   ```
+3. **Obtener doctor por ID**
    
-   GET /api/doctores/D001
+   GET /api/doctores/:id
 
    Respuesta:
    ```json
@@ -125,7 +132,7 @@ http://localhost:9797
      "message": "Doctor no encontrado"
    }
    ```
-3. **Obtener doctores por especialidad**
+4. **Obtener doctores por especialidad**
    
    GET /api/doctores/especialidad/:especialidad
 
@@ -156,7 +163,7 @@ http://localhost:9797
      "message": "Especialidad de Doctor no encontrado"
    }
    ```
-4. **Crear nuevo doctor**
+5. **Crear nuevo doctor**
    
    POST /api/doctores
 
@@ -259,7 +266,14 @@ http://localhost:9797
        ]
    }
    ```
-6. **Obtener paciente por ID**
+   Respuesta(error):
+   ```json
+   {
+     "success": false,
+     "message": "No se encuentra ningun paciente registrado"
+   }
+   ```
+7. **Obtener paciente por ID**
    
    GET /api/pacientes/:id
 
@@ -284,7 +298,7 @@ http://localhost:9797
      "message": "Paciente no encontrado"
    }
    ```
-7. **Crear nuevo paciente**
+8. **Crear nuevo paciente**
     
    POST /api/pacientes
 
@@ -333,9 +347,9 @@ http://localhost:9797
      "message": "Totos los datos son requeridos"
    }
    ```
-8. **Actualizar paciente**
+9. **Actualizar paciente**
    
-   PUT /api/pacientes:id
+   PUT /api/pacientes/:id
 
    Requerimientos:
    ```json
@@ -368,7 +382,7 @@ http://localhost:9797
      "message": "Paciente no encontrado"
    }
    ```
-9. **Obtener historial de citas del paciente**
+10. **Obtener historial de citas del paciente**
     
    GET /api/pacientes/:id/historial
 
@@ -412,7 +426,7 @@ http://localhost:9797
     
    GET /api/citas
    
-   Respuesta(filtro no exitoso):
+   Respuesta:
    ```json
    {
        "success": true,
@@ -473,6 +487,13 @@ http://localhost:9797
                "estado": "cancelada"
            }
        ]
+   }
+   ```
+   Respuesta(error):
+   ```json
+   {
+     "success": false,
+     "message": "No se encuentra ninguna cita registrado"
    }
    ```
 11. **Obtener cita por ID**
@@ -769,3 +790,5 @@ http://localhost:9797
      "message": "Citas no encontradas"
    }
    ```
+
+<!--<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAtiaOuaFGUPWwx4wA_xvxzA0-ZmzEmReE9oXdkJD10keS0ItoSp_Jocd_pYGmMOoYXmrvgZtfPenmLiPU-8hkkAFCXIFWQDQuhGNsw52DjQ&s=10" width="100%" alt="Texto alternativo">-->
