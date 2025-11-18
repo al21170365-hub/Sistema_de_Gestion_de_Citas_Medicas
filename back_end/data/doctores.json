@@ -34,5 +34,17 @@
       "Miércoles",
       "Viernes"
     ]
+  },
+  {
+    "id": "D004",
+    "nombre": "Dra. Laura Vida",
+    "especialidad": "Dermatóloga",
+    "horarioInicio": "10:00",
+    "horarioFin": "19:00",
+    "diasDisponibles": [
+      "Lunes",
+      "Martes",
+      "Jueves"
+    ]
   }
 ]

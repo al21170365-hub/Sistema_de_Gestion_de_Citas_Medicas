@@ -43,5 +43,14 @@
     "hora": "16:30",
     "motivo": "Revisión de lunar sospechoso",
     "estado": "programada"
+  },
+  {
+    "id": "C006",
+    "pacienteId": "P002",
+    "doctorId": "D001",
+    "fecha": "2026-01-13",
+    "hora": "16:30",
+    "motivo": "Revisión de lunar sospechoso",
+    "estado": "programada"
   }
 ]

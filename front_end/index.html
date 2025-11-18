@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles.css">
+    <script async src="./script.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-stethoscope"></i>
+                <h1>MediSchedule Pro</h1>
+            </div>
+            <p class="tagline">Efficient medical appointment management system</p>
+            <div class="add_what">
+                <button class="border-btn active" onclick="display_doctor()">
+                    <i class="fas fa-user-md"></i> Add Doctor
+                </button>
+                <button class="border-btn" onclick="display_pacient()">
+                    <i class="fas fa-user-injured"></i> Add Patient
+                </button>
+                <button class="border-btn" onclick="display_appointment()">
+                    <i class="fas fa-calendar-check"></i> Add Appointment
+                </button>
+            </div>
+        </header>
+        
+        <main>
+            <section class="doctors_section active-section">
+                <div class="section-header">
+                    <i class="fas fa-user-md"></i>
+                    <h2>Add New Doctor</h2>
+                </div>
+                <form action="" class="form_doctor">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="doctor-name">Full Name</label>
+                            <input type="text" id="doctor-name" placeholder="Enter doctor's full name">
+                        </div>
+                        <div class="form-group">
+                            <label for="doctor-specialty">Specialty</label>
+                            <select id="doctor-specialty">
+                                <option value="">Select specialty</option>
+                                <option value="cardiology">Cardiology</option>
+                                <option value="dermatology">Dermatology</option>
+                                <option value="neurology">Neurology</option>
+                                <option value="pediatrics">Pediatrics</option>
+                                <option value="orthopedics">Orthopedics</option>
+                                <option value="psychiatry">Psychiatry</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="start-time">Start Time</label>
+                            <input type="time" id="start-time">
+                        </div>
+                        <div class="form-group">
+                            <label for="end-time">End Time</label>
+                            <input type="time" id="end-time">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Available Days</label>
+                        <div class="checkbox-group">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="monday" name="days" value="monday">
+                                <label for="monday">Monday</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="tuesday" name="days" value="tuesday">
+                                <label for="tuesday">Tuesday</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="wednesday" name="days" value="wednesday">
+                                <label for="wednesday">Wednesday</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="thursday" name="days" value="thursday">
+                                <label for="thursday">Thursday</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="friday" name="days" value="friday">
+                                <label for="friday">Friday</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="saturday" name="days" value="saturday">
+                                <label for="saturday">Saturday</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="sunday" name="days" value="sunday">
+                                <label for="sunday">Sunday</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save Doctor </button>
+                    </div>
+                </form>
+            </section>
+            
+            <section class="pacientes_section">
+                <div class="section-header">
+                    <i class="fas fa-user-injured"></i>
+                    <h2>Add New Patient</h2>
+                </div>
+                <form action="">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="patient-name">Full Name</label>
+                            <input type="text" id="patient-name" placeholder="Enter patient's full name">
+                        </div>
+                        <div class="form-group">
+                            <label for="patient-age">Age</label>
+                            <input type="number" id="patient-age" placeholder="Enter age">
+                        </div>
+                        <div class="form-group">
+                            <label for="patient-phone">Phone Number</label>
+                            <input type="tel" id="patient-phone" placeholder="Enter phone number">
+                        </div>
+                        <div class="form-group">
+                            <label for="patient-email">Email Address</label>
+                            <input type="email" id="patient-email" placeholder="Enter email address">
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary">
+                            <i class="fas fa-times"></i> Cancel
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Save Patient
+                        </button>
+                    </div>
+                </form>
+            </section>
+            
+            <section class="citas_section">
+                <div class="section-header">
+                    <i class="fas fa-calendar-check"></i>
+                    <h2>Schedule New Appointment</h2>
+                </div>
+                <form action="">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="appointment-patient">Select Patient</label>
+                            <select id="appointment-patient">
+                                <option value="">Select patient</option>
+                                <option value="patient1">John Doe</option>
+                                <option value="patient2">Jane Smith</option>
+                                <option value="patient3">Robert Johnson</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="appointment-doctor">Select Doctor</label>
+                            <select id="appointment-doctor">
+                                <option value="">Select doctor</option>
+                                <option value="doctor1">Dr. Michael Brown</option>
+                                <option value="doctor2">Dr. Sarah Wilson</option>
+                                <option value="doctor3">Dr. James Davis</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="appointment-date">Appointment Date</label>
+                            <input type="date" id="appointment-date">
+                        </div>
+                        <div class="form-group">
+                            <label for="appointment-time">Appointment Time</label>
+                            <input type="time" id="appointment-time">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="appointment-reason">Reason for Visit</label>
+                        <textarea id="appointment-reason" rows="4" placeholder="Describe the reason for the appointment"></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary">
+                            <i class="fas fa-times"></i> Cancel
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-calendar-plus"></i> Schedule Appointment
+                        </button>
+                    </div>
+                </form>
+            </section>
+        </main>
+        
+        <footer>
+            <p>MediSchedule Pro &copy; 2023 | Medical Appointment Management System</p>
+        </footer>
+    </div>
+</body>
+</html>

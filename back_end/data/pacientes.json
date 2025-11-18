@@ -1,0 +1,66 @@
+[
+  {
+    "id": "P001",
+    "nombre": "Carlos Rodríguez",
+    "edad": 42,
+    "telefono": "555-0102",
+    "email": "carlos.rodriguez@email.com",
+    "fechaRegistro": "2024-10-15"
+  },
+  {
+    "id": "P002",
+    "nombre": "Ana Martínez",
+    "edad": 28,
+    "telefono": "555-0103",
+    "email": "ana.martinez@email.com",
+    "fechaRegistro": "2024-09-22"
+  },
+  {
+    "id": "P003",
+    "nombre": "David Chen",
+    "edad": 51,
+    "telefono": "555-0104",
+    "email": "david.chen@email.com",
+    "fechaRegistro": "2024-11-05"
+  },
+  {
+    "id": "P004",
+    "nombre": "lazcano",
+    "edad": 51,
+    "telefono": "555-0104",
+    "email": "davi.chen@email.com",
+    "fechaRegistro": "2024-11-05"
+  },
+  {
+    "id": "P005",
+    "nombre": "lazcano",
+    "edad": 51,
+    "telefono": "555-0104",
+    "email": "davi.che@email.com",
+    "fechaRegistro": "2025-11-16T23:39:02.090Z"
+  },
+  {
+    "id": "P006",
+    "nombre": "lazcano",
+    "edad": 51,
+    "telefono": "555-0104",
+    "email": "davi.he@email.com",
+    "fechaRegistro": "2025-11-16T23:41:34.844Z"
+  },
+  {
+    "id": "P007",
+    "nombre": "lazcano",
+    "edad": 51,
+    "telefono": "555-0104",
+    "email": "davi.h@email.com",
+    "fechaRegistro": "11/16/2025, 3:44:02 PM"
+  },
+  {
+    "id": "P008",
+    "nombre": "Carmen Ruiz",
+    "edad": 32,
+    "telefono": "555-0103",
+    "email": "carmn.ruiz@email.com",
+    "fechaRegistro": "11/16/2025, 3:44:32 PM"
+  }
+]

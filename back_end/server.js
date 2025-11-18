@@ -19,10 +19,17 @@ const {
     obtenerCitaHoraFecha
 } = require('./utils/fileManager')
 const app = express()
+const cors = require('cors');
 const PORT = process.env.PORT || 9797
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+
+app.use(cors());
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+}));
 
 app.get('/', (req,res) => {
     res.send('!Servidor Express funcionando correctamente!')
@@ -131,7 +138,7 @@ app.get('/api/pacientes/:id', (req,res) => {
     })
 })
 app.post('/api/pacientes', (req,res) => {
-    const {nombre,edad,telefono,email,fechaRegistro} = req.body
+    const {nombre,edad,telefono,email} = req.body
     const existe = obtenerPacienteEmail(email)
     if(existe) {
 	return res.json({
@@ -145,12 +152,13 @@ app.post('/api/pacientes', (req,res) => {
 	    message: 'Edad tiene que ser mayor a 0'
 	})
     }
-    if(!nombre || !edad || !telefono || !email || !fechaRegistro) {
+    if(!nombre || !edad || !telefono || !email) {
 	return res.status(400).json({
 	    success: false,
 	    message: 'Totos los datos son requeridos'
 	})
     }
+    const fechaRegistro = new Date().toLocaleString("en-US", {timeZone: "America/Tijuana"});
     const nuevoPaciente = crearPaciente(nombre,edad,telefono,email,fechaRegistro)
     res.status(201).json({
 	success: true,
@@ -247,8 +255,8 @@ app.get('/api/citas/:id', (req,res) => {
     })
 })
 app.post('/api/citas', (req,res) => {
-    const {pacienteId,doctorId,fecha,hora,motivo,estado} = req.body
-
+    const {pacienteId,doctorId,fecha,hora,motivo} = req.body
+    const estado = 'programada'
     const existeP = obtenerPacientesId(pacienteId)
     if(!existeP) {
 	return res.status(404).json({

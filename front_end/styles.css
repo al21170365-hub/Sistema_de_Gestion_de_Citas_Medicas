@@ -1,0 +1,256 @@
+:root {
+            --primary: #3498db;
+            --secondary: #2ecc71;
+            --accent: #e74c3c;
+            --light: #f8f9fa;
+            --dark: #2c3e50;
+            --gray: #95a5a6;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --radius: 10px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: var(--dark);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+        
+        .logo i {
+            font-size: 2.5rem;
+            color: var(--primary);
+        }
+        
+        .logo h1 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            font-weight: 700;
+        }
+        
+        .tagline {
+            color: var(--gray);
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+        
+        .add_what {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .border-btn {
+            background: white;
+            border: 2px solid var(--primary);
+            padding: 15px 30px;
+            color: var(--primary);
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: var(--shadow);
+        }
+        
+        .border-btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        .border-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        main {
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            margin-bottom: 40px;
+        }
+        
+        .section-header {
+            background: var(--dark);
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .section-header i {
+            font-size: 1.5rem;
+        }
+        
+        .section-header h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+        
+        form {
+            padding: 30px;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        label {
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 1rem;
+        }
+        
+        input, select, textarea {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+        
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 10px;
+        }
+        
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .checkbox-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--primary);
+        }
+        
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: var(--gray);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #7f8c8d;
+        }
+        
+        .doctors_section, .pacientes_section, .citas_section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .active-section {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        footer {
+            text-align: center;
+            color: var(--gray);
+            padding: 20px;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .add_what {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .border-btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+            
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-actions {
+                flex-direction: column;
+            }
+        }
