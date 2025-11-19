@@ -58,5 +58,17 @@
       "Martes",
       "Miercoles"
     ]
+  },
+  {
+    "id": "D006",
+    "nombre": "jose",
+    "especialidad": "sicologo",
+    "horarioInicio": "08:00",
+    "horarioFin": "16:00",
+    "diasDisponibles": [
+      "Lunes",
+      "Martes",
+      "Miércoles"
+    ]
   }
 ]

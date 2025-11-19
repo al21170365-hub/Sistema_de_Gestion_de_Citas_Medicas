@@ -40,11 +40,18 @@ const citas_id_cancelar = document.querySelector('.citas_id_cancelar')
 const getEstadisticas_container = document.querySelector('.getEstadisticas_container')
 
 const getFiltros_container = document.querySelector('.getFiltros_container')
+const citas_fecha_filtro = document.querySelector('.citas_fecha_filtro')
+const citas_estado_filtro = document.querySelector('.citas_estado_filtro')
+
+const doctores_fecha_filtro = document.querySelector('.doctores_fecha_filtro')
+const doctores_hora_filtro = document.querySelector('.doctores_hora_filtro')
+
+const getProximas_container = document.querySelector('.getProximas_container')
+const getCitasFiltro_container = document.querySelector('.getCitasFiltro_container')
 
 async function get_doctores() {
     getDoctores_container.innerHTML = ''
     const especialidad = get_doctores_especialidad.value
-    const agenda = get_doctor_agenda.value
     const id_s = get_doctores_id.value
     let url = ''
     
@@ -52,8 +59,6 @@ async function get_doctores() {
         url = `http://localhost:9797/api/doctores/${id_s}`
     } else if(especialidad){
         url = `http://localhost:9797/api/doctores/especialidad/${especialidad}`
-    } else if(agenda) {
-        url = `http://localhost:9797/api/citas/doctor/${agenda}`
     } else {
         url = `http://localhost:9797/api/doctores`
     }
@@ -509,5 +514,100 @@ async function get_estadisticas_especialidades() {
 }
 
 async function get_citas_filtro() {
+    getCitasFiltro_container.innerHTML = '' 
+    let fecha = citas_fecha_filtro.value
+    let estado = citas_estado_filtro.value
+    let url = 'http://localhost:9797/api/citas'
+    const params = new URLSearchParams()
+    if (fecha) params.append('fecha', fecha.replace(/\//g, '-'))
+    if (estado) params.append('estado',estado)
+    if (params.toString()) {
+        url += `?${params.toString()}`
+    }
     
+    try {
+        const results = await fetch(url)
+        if (!results.ok) {
+            throw new Error(`Error: ${results.status}`)
+        }
+        const datas = await results.json()
+        for(let i = 0; i < datas.data.length; i++) {
+            getCitasFiltro_container.innerHTML += `
+                <div class="cita-item">
+                    <strong>ID:</strong> ${datas.data[i].id} | 
+                    <strong>Paciente ID:</strong> ${datas.data[i].pacienteId} | 
+                    <strong>Doctor ID:</strong> ${datas.data[i].doctorId} | 
+                    <strong>Fecha:</strong> ${datas.data[i].fecha} | 
+                    <strong>Hora:</strong> ${datas.data[i].hora} | 
+                    <strong>Motivo:</strong> ${datas.data[i].motivo} | 
+                    <strong>Estado:</strong> ${datas.data[i].estado}
+                </div>`
+        }
+    } catch (error) {
+        console.log(`Error: ${error}`)
+        getCitasFiltro_container.innerHTML = `<div class="error">Error al cargar citas: ${error.message}</div>`
+    }
+}
+async function get_doctores_disponibles() {
+    getFiltros_container.innerHTML = ''
+    let fecha = doctores_fecha_filtro.value
+    let hora = doctores_hora_filtro.value
+    let url = 'http://localhost:9797/api/doctoresf/disponibles'
+    const params = new URLSearchParams()
+    if (fecha) params.append('fecha', fecha.replace(/\//g, '-'))
+    if (hora) params.append('estado',hora)
+    if (params.toString()) {
+        url += `?${params.toString()}`
+    }
+    
+    try {
+        const results = await fetch(url)
+        if (!results.ok) {
+            throw new Error(`Error: ${results.status}`)
+        }
+        const datas = await results.json()
+        console.log(datas)
+        for(let i = 0; i < datas.data.length; i++) {
+            getFiltros_container.innerHTML += `
+                <div>
+                    <strong>ID:</strong> ${datas.data[i].id} | 
+                    <strong>Nombre:</strong> ${datas.data[i].nombre} | 
+                    <strong>Especialidad:</strong> ${datas.data[i].especialidad} | 
+                    <strong>Horario:</strong> ${datas.data[i].horarioInicio} - ${datas.data[i].horarioFin} | 
+                    <strong>Disponibilidad:</strong> ${datas.data[i].diasDisponibles}
+                </div>`
+        }
+    } catch (error) {
+        console.log(`Error: ${error}`)
+        return null
+    }
+}
+
+async function citas_proximas() {
+    getEstadisticas_container.innerHTML = ''
+    let url = ''
+    url = 'http://localhost:9797/api/proximas'
+    
+    try {
+        const results = await fetch(url)
+        if (!results.ok) {
+            throw new Error(`Error: ${results.status}`)
+        }
+        const datas = await results.json()
+        for(let i = 0; i < datas.data.length; i++) {
+            getProximas_container.innerHTML += `
+                <div class="cita-item">
+                    <strong>ID:</strong> ${datas.data[i].id} | 
+                    <strong>Paciente ID:</strong> ${datas.data[i].pacienteId} | 
+                    <strong>Doctor ID:</strong> ${datas.data[i].doctorId} | 
+                    <strong>Fecha:</strong> ${datas.data[i].fecha} | 
+                    <strong>Hora:</strong> ${datas.data[i].hora} | 
+                    <strong>Motivo:</strong> ${datas.data[i].motivo} | 
+                    <strong>Estado:</strong> ${datas.data[i].estado}
+                </div>`
+        }
+    } catch (error) {
+        console.log(`Error: ${error}`)
+        return null
+    }
 }

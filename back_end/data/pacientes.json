@@ -70,5 +70,13 @@
     "telefono": "1234567890",
     "email": "jose@gmail.com",
     "fechaRegistro": "11/18/2025, 10:15:02 PM"
+  },
+  {
+    "id": "P010",
+    "nombre": "LAZCANO",
+    "edad": "22",
+    "telefono": "1234567890",
+    "email": "lazcano@gmail.com",
+    "fechaRegistro": "11/19/2025, 12:11:23 PM"
   }
 ]
