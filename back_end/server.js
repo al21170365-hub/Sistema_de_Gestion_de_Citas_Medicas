@@ -320,7 +320,7 @@ app.post('/api/citas', (req,res) => {
 	})
     }
 
-    if(!pacienteId || !doctorId || !fecha || !hora || !motivo || !estado) {
+    if(!pacienteId || !doctorId || !fecha || !hora || !motivo) {
 	return res.status(400).json({
 	    success: false,
 	    message: 'Totos los datos son requeridos'

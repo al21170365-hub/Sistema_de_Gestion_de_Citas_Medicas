@@ -46,5 +46,17 @@
       "Martes",
       "Jueves"
     ]
+  },
+  {
+    "id": "D005",
+    "nombre": "jose",
+    "especialidad": "maria",
+    "horarioInicio": "08:100",
+    "horarioFin": "17:00",
+    "diasDisponibles": [
+      "Lunes",
+      "Martes",
+      "Miercoles"
+    ]
   }
 ]

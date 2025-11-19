@@ -130,7 +130,7 @@ const obtenerCitasId = (id) => {
     const db = leerDB_CITAS()
     return db.find(u => u.id === id)
 }
-const crearCita = (pacienteId,doctorId,fecha,hora,motivo) => {
+const crearCita = (pacienteId,doctorId,fecha,hora,motivo,estado) => {
     const db = leerDB_CITAS()
     let id = db.length > 0 ? Math.max(...db.map(u => parseInt(u.id.slice(1)))) + 1 : 1
     id = id.toString().length === 1 ? "C00"+id : id.toString().length === 2 ? "C0"+id : "C"+id 

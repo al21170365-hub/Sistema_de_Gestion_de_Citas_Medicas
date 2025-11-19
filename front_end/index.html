@@ -4,196 +4,107 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles.css">
-    <script async src="./script.js"></script>
-    <title>Document</title>
+    <script defer src="./script.js"></script>
+    <title>Sistema de Gestión de Citas Médicas</title>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="logo">
-                <i class="fas fa-stethoscope"></i>
-                <h1>MediSchedule Pro</h1>
-            </div>
-            <p class="tagline">Efficient medical appointment management system</p>
-            <div class="add_what">
-                <button class="border-btn active" onclick="display_doctor()">
-                    <i class="fas fa-user-md"></i> Add Doctor
-                </button>
-                <button class="border-btn" onclick="display_pacient()">
-                    <i class="fas fa-user-injured"></i> Add Patient
-                </button>
-                <button class="border-btn" onclick="display_appointment()">
-                    <i class="fas fa-calendar-check"></i> Add Appointment
-                </button>
-            </div>
-        </header>
+    <header>
+        <h1>Sistema de Gestión de Citas Médicas</h1>
+        <p class="subtitle">Administre doctores, pacientes y citas de manera eficiente</p>
+    </header>
+    <main>
+        <section class="getDoctores_section">
+            <h1>Gestión de Doctores</h1>
+            Buscar por id: <input class="doctor_id_input" type="text"><br>
+            Buscar por especialidad: <input class="doctor_especialidad_input" type="text"><br>
+            Buscar agenda del doctor (ID): <input class="doctor_agenda_input" type="text"><br>
+            <button class="getDoctores_btn" onclick="get_doctores()">Buscar Doctores</button>
+            <div class="getDoctores_container"></div>
+        </section>
+
+        <section class="postPacientes_section">
+            <h1>Nuevo Doctor</h1>
+            Nombre: <input class="doctor_nombre_nuevo" type="text"><br>
+            Especialidad: <input class="doctor_especialidad_nuevo" type="text"><br>
+            Hora de Inicio: <input class="doctor_inicio_nuevo" type="text"><br>
+            Hora Fina: <input class="doctor_final_nuevo" type="text"><br>
+            Dias disponibles: <br>
+            Lunes <input class="doctor_dias_nuevo" type="checkbox" value="Lunes">
+            Martes <input class="doctor_dias_nuevo" type="checkbox" value="Martes">
+            Miercoles <input class="doctor_dias_nuevo" type="checkbox" value="Miercoles">
+            Jueves <input class="doctor_dias_nuevo" type="checkbox" value="Jueves">
+            Viernes <input class="doctor_dias_nuevo" type="checkbox" value="Viernes">
+            Sabado <input class="doctor_dias_nuevo" type="checkbox" value="Sabado">
+            Domingo <input class="doctor_dias_nuevo" type="checkbox" value="Domingo"><br>
+            <button onclick="post_doctor()">Agregar Doctor</button>
+        </section>
         
-        <main>
-            <section class="doctors_section active-section">
-                <div class="section-header">
-                    <i class="fas fa-user-md"></i>
-                    <h2>Add New Doctor</h2>
-                </div>
-                <form action="" class="form_doctor">
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label for="doctor-name">Full Name</label>
-                            <input type="text" id="doctor-name" placeholder="Enter doctor's full name">
-                        </div>
-                        <div class="form-group">
-                            <label for="doctor-specialty">Specialty</label>
-                            <select id="doctor-specialty">
-                                <option value="">Select specialty</option>
-                                <option value="cardiology">Cardiology</option>
-                                <option value="dermatology">Dermatology</option>
-                                <option value="neurology">Neurology</option>
-                                <option value="pediatrics">Pediatrics</option>
-                                <option value="orthopedics">Orthopedics</option>
-                                <option value="psychiatry">Psychiatry</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="start-time">Start Time</label>
-                            <input type="time" id="start-time">
-                        </div>
-                        <div class="form-group">
-                            <label for="end-time">End Time</label>
-                            <input type="time" id="end-time">
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Available Days</label>
-                        <div class="checkbox-group">
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="monday" name="days" value="monday">
-                                <label for="monday">Monday</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="tuesday" name="days" value="tuesday">
-                                <label for="tuesday">Tuesday</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="wednesday" name="days" value="wednesday">
-                                <label for="wednesday">Wednesday</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="thursday" name="days" value="thursday">
-                                <label for="thursday">Thursday</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="friday" name="days" value="friday">
-                                <label for="friday">Friday</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="saturday" name="days" value="saturday">
-                                <label for="saturday">Saturday</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="sunday" name="days" value="sunday">
-                                <label for="sunday">Sunday</label>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="form-actions">
-                        <button type="button" class="btn btn-secondary">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Save Doctor </button>
-                    </div>
-                </form>
-            </section>
-            
-            <section class="pacientes_section">
-                <div class="section-header">
-                    <i class="fas fa-user-injured"></i>
-                    <h2>Add New Patient</h2>
-                </div>
-                <form action="">
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label for="patient-name">Full Name</label>
-                            <input type="text" id="patient-name" placeholder="Enter patient's full name">
-                        </div>
-                        <div class="form-group">
-                            <label for="patient-age">Age</label>
-                            <input type="number" id="patient-age" placeholder="Enter age">
-                        </div>
-                        <div class="form-group">
-                            <label for="patient-phone">Phone Number</label>
-                            <input type="tel" id="patient-phone" placeholder="Enter phone number">
-                        </div>
-                        <div class="form-group">
-                            <label for="patient-email">Email Address</label>
-                            <input type="email" id="patient-email" placeholder="Enter email address">
-                        </div>
-                    </div>
-                    
-                    <div class="form-actions">
-                        <button type="button" class="btn btn-secondary">
-                            <i class="fas fa-times"></i> Cancel
-                        </button>
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-save"></i> Save Patient
-                        </button>
-                    </div>
-                </form>
-            </section>
-            
-            <section class="citas_section">
-                <div class="section-header">
-                    <i class="fas fa-calendar-check"></i>
-                    <h2>Schedule New Appointment</h2>
-                </div>
-                <form action="">
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label for="appointment-patient">Select Patient</label>
-                            <select id="appointment-patient">
-                                <option value="">Select patient</option>
-                                <option value="patient1">John Doe</option>
-                                <option value="patient2">Jane Smith</option>
-                                <option value="patient3">Robert Johnson</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="appointment-doctor">Select Doctor</label>
-                            <select id="appointment-doctor">
-                                <option value="">Select doctor</option>
-                                <option value="doctor1">Dr. Michael Brown</option>
-                                <option value="doctor2">Dr. Sarah Wilson</option>
-                                <option value="doctor3">Dr. James Davis</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="appointment-date">Appointment Date</label>
-                            <input type="date" id="appointment-date">
-                        </div>
-                        <div class="form-group">
-                            <label for="appointment-time">Appointment Time</label>
-                            <input type="time" id="appointment-time">
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="appointment-reason">Reason for Visit</label>
-                        <textarea id="appointment-reason" rows="4" placeholder="Describe the reason for the appointment"></textarea>
-                    </div>
-                    
-                    <div class="form-actions">
-                        <button type="button" class="btn btn-secondary">
-                            <i class="fas fa-times"></i> Cancel
-                        </button>
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-calendar-plus"></i> Schedule Appointment
-                        </button>
-                    </div>
-                </form>
-            </section>
-        </main>
+        <section class="getPacientes_section">
+            <h1>Gestión de Pacientes</h1>
+            Buscar por id: <input class="paciente_id_input" type="text"><br>
+            <button class="getPacientes_btn" onclick="print_pacientes()">Buscar Pacientes</button>
+            <div class="getPacientes_container"></div>
+        </section>
+
+        <section class="postPacientes_section">
+            <h1>Nuevo Pacientes</h1>
+            Nombre: <input class="paciente_nombre_nuevo" type="text"><br>
+            Edad: <input class="paciente_edad_nuevo" type="text"><br>
+            Telefono: <input class="paciente_telefono_nuevo" type="text"><br>
+            Email: <input class="paciente_email_nuevo" type="text"><br>
+            <button onclick="post_paciente()">Agregar Paciente</button>
+        </section>
         
-        <footer>
-            <p>MediSchedule Pro &copy; 2023 | Medical Appointment Management System</p>
-        </footer>
-    </div>
+        <section class="putPacientes_section">
+            <h1>Actualizar Pacientes</h1>
+            Id del paciente a actualizar: <input class="paciente_id_actualizar" type="text"><br>
+            <button onclick="get_put_paciente()">Cargar Datos</button><br><br>
+            Nombre: <input class="paciente_nombre_actualizar" type="text"><br>
+            Edad: <input class="paciente_edad_actualizar" type="text"><br>
+            Telefono: <input class="paciente_telefono_actualizar" type="text"><br>
+            Email: <input class="paciente_email_actualizar" type="text"><br>
+            <button onclick="put_paciente()">Actualizar Paciente</button>
+        </section>
+
+        <section class="getDoctores_section">
+            <h1>Gestión de Citas</h1>
+            Buscar por id: <input class="citas_id_input" type="text"><br>
+            Buscar agenda de doctor por id: <input class="citas_agenda_id_input" type="text"><br>
+            Buscar historial de paciente por id: <input class="citas_historial_id_input" type="text"><br>
+            <button class="getCitas_btn" onclick="print_citas()">Buscar Cita</button>
+        </section>
+
+        <section class="getDoctores_section">
+            <h1>Nueva Cita</h1>
+            Paciente: <input class="citas_paciente_nuevo" type="text"><br>
+            Doctor: <input class="citas_doctor_nuevo" type="text"><br>
+            Fecha: <input class="citas_fecha_nuevo" type="text"><br>
+            Hora: <input class="citas_hora_nuevo" type="text"><br>
+            Motivo: <input class="citas_motivo_nuevo" type="text"><br>
+            <button class="getCitas_btn" onclick="post_citas()">Agregar cita</button>
+        </section>
+
+        <section class="getDoctores_section">
+            <h1>Cancelar Cita</h1>
+            Buscar por id: <input class="citas_id_cancelar" type="text"><br>
+            <button class="getCitas_btn" onclick="put_citas()">Cancelar Cita</button>
+            <div class="getCitas_container"></div>
+        </section>
+
+        <section class="getDoctores_section">
+            <h1>Estadisticas</h1>
+            Doctores mas solicitados:
+            <button class="getCitas_btn" onclick="get_estadisticas_doctores()">Obtener estadisticas doctores</button><br>
+            Especialidades mas solicitados:
+            <button class="getCitas_btn" onclick="get_estadisticas_especialidades()">Obtener estadisticas especialidades</button>
+            <div class="getEstadisticas_container"></div>
+        </section>
+
+        <section class="getDoctores_section">
+            <h1>Estadisticas</h1>
+            <button class="getCitas_btn" onclick="get_citas_filtro()">Obtener citas con filtro</button>
+            <div class="getFiltros_container"></div>
+        </section>
+    </main>
 </body>
 </html>

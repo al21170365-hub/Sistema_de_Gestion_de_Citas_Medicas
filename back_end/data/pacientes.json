@@ -1,8 +1,8 @@
 [
   {
     "id": "P001",
-    "nombre": "Carlos Rodríguez",
-    "edad": 42,
+    "nombre": "Lazcano Beltran",
+    "edad": "42",
     "telefono": "555-0102",
     "email": "carlos.rodriguez@email.com",
     "fechaRegistro": "2024-10-15"
@@ -62,5 +62,13 @@
     "telefono": "555-0103",
     "email": "carmn.ruiz@email.com",
     "fechaRegistro": "11/16/2025, 3:44:32 PM"
+  },
+  {
+    "id": "P009",
+    "nombre": "jose",
+    "edad": "22",
+    "telefono": "1234567890",
+    "email": "jose@gmail.com",
+    "fechaRegistro": "11/18/2025, 10:15:02 PM"
   }
 ]
