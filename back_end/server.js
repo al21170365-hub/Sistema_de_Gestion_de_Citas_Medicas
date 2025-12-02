@@ -152,6 +152,12 @@ app.post('/api/pacientes', (req,res) => {
 	    message: 'Edad tiene que ser mayor a 0'
 	})
     }
+    if(!validateEmail(email)) {
+    return res.status(400).json({
+	    success: false,
+	    message: 'Email incorrecto'
+	})
+    }
     if(!nombre || !edad || !telefono || !email) {
 	return res.status(400).json({
 	    success: false,
@@ -275,9 +281,9 @@ app.post('/api/citas', (req,res) => {
     const year = now.getFullYear();
     const month = now.getMonth();
     const date = now.getDate();
-    const fechaNow = `${year}-${month+1}-${date}`
+    const fechaNow = `${year}-${(month + 1).toString().padStart(2, '0')}-${date.toString().padStart(2, '0')}`;
 
-    if(new Date(fecha) <= new Date(fechaNow)) {
+    if(new Date(fecha) < new Date(fechaNow)) {
 	return res.status(400).json({
 	    success: false,
 	    message: `Fehca: ${fecha} tiene que ser mayor que ${fechaNow}`
@@ -512,4 +518,9 @@ function getTomorrow() {
     const day = String(tomorrow.getDate()).padStart(2, '0');
     
     return `${year}-${month}-${day}`;
+}
+
+function validateEmail(email) {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
 }

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/doctores.js" defer></script>
+    <title>Document</title>
+</head>
+<body>
+    <a href="../index.html">Inicio</a>
+    <!-- Gestión de Doctores -->
+    <section class="card">
+        <h2>Gestión de Doctores</h2>
+        <div class="form-group">
+            <label>Buscar por ID:</label>
+            <input class="doctor_id_input" type="text" placeholder="ID del doctor">
+        </div>
+        <div class="form-group">
+            <label>Buscar por especialidad:</label>
+            <input class="doctor_especialidad_input" type="text" placeholder="Especialidad">
+        </div>
+        <button class="btn btn-primary getDoctores_btn" onclick="get_doctores()">Buscar Doctores</button>
+        <div class="results-container getDoctores_container"></div>
+    </section>
+    <!-- Nuevo Doctor -->
+    <section class="card">
+        <h2>Nuevo Doctor</h2>
+        <div class="form-group">
+            <label>Nombre:</label>
+            <input class="doctor_nombre_nuevo" type="text" placeholder="Nombre completo" required>
+        </div>
+        <div class="form-group">
+            <label>Especialidad:</label>
+            <input class="doctor_especialidad_nuevo" type="text" placeholder="Especialidad" required>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Hora de Inicio:</label>
+                <input class="doctor_inicio_nuevo" type="time" required>
+            </div>
+            <div class="form-group">
+                <label>Hora Final:</label>
+                <input class="doctor_final_nuevo" type="time" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Días disponibles:</label>
+            <div class="checkbox-group">
+                <label><input class="doctor_dias_nuevo" type="checkbox" value="Lunes"> Lunes</label>
+                <label><input class="doctor_dias_nuevo" type="checkbox" value="Martes"> Martes</label>
+                <label><input class="doctor_dias_nuevo" type="checkbox" value="Miércoles"> Miércoles</label>
+                <label><input class="doctor_dias_nuevo" type="checkbox" value="Jueves"> Jueves</label>
+                <label><input class="doctor_dias_nuevo" type="checkbox" value="Viernes"> Viernes</label>
+                <label><input class="doctor_dias_nuevo" type="checkbox" value="Sábado"> Sábado</label>
+                <label><input class="doctor_dias_nuevo" type="checkbox" value="Domingo"> Domingo</label>
+            </div>
+        </div>
+        <button class="btn btn-success" onclick="post_doctor()">Agregar Doctor</button>
+    </section>
+</body>
+</html>

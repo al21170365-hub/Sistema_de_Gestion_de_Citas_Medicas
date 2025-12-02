@@ -1,4 +1,4 @@
-const getDoctores_container = document.querySelector('.getDoctores_container')
+/*const getDoctores_container = document.querySelector('.getDoctores_container')
 const getPacientes_container = document.querySelector('.getPacientes_container')
 const getDoctores_btn = document.querySelector('.getDoctores_btn')
 const get_doctores_id = document.querySelector('.doctor_id_input')
@@ -611,3 +611,4 @@ async function citas_proximas() {
         return null
     }
 }
+*/

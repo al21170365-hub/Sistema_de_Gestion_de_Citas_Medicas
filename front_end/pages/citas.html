@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/citas.js" defer></script>
+    <title>Document</title>
+</head>
+<body>
+    <a href="../index.html">Inicio</a>
+    <!--Gestión de Citas -->
+    <section class="card">
+        <h2>Gestión de Citas</h2>
+        <div class="form-group">
+            <label>Buscar por ID:</label>
+            <input class="citas_id_input" type="text" placeholder="ID de la cita">
+        </div>
+        <div class="form-group">
+            <label>Buscar agenda de doctor por ID:</label>
+            <input class="citas_agenda_id_input" type="text" placeholder="ID del doctor">
+        </div>
+        <!--<div class="form-group">
+            <label>Buscar historial de paciente por ID:</label>
+            <input class="citas_historial_id_input" type="text" placeholder="ID del paciente">
+        </div>-->
+        <button class="btn btn-primary getCitas_btn" onclick="print_citas()">Buscar Cita</button>
+        <div class="results-container getCitas_container"></div>
+    </section>
+    <!-- Nueva Cita -->
+    <section class="card">
+        <h2>Nueva Cita</h2>
+        <div class="form-group">
+            <label>Paciente (ID):</label>
+            <input class="citas_paciente_nuevo" type="text" placeholder="ID del paciente" required>
+        </div>
+        <div class="form-group">
+            <label>Doctor (ID):</label>
+            <input class="citas_doctor_nuevo" type="text" placeholder="ID del doctor" required>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Fecha:</label>
+                <input class="citas_fecha_nuevo" type="date" required>
+            </div>
+            <div class="form-group">
+                <label>Hora:</label>
+                <input class="citas_hora_nuevo" type="time" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Motivo:</label>
+            <input class="citas_motivo_nuevo" type="text" placeholder="Motivo de la consulta" required>
+        </div>
+        <button class="btn btn-success" onclick="post_citas()">Agregar Cita</button>
+    </section>
+    <!-- Cancelar Cita -->
+    <section class="card">
+        <h2>Cancelar Cita</h2>
+        <div class="form-group">
+            <label>ID de la cita a cancelar:</label>
+            <input class="citas_id_cancelar" type="text" placeholder="ID de la cita">
+        </div>
+        <button class="btn btn-danger" onclick="put_citas()">Cancelar Cita</button>
+    </section>
+    <!-- Estadísticas -->
+    <section class="card">
+        <h2>Estadísticas</h2>
+        <div class="stats-buttons">
+            <button class="btn btn-info" onclick="get_estadisticas_doctores()">Doctores Más Solicitados</button>
+            <button class="btn btn-info" onclick="get_estadisticas_especialidades()">Especialidades Más Solicitadas</button>
+        </div>
+        <div class="results-container getEstadisticas_container"></div>
+    </section>
+    <!-- Citas con Filtro -->
+    <section class="card">
+        <h2>Filtrar Citas</h2>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Fecha:</label>
+                <input class="citas_fecha_filtro" type="date">
+            </div>
+            <div class="form-group">
+                <label>Estado:</label>
+                <select class="citas_estado_filtro">
+                    <option value="">Todos</option>
+                    <option value="programada">Programada</option>
+                    <option value="completada">Completada</option>
+                    <option value="cancelada">Cancelada</option>
+                </select>
+            </div>
+        </div>
+        <button class="btn btn-primary" onclick="get_citas_filtro()">Obtener Citas con Filtro</button>
+        <div class="results-container getCitasFiltro_container"></div>
+    </section>
+    <!-- Doctores Disponibles -->
+    <section class="card">
+        <h2>Doctores Disponibles</h2>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Fecha:</label>
+                <input class="doctores_fecha_filtro" type="date">
+            </div>
+            <div class="form-group">
+                <label>Hora:</label>
+                <input class="doctores_hora_filtro" type="time">
+            </div>
+        </div>
+        <button class="btn btn-primary" onclick="get_doctores_disponibles()">Obtener Doctores Disponibles</button>
+        <div class="results-container getFiltros_container"></div>
+    </section>
+    <!-- Citas Próximas -->
+    <section class="card">
+        <h2>Citas Próximas</h2>
+        <button class="btn btn-primary" onclick="citas_proximas()">Obtener Citas Próximas</button>
+        <div class="results-container getProximas_container"></div>
+    </section>
+</body>
+</html>
