@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../js/doctores.js" defer></script>
+    <script defer src="../js/doctores.js"></script>
+    <script defer src="../js/citas.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -20,6 +21,7 @@
             <input class="doctor_especialidad_input" type="text" placeholder="Especialidad">
         </div>
         <button class="btn btn-primary getDoctores_btn" onclick="get_doctores()">Buscar Doctores</button>
+        <button class="btn btn-primary getCitas_btn" onclick="print_citas(2)">Buscar agenda</button>
         <div class="results-container getDoctores_container"></div>
     </section>
     <!-- Nuevo Doctor -->

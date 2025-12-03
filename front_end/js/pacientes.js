@@ -58,15 +58,14 @@ async function post_paciente() {
             },
             body: JSON.stringify(addData)
         });
-        console.log(response)
         
         const result = await response.json();
+        getPacientes_container.innerHTML = `<div class="ok">${result?.message}</div>`
         if (!response.ok || (result && result.success === false)) {
            const errorMessage = result?.message || `Error: ${response.status} - ${response.statusText}`;
            throw new Error(errorMessage);
         }
     } catch (error) {
-        console.log(error);
         getPacientes_container.innerHTML = `<div class="error">${error}</div>`
     }
 }
@@ -107,6 +106,7 @@ async function put_paciente() {
         }
         
         const result = await response.json();
+        getPacientes_container.innerHTML = `<div class="ok">${result?.message}</div>`
         if (!response.ok || (result && result.success === false)) {
            const errorMessage = result?.message || `Error: ${response.status} - ${response.statusText}`;
            throw new Error(errorMessage);

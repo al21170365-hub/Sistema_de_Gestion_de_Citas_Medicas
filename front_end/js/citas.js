@@ -25,6 +25,9 @@ const doctores_hora_filtro = document.querySelector('.doctores_hora_filtro')
 const getProximas_container = document.querySelector('.getProximas_container')
 const getCitasFiltro_container = document.querySelector('.getCitasFiltro_container')
 
+const get_doctores_id2 = document.querySelector('.doctor_id_input')
+const getDoctores_container2 = document.querySelector('.getDoctores_container')
+
 async function get_citas(id_s,id_a,id_h) {
     let url = ''
     if(id_h) {
@@ -90,7 +93,8 @@ async function post_citas() {
                 <strong>Hora:</strong> ${result.data.hora} | 
                 <strong>Motivo:</strong> ${result.data.motivo} | 
                 <strong>Estado:</strong> ${result.data.estado}
-            </div>`
+            </div>
+            <p>${result?.message}</p>`
     } catch (error) {
         console.log(`Error: ${error}`);
         getPacientes_container.innerHTML = `<div class="error">Error al actualizar paciente: ${error.message}</div>`
@@ -137,27 +141,45 @@ async function put_citas() {
 }
 
 async function print_citas(id) {
-    getCitas_container.innerHTML = ''
     let id_s
     let id_a
+    let id_h
     if(!id) {
+        getCitas_container.innerHTML = ''
         id_s = citas_id_input.value
-        id_a = citas_agenda_id_input.value
-    }else {
+    }else if(id === 1){
         if(!citas_historial_id_input.value) {
             getCitas_container.innerHTML = '<div class="error">No se encuentra historial</div>'
             return
         }
+        id_h = citas_historial_id_input.value
+    }else if(id === 2) {
+        if(!get_doctores_id2.value) {
+            getDoctores_container2.innerHTML = '<div class="error">No se encuentran agendas</div>'
+            return
+        }
+        id_a = get_doctores_id2.value
     }
-    const id_h = citas_historial_id_input.value
     let citas = await get_citas(id_s,id_a,id_h)
     
     if (!citas || !citas.data) {
         getCitas_container.innerHTML = '<div class="error">No se encontraron citas</div>'
         return
     }
-    
-    if(id_s) {
+    if(id === 2) {
+        for(let i = 0; i < citas.data.length; i++) {
+            getDoctores_container2.innerHTML += `
+                <div class="cita-item">
+                    <strong>ID:</strong> ${citas.data[i].id} | 
+                    <strong>Paciente ID:</strong> ${citas.data[i].pacienteId} | 
+                    <strong>Doctor ID:</strong> ${citas.data[i].doctorId} | 
+                    <strong>Fecha:</strong> ${citas.data[i].fecha} | 
+                    <strong>Hora:</strong> ${citas.data[i].hora} | 
+                    <strong>Motivo:</strong> ${citas.data[i].motivo} | 
+                    <strong>Estado:</strong> ${citas.data[i].estado}
+                </div>`
+    }
+  else if(id_s) {
         getCitas_container.innerHTML = `
             <div class="cita-item">
                 <strong>ID:</strong> ${citas.data.id} | 
