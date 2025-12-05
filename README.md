@@ -33,6 +33,7 @@
 2. **Dirigirte a la carpeta**
    ```bash
    cd Sistema_de_Gestion_de_Citas_Medicas
+   cd back_end
 3. **Iniciar el API**
    ```bash
    nmp start dev
@@ -45,6 +46,7 @@
 2. **Dirigirte a la carpeta**
    ```bash
    cd Sistema_de_Gestion_de_Citas_Medicas
+   cd back_end
 3. **Crear imagen docker**
    ```bash
    docker build -t node-app .
@@ -58,6 +60,47 @@
 ```text
 http://localhost:9797
 ```
+## Estructura del proyecto
+
+```bash
+Sistema_de_Gestion_de_Citas_Medicas/
+├── .git/                         
+├── back_end/                      
+│   ├── data/                      
+│   │   ├── citas.json
+│   │   ├── doctores.json
+│   │   └── pacientes.json
+│   ├── node_modules/              
+│   ├── tests/                    
+│   ├── utils/                    
+│   │   └── fileManager.js         
+│   ├── Dockerfile                 
+│   ├── package-lock.json
+│   ├── package.json
+│   └── server.js                  
+├── front_end/                     
+│   ├── css/                       
+│   │   ├── citas.css
+│   │   ├── doctores.css
+│   │   ├── pacientes.css
+│   │   └── styles.css
+│   ├── js/                        
+│   │   ├── busquedas.js
+│   │   ├── citas.js
+│   │   ├── doctores.js
+│   │   └── pacientes.js
+│   ├── pages/                     
+│   │   ├── citas.html
+│   │   ├── doctores.html
+│   │   └── pacientes.html
+│   ├── img/                      
+│   ├── node_modules/              
+│   ├── package-lock.json
+│   ├── package.json
+│   └── index.html                 
+├── LICENSE                        
+├── README.md                      
+└── package-lock.json                  
 
 ### 📋 DOCTORES
 1. **Obtener todos los doctores**
