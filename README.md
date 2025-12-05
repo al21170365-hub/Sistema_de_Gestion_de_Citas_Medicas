@@ -33,6 +33,7 @@
 2. **Dirigirte a la carpeta**
    ```bash
    cd Sistema_de_Gestion_de_Citas_Medicas
+   cd back_end
 3. **Iniciar el API**
    ```bash
    nmp start dev
@@ -45,6 +46,7 @@
 2. **Dirigirte a la carpeta**
    ```bash
    cd Sistema_de_Gestion_de_Citas_Medicas
+   cd back_end
 3. **Crear imagen docker**
    ```bash
    docker build -t node-app .
@@ -59,44 +61,46 @@
 http://localhost:9797
 ```
 ## Estructura del proyecto
+
+```bash
 Sistema_de_Gestion_de_Citas_Medicas/
-├── .git/                          # Carpeta de control de versiones Git
-├── back_end/                      # Backend (Node.js/Express)
-│   ├── data/                      # Datos almacenados en JSON
+├── .git/                         
+├── back_end/                      
+│   ├── data/                      
 │   │   ├── citas.json
 │   │   ├── doctores.json
 │   │   └── pacientes.json
-│   ├── node_modules/              # Dependencias de Node.js
-│   ├── tests/                     # Pruebas del backend
-│   ├── utils/                     # Utilidades del backend
-│   │   └── fileManager.js         # Gestor de archivos JSON
-│   ├── Dockerfile                 # Configuración para Docker
-│   ├── package-lock.json          # Lock de dependencias
-│   ├── package.json               # Dependencias y scripts del backend
-│   └── server.js                  # Servidor principal
-├── front_end/                     # Frontend (HTML, CSS, JavaScript)
-│   ├── css/                       # Estilos CSS
+│   ├── node_modules/              
+│   ├── tests/                    
+│   ├── utils/                    
+│   │   └── fileManager.js         
+│   ├── Dockerfile                 
+│   ├── package-lock.json
+│   ├── package.json
+│   └── server.js                  
+├── front_end/                     
+│   ├── css/                       
 │   │   ├── citas.css
 │   │   ├── doctores.css
 │   │   ├── pacientes.css
 │   │   └── styles.css
-│   ├── js/                        # Lógica JavaScript
+│   ├── js/                        
 │   │   ├── busquedas.js
 │   │   ├── citas.js
 │   │   ├── doctores.js
 │   │   └── pacientes.js
-│   ├── pages/                     # Páginas HTML
+│   ├── pages/                     
 │   │   ├── citas.html
 │   │   ├── doctores.html
 │   │   └── pacientes.html
-│   ├── img/                       # Imágenes y recursos visuales
-│   ├── node_modules/              # Dependencias del frontend
-│   ├── package-lock.json          # Lock de dependencias del frontend
-│   ├── package.json               # Dependencias del frontend
-│   └── index.html                 # Página principal
-├── LICENSE                        # Licencia del proyecto
-├── README.md                      # Documentación del proyecto
-└── package-lock.json              # Lock de dependencias raíz
+│   ├── img/                      
+│   ├── node_modules/              
+│   ├── package-lock.json
+│   ├── package.json
+│   └── index.html                 
+├── LICENSE                        
+├── README.md                      
+└── package-lock.json                  
 
 ### 📋 DOCTORES
 1. **Obtener todos los doctores**
