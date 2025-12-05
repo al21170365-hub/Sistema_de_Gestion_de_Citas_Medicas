@@ -99,7 +99,7 @@ async function busqueda_global() {
 
     let html = ''
 
-    html += `
+    html = `
       ${pacientesFiltrados.map(paciente => `
           <tr>
               <td>${paciente.id}</td>
@@ -111,7 +111,26 @@ async function busqueda_global() {
           </tr>
       `).join('')}
     `
-    html += `
+    contenedor.innerHTML += `
+          <br>
+          <h3>Pacientes</h3>
+         <table class="pacientes-table">
+             <thead>
+                 <tr>
+                     <th>ID</th>
+                     <th>Nombre</th>
+                     <th>Edad</th>
+                     <th>Telefono</th>
+                     <th>Email</th>
+                     <th>Fecha de Registro</th>
+                 </tr>
+             </thead>
+             <tbody>
+                ${html}
+             </tbody>
+         </table>
+    `;
+    html = `
       ${doctoresFiltrados.map(doctor => `
           <tr>
               <td>${doctor.id}</td>
@@ -122,7 +141,25 @@ async function busqueda_global() {
           </tr>
       `).join('')}
     `
-    html += `
+    contenedor.innerHTML += `
+          <br>
+          <h3>Doctores</h3>
+         <table class="pacientes-table">
+             <thead>
+                 <tr>
+                     <th>ID</th>
+                     <th>Nombre</th>
+                     <th>Especialidad</th>
+                     <th>Horario</th>
+                     <th>Disponibilidad</th>
+                 </tr>
+             </thead>
+             <tbody>
+                ${html}
+             </tbody>
+         </table>
+    `;
+    html = `
       ${citasFiltradas.map(citas => `
             <tr>
               <td>${citas.id}</td>
@@ -135,7 +172,9 @@ async function busqueda_global() {
           </tr>
       `).join('')}
     `
-    contenedor.innerHTML = `
+    contenedor.innerHTML += `
+          <br>
+          <h3>Citas</h3>
          <table class="pacientes-table">
              <thead>
                  <tr>
@@ -407,5 +446,7 @@ async function busqueda_multiple_criterios() {
 }
 
 function limpiarBusqueda() {
-  contenedor.innerHTML = ''
+  contenedor.innerHTML = `
+            <h3><i class="fas fa-tachometer-alt"></i> Panel de Control</h3>
+            <p>Bienvenido al sistema de gestión de citas médicas. Utilice los enlaces de navegación para acceder a las diferentes secciones.</p>`
 }
