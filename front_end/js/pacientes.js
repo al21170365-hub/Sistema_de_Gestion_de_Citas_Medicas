@@ -23,14 +23,14 @@ async function get_pacientes(id_s) {
     }
     try {
         const results = await fetch(url)
-        if (!results.ok) {
-            throw new Error(`Error: ${results.status}`)
-        }
         const datas = await results.json()
+        if (!results.ok) {
+            throw new Error(`Error: ${datas?.message}`)
+        }
         return datas
     } catch (error) {
         console.log(`Error: ${error}`)
-        return null
+        return error
     }
 }
 
@@ -59,7 +59,8 @@ async function post_paciente() {
         });
         
         const result = await response.json();
-        getPacientes_container.innerHTML = `<div class="ok">${result?.message}</div>`
+        const nuevo_p = document.querySelector('.nuevo_p')
+        nuevo_p.innerHTML = `<div class="ok">${result?.message}</div>`
         if (!response.ok || (result && result.success === false)) {
            const errorMessage = result?.message || `Error: ${response.status} - ${response.statusText}`;
            throw new Error(errorMessage);
@@ -105,7 +106,8 @@ async function put_paciente() {
         }
         
         const result = await response.json();
-        getPacientes_container.innerHTML = `<div class="ok">${result?.message}</div>`
+        const actualizar_p = document.querySelector('.actualizar_p')
+        actualizar_p.innerHTML = `<div class="ok">${result?.message}</div>`
         if (!response.ok || (result && result.success === false)) {
            const errorMessage = result?.message || `Error: ${response.status} - ${response.statusText}`;
            throw new Error(errorMessage);
@@ -206,17 +208,17 @@ async function amount_pacientes() {
     
     try {
         const results = await fetch(url)
-        if (!results.ok) {
-            throw new Error(`Error: ${results.status}`)
-        }
         const datas = await results.json()
+        if (!results.ok) {
+            throw new Error(`Error: ${datas?.message}`)
+        }
         getPacientes_container_front.innerHTML = `
             <h2>Total de pacientes registrados</h2>
             Pacientes: ${datas.data.length}
         `
     } catch (error) {
         console.log(`Error: ${error}`)
-        return null
+        return error
     }
 }
 let currentPage2 = window.location.pathname.split('/').pop()

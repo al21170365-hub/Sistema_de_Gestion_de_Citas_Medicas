@@ -115,5 +115,14 @@
     "hora": "15:00",
     "motivo": "enfermo",
     "estado": "programada"
+  },
+  {
+    "id": "C014",
+    "pacienteId": "P001",
+    "doctorId": "D001",
+    "fecha": "2025-12-22",
+    "hora": "13:00",
+    "motivo": "enfermo",
+    "estado": "programada"
   }
 ]

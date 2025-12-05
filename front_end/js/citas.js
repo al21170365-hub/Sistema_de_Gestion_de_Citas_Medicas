@@ -49,10 +49,10 @@ async function get_citas(id_s,id_a,id_h) {
     
     try {
         const results = await fetch(url)
-        if (!results.ok) {
-            throw new Error(`Error: ${results.status}`)
-        }
         const datas = await results.json()
+        if (!results.ok) {
+            throw new Error(`Error: ${datas?.message}`)
+        }
         return datas
     } catch (error) {
         console.log(`Error: ${error}`)
@@ -91,6 +91,8 @@ async function post_citas() {
         }
         
         const result = await response.json();
+        const nuevaa = document.querySelector('.nuevaa')
+        nuevaa.innerHTML = `${result?.message}`
     } catch (error) {
         getCitas_container.innerHTML = `<div class="error">Error al actualizar paciente: ${error.message}</div>`
     }
@@ -119,16 +121,8 @@ async function put_citas() {
         }
         
         const result = await response.json();
-        getCitas_container.innerHTML = `
-            <div class="cita-item">
-                <strong>ID:</strong> ${result.data.id} | 
-                <strong>Paciente ID:</strong> ${result.data.pacienteId} | 
-                <strong>Doctor ID:</strong> ${result.data.doctorId} | 
-                <strong>Fecha:</strong> ${result.data.fecha} | 
-                <strong>Hora:</strong> ${result.data.hora} | 
-                <strong>Motivo:</strong> ${result.data.motivo} | 
-                <strong>Estado:</strong> ${result.data.estado}
-            </div>`
+        const form_group = document.querySelector('.canceladaa')
+        form_group.innerHTML = `${result?.message}`
     } catch (error) {
         console.log(`Error: ${error}`);
         getPacientes_container.innerHTML = `<div class="error">Error al actualizar paciente: ${error.message}</div>`
@@ -199,7 +193,6 @@ async function print_citas(id) {
                     `).join('')}
                 </tbody>
             </table>
-            <p>${citas?.message}</p>
        `;
     }
   else if(id_s) {
@@ -228,7 +221,6 @@ async function print_citas(id) {
                     </tr>
                 </tbody>
             </table>
-            <p>${citas?.message}</p>
        `;
     } else {
        getCitas_container.innerHTML = `
@@ -258,7 +250,6 @@ async function print_citas(id) {
                     `).join('')}
                 </tbody>
             </table>
-            <p>${citas?.message}</p>
        `;
     }
 }
@@ -489,7 +480,6 @@ async function get_estadisticas_especialidades(id) {
             throw new Error(`Error: ${results.status}`)
         }
         const datas = await results.json()
-        console.log(datas)
         if(id) {
             mostrarResumenEstadisticasEspecialidades(datas)
             return
@@ -549,7 +539,6 @@ async function get_citas_filtro() {
                     `).join('')}
                 </tbody>
             </table>
-            <p>${datas?.message}</p>
        `;
     } catch (error) {
         console.log(`Error: ${error}`)
@@ -597,7 +586,6 @@ async function get_doctores_disponibles() {
                     `).join('')}
                 </tbody>
             </table>
-            <p>${datas?.message}</p>
        `;
     } catch (error) {
         console.log(`Error: ${error}`)
@@ -605,63 +593,51 @@ async function get_doctores_disponibles() {
     }
 }
 
-async function citas_proximas() {
-    getEstadisticas_container.innerHTML = ''
-    let url = ''
-    url = 'http://localhost:9797/api/proximas'
-    
-    try {
-        const results = await fetch(url)
-        if (!results.ok) {
-            throw new Error(`Error: ${results.status}`)
-        }
-        const datas = await results.json()
-       getProximas_container.innerHTML = `
-            <table class="pacientes-table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Paciente</th>
-                        <th>Doctor</th>
-                        <th>Fecha</th>
-                        <th>Hora</th>
-                        <th>Motivo</th>
-                        <th>Estado</th>
-                    </tr>
-                </thead>
-                <tbody>
-                     <tr>
-                    ${datas.data.map(cita => `
-                         <td>${cita.id}</td>
-                         <td>${cita.pacienteId}</td>
-                         <td>${cita.doctorId}</td>
-                         <td>${cita.fecha}</td>
-                         <td>${cita.hora}</td>
-                         <td>${cita.motivo}</td>
-                         <td>${cita.estado}</td>
-                    </tr>
-                    `).join('')}
-                </tbody>
-            </table>
-            <p>${datas?.message}</p>
-       `;
-        // for(let i = 0; i < datas.data.length; i++) {
-        //     getProximas_container.innerHTML += `
-        //         <div class="cita-item">
-        //             <strong>ID:</strong> ${datas.data[i].id} | 
-        //             <strong>Paciente ID:</strong> ${datas.data[i].pacienteId} | 
-        //             <strong>Doctor ID:</strong> ${datas.data[i].doctorId} | 
-        //             <strong>Fecha:</strong> ${datas.data[i].fecha} | 
-        //             <strong>Hora:</strong> ${datas.data[i].hora} | 
-        //             <strong>Motivo:</strong> ${datas.data[i].motivo} | 
-        //             <strong>Estado:</strong> ${datas.data[i].estado}
-        //         </div>`
-        // }
-    } catch (error) {
-        console.log(`Error: ${error}`)
-        return null
-    }
-}
+// async function citas_proximas() {
+//     getEstadisticas_container.innerHTML = ''
+//     let url = ''
+//     url = 'http://localhost:9797/api/proximas'
+//
+//     try {
+//         const results = await fetch(url)
+//         if (!results.ok) {
+//             throw new Error(`Error: ${results.status}`)
+//         }
+//         const datas = await results.json()
+//        getProximas_container.innerHTML = `
+//             <table class="pacientes-table">
+//                 <thead>
+//                     <tr>
+//                         <th>ID</th>
+//                         <th>Paciente</th>
+//                         <th>Doctor</th>
+//                         <th>Fecha</th>
+//                         <th>Hora</th>
+//                         <th>Motivo</th>
+//                         <th>Estado</th>
+//                     </tr>
+//                 </thead>
+//                 <tbody>
+//                      <tr>
+//                     ${datas.data.map(cita => `
+//                          <td>${cita.id}</td>
+//                          <td>${cita.pacienteId}</td>
+//                          <td>${cita.doctorId}</td>
+//                          <td>${cita.fecha}</td>
+//                          <td>${cita.hora}</td>
+//                          <td>${cita.motivo}</td>
+//                          <td>${cita.estado}</td>
+//                     </tr>
+//                     `).join('')}
+//                 </tbody>
+//             </table>
+//             <p>${datas?.message}</p>
+//        `;
+//     } catch (error) {
+//         console.log(`Error: ${error}`)
+//         return null
+//     }
+// }
 
 async function show_citas_programadas_hoy() {
     getCitasFiltro_container_front.innerHTML = '' 
@@ -720,7 +696,6 @@ async function show_citas_programadas_hoy() {
                     ${filasHTML}
                 </tbody>
             </table>
-            ${datas?.message ? `<p class="mensaje-info">${datas.message}</p>` : ''}
         `
     } catch (error) {
         console.log(`Error: ${error}`)
@@ -771,20 +746,7 @@ async function show_citas_proximas() {
                     `).join('')}
                 </tbody>
             </table>
-            <p>${datas?.message}</p>
        `;
-        // for(let i = 0; i < datas.data.length; i++) {
-        //     citas_pendiente_24_horas.innerHTML += `
-        //         <div class="cita-item">
-        //             <strong>ID:</strong> ${datas.data[i].id}<br> 
-        //             <strong>Paciente ID:</strong> ${datas.data[i].pacienteId}<br> 
-        //             <strong>Doctor ID:</strong> ${datas.data[i].doctorId}<br> 
-        //             <strong>Fecha:</strong> ${datas.data[i].fecha}<br> 
-        //             <strong>Hora:</strong> ${datas.data[i].hora}<br> 
-        //             <strong>Motivo:</strong> ${datas.data[i].motivo}<br> 
-        //             <strong>Estado:</strong> ${datas.data[i].estado}
-        //         </div>`
-        // }
     } catch (error) {
         console.log(`Error: ${error}`)
         return null

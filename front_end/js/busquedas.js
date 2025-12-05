@@ -404,18 +404,6 @@ async function busqueda_multiple_criterios() {
         `;
     }
     
-    // Mostrar resumen
-    // if (contenedor) {
-    //     contenedor.innerHTML += `
-    //         <div class="resumen-busqueda">
-    //             <h4>Resumen de búsqueda</h4>
-    //             <p><strong>Total resultados:</strong> ${totalResultados}</p>
-    //             <p><strong>Pacientes:</strong> ${pacientesFiltrados.length}</p>
-    //             <p><strong>Doctores:</strong> ${doctoresFiltrados.length}</p>
-    //             <p><strong>Citas:</strong> ${citasFiltradas.length}</p>
-    //         </div>
-    //     `;
-    // }
 }
 
 function limpiarBusqueda() {

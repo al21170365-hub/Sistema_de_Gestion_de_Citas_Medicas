@@ -39,10 +39,11 @@ async function get_doctores(id) {
     
     try {
         const results = await fetch(url)
-        if (!results.ok) {
-            throw new Error(`Error: ${results.status}`)
-        }
+        // if (!results.ok) {
+        //     throw new Error(`Error: ${results.status}`)
+        // }
         const datas = await results.json()
+        getDoctores_container.innerHTML = `${datas?.message}`
         if(id) {
             return datas
         }
@@ -61,10 +62,12 @@ async function get_doctores_a(id_a) {
     
     try {
         const results = await fetch(url)
-        if (!results.ok) {
-            throw new Error(`Error: ${results.status}`)
-        }
+        // if (!results.ok) {
+        //     console.log(results)
+        //     throw new Error(`Error: ${results.status}`)
+        // }
         const datas = await results.json()
+        getDoctores_container.innerHTML = `${datas?.message}`
         return datas
     } catch (error) {
         console.log(`Error: ${error}`)
@@ -73,7 +76,8 @@ async function get_doctores_a(id_a) {
 }
 
 async function post_doctor() {
-    getPacientes_container.innerHTML = '';
+    const nuevo_d = document.querySelector('.nuevo_d')
+    nuevo_d.innerHTML = '';
     const nombre = doctor_nombre_nuevo.value
     const especialidad = doctor_especialidad_nuevo.value
     const inicio = doctor_inicio_nuevo.value
@@ -100,14 +104,15 @@ async function post_doctor() {
             body: JSON.stringify(addData)
         });
         
-        if (!response.ok) {
-            throw new Error(`Error: ${response.status} - ${response.statusText}`);
-        }
+        // if (!response.ok) {
+        //     throw new Error(`Error: ${response.status} - ${response.statusText}`);
+        // }
         
         const result = await response.json();
+        nuevo_d.innerHTML = `${result?.message}`
     } catch (error) {
         console.log(`Error: ${error}`);
-        getPacientes_container.innerHTML = `<div class="error">Error al actualizar paciente: ${error.message}</div>`
+        nuevo_d.innerHTML = `<div class="error">Error al crear doctor: ${error.message}</div>`
     }
 }
 async function put_doctor() {
@@ -145,9 +150,9 @@ async function put_doctor() {
             body: JSON.stringify(updatedData)
         });
 
-        if (!response.ok) {
-            throw new Error(`Error: ${response.status} - ${response.statusText}`);
-        }
+        // if (!response.ok) {
+        //     throw new Error(`Error: ${response.status} - ${response.statusText}`);
+        // }
 
         const result = await response.json();
         doctor_actualizar_r.innerHTML = `<div class="ok">${result?.message}</div>`
@@ -192,16 +197,30 @@ function print_doctores(doctores) {
         return
     }
     
-    for(let i = 0; i < doctores.data.length; i++) {
-        getDoctores_container.innerHTML += `
-        <div class="doctor-item">
-            <strong>ID:</strong> ${doctores.data[i].id} | 
-            <strong>Nombre:</strong> ${doctores.data[i].nombre} | 
-            <strong>Especialidad:</strong> ${doctores.data[i].especialidad} | 
-            <strong>Horario:</strong> ${doctores.data[i].horarioInicio} - ${doctores.data[i].horarioFin} | 
-            <strong>Disponibilidad:</strong> ${doctores.data[i].diasDisponibles}
-        </div>`
-    }
+    getDoctores_container.innerHTML = `
+         <table class="pacientes-table">
+             <thead>
+                 <tr>
+                     <th>ID</th>
+                     <th>Nombre</th>
+                     <th>Especialidad</th>
+                     <th>Horario</th>
+                     <th>Disponibilidad</th>
+                 </tr>
+             </thead>
+             <tbody>
+                 ${doctores.data.map(doctor => `
+                     <tr>
+                         <td>${doctor.id}</td>
+                         <td>${doctor.nombre}</td>
+                         <td>${doctor.especialidad}</td>
+                         <td>${doctor.horarioInicio} - ${doctor.horarioFin}</td>
+                         <td>${doctor.diasDisponibles}</td>
+                     </tr>
+                 `).join('')}
+             </tbody>
+         </table>
+    `;
 }
 
 function print_doctor(doctor) {
@@ -209,16 +228,28 @@ function print_doctor(doctor) {
         getDoctores_container.innerHTML = '<div>No se encontró el doctor</div>'
         return
     }
-    
     getDoctores_container.innerHTML = `
-    <div class="doctor-item">
-        <strong>ID:</strong> ${doctor.data.id}<br>
-        <strong>Nombre:</strong> ${doctor.data.nombre}<br>
-        <strong>Especialidad:</strong> ${doctor.data.especialidad}<br>
-        <strong>Horario Inicio:</strong> ${doctor.data.horarioInicio}<br>
-        <strong>Horario Fin:</strong> ${doctor.data.horarioFin}<br>
-        <strong>Disponibilidad:</strong> ${doctor.data.diasDisponibles}
-    </div>`
+         <table class="pacientes-table">
+             <thead>
+                 <tr>
+                     <th>ID</th>
+                     <th>Nombre</th>
+                     <th>Especialidad</th>
+                     <th>Horario</th>
+                     <th>Disponibilidad</th>
+                 </tr>
+             </thead>
+             <tbody>
+                 <tr>
+                     <td>${doctor.data.id}</td>
+                     <td>${doctor.data.nombre}</td>
+                     <td>${doctor.data.especialidad}</td>
+                     <td>${doctor.data.horarioInicio} - ${doctor.horarioFin}</td>
+                     <td>${doctor.data.diasDisponibles}</td>
+                 </tr>
+             </tbody>
+         </table>
+    `;
 }
 
 async function amount_doctores() {
@@ -228,10 +259,10 @@ async function amount_doctores() {
     
     try {
         const results = await fetch(url)
-        if (!results.ok) {
-            throw new Error(`Error: ${results.status}`)
-        }
         const datas = await results.json()
+        if (!results.ok) {
+            throw new Error(`Error: ${datas?.message}`)
+        }
         getDoctores_container_front.innerHTML = `
             <h2>Total de doctores activos</h2>
             Doctores: ${datas.data.length}
