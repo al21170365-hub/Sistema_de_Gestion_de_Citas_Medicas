@@ -28,6 +28,9 @@ const getCitasFiltro_container = document.querySelector('.getCitasFiltro_contain
 const get_doctores_id2 = document.querySelector('.doctor_id_input')
 const getDoctores_container2 = document.querySelector('.getDoctores_container')
 
+const citas1_chart = document.querySelector('.citas1_chart')
+const citas2_chart = document.querySelector('.citas2_chart')
+const citas3_chart = document.querySelector('.citas3_chart')
 const myChart = document.querySelector('.myChart')
 const ctx = document.getElementById('myChart');
 const citas_mes = document.querySelector('.citas_mes')
@@ -35,7 +38,7 @@ const myChart2 = document.querySelector('.myChart2')
 const tasa_citas_canceladas = document.querySelector('.tasa_citas_canceladas')
 const notificationBadge = document.getElementById('notificationBadge')
 
-async function get_citas(id_s,id_a,id_h) {
+async function get_citas(id_s,id_a,id_h,id) {
     let url = ''
     if(id_h) {
         url = `http://localhost:9797/api/pacientes/${id_h}/historial`
@@ -48,15 +51,23 @@ async function get_citas(id_s,id_a,id_h) {
     }
     
     try {
+        const getCitas_btn = document.querySelector('.getCitas_btn')
+        // getCitas_btn.disable = true
         const results = await fetch(url)
         const datas = await results.json()
         if (!results.ok) {
-            throw new Error(`Error: ${datas?.message}`)
+            if(!id) {
+                alert(`${datas?.message}`)
+                return
+            }else {
+                throw new Error(`${datas?.message}`)
+            }
         }
+        // getCitas_btn.disable = false
         return datas
     } catch (error) {
         console.log(`Error: ${error}`)
-        return null
+        return error
     }
 }
 
@@ -86,13 +97,15 @@ async function post_citas() {
             body: JSON.stringify(updatedData)
         });
         
-        if (!response.ok) {
-            throw new Error(`Error: ${response.status} - ${response.statusText}`);
-        }
         
         const result = await response.json();
-        const nuevaa = document.querySelector('.nuevaa')
-        nuevaa.innerHTML = `${result?.message}`
+        if (!response.ok) {
+            alert(`${result?.message}`)
+            return
+            // throw new Error(`Error: ${response.status} - ${response.statusText}`);
+        }
+        // const nuevaa = document.querySelector('.nuevaa')
+        // nuevaa.innerHTML = `${result?.message}`
     } catch (error) {
         getCitas_container.innerHTML = `<div class="error">Error al actualizar paciente: ${error.message}</div>`
     }
@@ -116,13 +129,15 @@ async function put_citas() {
             }
         });
         
-        if (!response.ok) {
-            throw new Error(`Error: ${response.status} - ${response.statusText}`);
-        }
         
         const result = await response.json();
-        const form_group = document.querySelector('.canceladaa')
-        form_group.innerHTML = `${result?.message}`
+        if (!response.ok) {
+            alert(`${result?.message}`)
+            return
+            // throw new Error(`Error: ${response.status} - ${response.statusText}`);
+        }
+        // const form_group = document.querySelector('.canceladaa')
+        // form_group.innerHTML = `${result?.message}`
     } catch (error) {
         console.log(`Error: ${error}`);
         getPacientes_container.innerHTML = `<div class="error">Error al actualizar paciente: ${error.message}</div>`
@@ -139,28 +154,40 @@ async function print_citas(id) {
         // id_a = citas_agenda_id_input.value
     }else if(id === 1){
         if(!citas_historial_id_input.value) {
-            getCitas_container.innerHTML = '<div class="error">No se encuentra historial</div>'
+            alert(`No se encuentra historial`)
+            // getCitas_container.innerHTML = '<div class="error">No se encuentra historial</div>'
             return
         }
         id_h = citas_historial_id_input.value
     }else if(id === 2) {
         if(!get_doctores_id2.value) {
-            getDoctores_container2.innerHTML = '<div class="error">No se encuentran agendas</div>'
+            alert(`No se encuentran agendas`)
+            // getDoctores_container2.innerHTML = '<div class="error">No se encuentran agendas</div>'
             return
         }
         id_a = get_doctores_id2.value
     }
-    let citas = await get_citas(id_s,id_a,id_h)
+    let citas = await get_citas(id_s,id_a,id_h,id)
+    console.log(citas)
     
-    if (!citas || !citas.data) {
-        getCitas_container.innerHTML = '<div class="error">No se encontraron citas</div>'
+    if (!citas || !citas.data && id !== 4 && id !== 3) {
+        // alert(`No se encuentran citas`)
+        // getCitas_container.innerHTML = '<div class="error">No se encontraron citas</div>'
         return
     }
     if(id === 4) {
+        if(citas === "Error: No se encuentra ninguna cita registrada") {
+          citas3_chart.innerHTML = `Error: No se encuentra ninguna cita registrada`
+          return
+        }
         mostrarTasaCancelacionesSimple(citas.data)
         return
     }
     if(id === 3) {
+        if(citas === "Error: No se encuentra ninguna cita registrada") {
+          citas1_chart.innerHTML = `Error: No se encuentra ninguna cita registrada`
+          return
+        }
       mostrarResumenMensualActual(citas.data)
       return
     }
@@ -254,6 +281,10 @@ async function print_citas(id) {
     }
 }
 function mostrarResumenMensualActual(citas) {
+    if(!citas) {
+      citas1_chart.innerHTML = `Error: No se encuentra ninguna cita registrada`
+      return
+    }
     // Obtener el año actual
     const añoActual = new Date().getFullYear();
     
@@ -361,10 +392,12 @@ async function get_estadisticas_doctores() {
     
     try {
         const results = await fetch(url)
-        if (!results.ok) {
-            throw new Error(`Error: ${results.status}`)
-        }
         const datas = await results.json()
+        if (!results.ok) {
+            alert(`${datas?.message}`)
+            return
+            // throw new Error(`Error: ${results.status}`)
+        }
         //console.log(datas.data)
         //mostrarResumenEstadisticasDoctores(datas)
         getEstadisticas_container.innerHTML = `
@@ -476,10 +509,14 @@ async function get_estadisticas_especialidades(id) {
     
     try {
         const results = await fetch(url)
-        if (!results.ok) {
-            throw new Error(`Error: ${results.status}`)
-        }
         const datas = await results.json()
+        if (!results.ok) {
+            if(id) {
+              citas2_chart.innerHTML = `${datas?.message}`
+              return
+            }
+            throw new Error(`Error: ${datas?.message}`)
+        }
         if(id) {
             mostrarResumenEstadisticasEspecialidades(datas)
             return
@@ -508,10 +545,12 @@ async function get_citas_filtro() {
     
     try {
         const results = await fetch(url)
-        if (!results.ok) {
-            throw new Error(`Error: ${results.status}`)
-        }
         const datas = await results.json()
+        if (!results.ok) {
+            alert(`${datas?.message}`)
+            return
+            // throw new Error(`Error: ${results.status}`)
+        }
        getCitasFiltro_container.innerHTML = `
             <table class="pacientes-table">
                 <thead>
@@ -559,10 +598,12 @@ async function get_doctores_disponibles() {
     
     try {
         const results = await fetch(url)
-        if (!results.ok) {
-            throw new Error(`Error: ${results.status}`)
-        }
         const datas = await results.json()
+        if (!results.ok) {
+            alert(`${datas?.message}`)
+            return
+            // throw new Error(`Error: ${results.status}`)
+        }
        getFiltros_container.innerHTML = `
             <table class="pacientes-table">
                 <thead>
@@ -754,6 +795,10 @@ async function show_citas_proximas() {
 }
 
 function mostrarTasaCancelacionesSimple(citas) {
+    if(!citas) {
+      citas3_chart.innerHTML = `Error: No se encuentra ninguna cita registrada`
+      return
+    }
     const añoActual = new Date().getFullYear();
     const programadasPorMes = Array(12).fill(0);
     const canceladasPorMes = Array(12).fill(0);

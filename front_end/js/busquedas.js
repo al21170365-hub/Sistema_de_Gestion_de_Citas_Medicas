@@ -55,7 +55,8 @@ async function busqueda_global() {
     let texto = busqueda_globals.value
     
     if(!texto) {
-        contenedor.innerHTML = '<p>Ingrese texto</p>'
+        alert(`Ingrese texto`)
+        // contenedor.innerHTML = '<p>Ingrese texto</p>'
         return
     }
     contenedor.innerHTML = ''
@@ -335,12 +336,11 @@ async function busqueda_multiple_criterios() {
                  <thead>
                      <tr>
                          <th>ID</th>
-                         <th>Paciente</th>
-                         <th>Doctor</th>
-                         <th>Fecha</th>
-                         <th>Hora</th>
-                         <th>Motivo</th>
-                         <th>Estado</th>
+                         <th>Nombre</th>
+                         <th>Edad</th>
+                         <th>Telefono</th>
+                         <th>Email</th>
+                         <th>Fecha de Registro</th>
                      </tr>
                  </thead>
                  <tbody>

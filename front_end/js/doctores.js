@@ -43,7 +43,11 @@ async function get_doctores(id) {
         //     throw new Error(`Error: ${results.status}`)
         // }
         const datas = await results.json()
-        getDoctores_container.innerHTML = `${datas?.message}`
+        if(!results.ok) {
+            alert(`${datas?.message}`)
+            return
+        }
+        // getDoctores_container.innerHTML = `${datas?.message}`
         if(id) {
             return datas
         }
@@ -62,12 +66,11 @@ async function get_doctores_a(id_a) {
     
     try {
         const results = await fetch(url)
-        // if (!results.ok) {
-        //     console.log(results)
-        //     throw new Error(`Error: ${results.status}`)
-        // }
         const datas = await results.json()
-        getDoctores_container.innerHTML = `${datas?.message}`
+        if (!results.ok) {
+            alert(`{datas?.message}`)
+            return
+        }
         return datas
     } catch (error) {
         console.log(`Error: ${error}`)
@@ -104,12 +107,13 @@ async function post_doctor() {
             body: JSON.stringify(addData)
         });
         
-        // if (!response.ok) {
-        //     throw new Error(`Error: ${response.status} - ${response.statusText}`);
-        // }
         
         const result = await response.json();
-        nuevo_d.innerHTML = `${result?.message}`
+        if (!response.ok) {
+            alert(`${result?.message}`)
+            return
+        }
+        // nuevo_d.innerHTML = `${result?.message}`
     } catch (error) {
         console.log(`Error: ${error}`);
         nuevo_d.innerHTML = `<div class="error">Error al crear doctor: ${error.message}</div>`
@@ -128,7 +132,8 @@ async function put_doctor() {
         .map(checkbox => checkbox.value);
 
     if (!id_s) {
-        doctor_actualizar_r.innerHTML = '<div class="error">Error: Se requiere ID del doctor</div>'
+        alert(`Error: Se requiere ID del doctor`)
+        // doctor_actualizar_r.innerHTML = '<div class="error">Error: Se requiere ID del doctor</div>'
         return;
     }
 
@@ -150,16 +155,18 @@ async function put_doctor() {
             body: JSON.stringify(updatedData)
         });
 
-        // if (!response.ok) {
-        //     throw new Error(`Error: ${response.status} - ${response.statusText}`);
-        // }
 
         const result = await response.json();
-        doctor_actualizar_r.innerHTML = `<div class="ok">${result?.message}</div>`
-        if (!response.ok || (result && result.success === false)) {
-           const errorMessage = result?.message || `Error: ${response.status} - ${response.statusText}`;
-           throw new Error(errorMessage);
+        if (!response.ok) {
+            alert(`${result?.message}`)
+            return
+
         }
+        // doctor_actualizar_r.innerHTML = `<div class="ok">${result?.message}</div>`
+        // if (!response.ok || (result && result.success === false)) {
+        //    const errorMessage = result?.message || `Error: ${response.status} - ${response.statusText}`;
+        //    throw new Error(errorMessage);
+        // }
     } catch (error) {
         console.log(`Error: ${error}`);
         doctor_actualizar_r.innerHTML = `<div class="error">Error al actualizar doctor: ${error.message}</div>`
@@ -193,7 +200,8 @@ async function get_put_doctor() {
 }
 function print_doctores(doctores) {
     if (!doctores.data || doctores.data.length === 0) {
-        getDoctores_container.innerHTML = '<div>No se encontraron doctores</div>'
+        alert(`No se encontraron doctores`)
+        // getDoctores_container.innerHTML = '<div>No se encontraron doctores</div>'
         return
     }
     
@@ -225,9 +233,11 @@ function print_doctores(doctores) {
 
 function print_doctor(doctor) {
     if (!doctor.data) {
-        getDoctores_container.innerHTML = '<div>No se encontró el doctor</div>'
+        alert(`No se encontró el doctor`)
+        // getDoctores_container.innerHTML = '<div>No se encontró el doctor</div>'
         return
     }
+    console.log(doctor)
     getDoctores_container.innerHTML = `
          <table class="pacientes-table">
              <thead>
@@ -244,7 +254,7 @@ function print_doctor(doctor) {
                      <td>${doctor.data.id}</td>
                      <td>${doctor.data.nombre}</td>
                      <td>${doctor.data.especialidad}</td>
-                     <td>${doctor.data.horarioInicio} - ${doctor.horarioFin}</td>
+                     <td>${doctor.data.horarioInicio} - ${doctor.data.horarioFin}</td>
                      <td>${doctor.data.diasDisponibles}</td>
                  </tr>
              </tbody>
@@ -261,15 +271,16 @@ async function amount_doctores() {
         const results = await fetch(url)
         const datas = await results.json()
         if (!results.ok) {
-            throw new Error(`Error: ${datas?.message}`)
+            throw new Error(`${datas?.message}`)
         }
         getDoctores_container_front.innerHTML = `
             <h2>Total de doctores activos</h2>
             Doctores: ${datas.data.length}
         `
     } catch (error) {
+        const doctores_registrados = document.querySelector('.doctores_registrados')
+        doctores_registrados.innerHTML = `${error}`
         console.log(`Error: ${error}`)
-        getDoctores_container_front.innerHTML = `<div class="error">Error al cargar doctores: ${error.message}</div>`
     }
 }
 let currentPage = window.location.pathname.split('/').pop()

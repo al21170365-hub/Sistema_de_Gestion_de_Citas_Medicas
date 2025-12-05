@@ -25,11 +25,12 @@ async function get_pacientes(id_s) {
         const results = await fetch(url)
         const datas = await results.json()
         if (!results.ok) {
+            alert(`${datas?.message}`)
             throw new Error(`Error: ${datas?.message}`)
         }
         return datas
     } catch (error) {
-        console.log(`Error: ${error}`)
+        // console.log(`Error: ${error}`)
         return error
     }
 }
@@ -59,12 +60,13 @@ async function post_paciente() {
         });
         
         const result = await response.json();
-        const nuevo_p = document.querySelector('.nuevo_p')
-        nuevo_p.innerHTML = `<div class="ok">${result?.message}</div>`
-        if (!response.ok || (result && result.success === false)) {
-           const errorMessage = result?.message || `Error: ${response.status} - ${response.statusText}`;
-           throw new Error(errorMessage);
-        }
+        // const nuevo_p = document.querySelector('.nuevo_p')
+        // nuevo_p.innerHTML = `<div class="ok">${result?.message}</div>`
+        alert(`${result?.message}`)
+        // if (!response.ok || (result && result.success === false)) {
+        //    const errorMessage = result?.message || `Error: ${response.status} - ${response.statusText}`;
+        //    throw new Error(errorMessage);
+        // }
     } catch (error) {
         getPacientes_container.innerHTML = `<div class="error">${error}</div>`
     }
@@ -80,7 +82,8 @@ async function put_paciente() {
     const email = paciente_email_actualizar.value
     
     if (!id_s) {
-        getPacientes_container.innerHTML = '<div class="error">Error: Se requiere ID del paciente</div>'
+        alert('Se requiere ID del paciente')
+        // getPacientes_container.innerHTML = '<div class="error">Error: Se requiere ID del paciente</div>'
         return;
     }
     
@@ -106,12 +109,13 @@ async function put_paciente() {
         }
         
         const result = await response.json();
-        const actualizar_p = document.querySelector('.actualizar_p')
-        actualizar_p.innerHTML = `<div class="ok">${result?.message}</div>`
-        if (!response.ok || (result && result.success === false)) {
-           const errorMessage = result?.message || `Error: ${response.status} - ${response.statusText}`;
-           throw new Error(errorMessage);
-        }
+        // const actualizar_p = document.querySelector('.actualizar_p')
+        // actualizar_p.innerHTML = `<div class="ok">${result?.message}</div>`
+        alert(`${result?.message}`)
+        // if (!response.ok || (result && result.success === false)) {
+        //    const errorMessage = result?.message || `Error: ${response.status} - ${response.statusText}`;
+        //    throw new Error(errorMessage);
+        // }
     } catch (error) {
         console.log(`Error: ${error}`);
         getPacientes_container.innerHTML = `<div class="error">Error al actualizar paciente: ${error.message}</div>`
@@ -144,6 +148,7 @@ async function print_pacientes() {
     let pacientes = await get_pacientes(id_s)
     
     if (!pacientes || !pacientes.data) {
+        
         getPacientes_container.innerHTML = '<div class="error">No se encontraron pacientes</div>'
         return
     }
@@ -210,13 +215,15 @@ async function amount_pacientes() {
         const results = await fetch(url)
         const datas = await results.json()
         if (!results.ok) {
-            throw new Error(`Error: ${datas?.message}`)
+            throw new Error(`${datas?.message}`)
         }
         getPacientes_container_front.innerHTML = `
             <h2>Total de pacientes registrados</h2>
             Pacientes: ${datas.data.length}
         `
     } catch (error) {
+        const pacientes_registrados = document.querySelector('.pacientes_registrados')
+        pacientes_registrados.innerHTML = `${error}`
         console.log(`Error: ${error}`)
         return error
     }

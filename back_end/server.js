@@ -175,6 +175,12 @@ app.post('/api/pacientes', (req,res) => {
 	    message: 'Edad tiene que ser mayor a 0'
 	})
     }
+    if(telefono.length !== 10) {
+    return res.status(400).json({
+	    success: false,
+	    message: 'Telefono invalido'
+	})
+    }
     if(!validateEmail(email)) {
     return res.status(400).json({
 	    success: false,
