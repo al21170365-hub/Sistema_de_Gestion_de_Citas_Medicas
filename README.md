@@ -58,6 +58,45 @@
 ```text
 http://localhost:9797
 ```
+## Estructura del proyecto
+Sistema_de_Gestion_de_Citas_Medicas/
+├── .git/                          # Carpeta de control de versiones Git
+├── back_end/                      # Backend (Node.js/Express)
+│   ├── data/                      # Datos almacenados en JSON
+│   │   ├── citas.json
+│   │   ├── doctores.json
+│   │   └── pacientes.json
+│   ├── node_modules/              # Dependencias de Node.js
+│   ├── tests/                     # Pruebas del backend
+│   ├── utils/                     # Utilidades del backend
+│   │   └── fileManager.js         # Gestor de archivos JSON
+│   ├── Dockerfile                 # Configuración para Docker
+│   ├── package-lock.json          # Lock de dependencias
+│   ├── package.json               # Dependencias y scripts del backend
+│   └── server.js                  # Servidor principal
+├── front_end/                     # Frontend (HTML, CSS, JavaScript)
+│   ├── css/                       # Estilos CSS
+│   │   ├── citas.css
+│   │   ├── doctores.css
+│   │   ├── pacientes.css
+│   │   └── styles.css
+│   ├── js/                        # Lógica JavaScript
+│   │   ├── busquedas.js
+│   │   ├── citas.js
+│   │   ├── doctores.js
+│   │   └── pacientes.js
+│   ├── pages/                     # Páginas HTML
+│   │   ├── citas.html
+│   │   ├── doctores.html
+│   │   └── pacientes.html
+│   ├── img/                       # Imágenes y recursos visuales
+│   ├── node_modules/              # Dependencias del frontend
+│   ├── package-lock.json          # Lock de dependencias del frontend
+│   ├── package.json               # Dependencias del frontend
+│   └── index.html                 # Página principal
+├── LICENSE                        # Licencia del proyecto
+├── README.md                      # Documentación del proyecto
+└── package-lock.json              # Lock de dependencias raíz
 
 ### 📋 DOCTORES
 1. **Obtener todos los doctores**
