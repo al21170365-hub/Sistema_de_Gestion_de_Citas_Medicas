@@ -97,42 +97,62 @@ async function busqueda_global() {
         return false;
     });
 
-    for (let i = 0; i < pacientesFiltrados.length; i++) {
-        contenedor.innerHTML += `
-            <div class="paciente-item">
-                <strong>ID:</strong> ${pacientesFiltrados[i].id} | 
-                <strong>Nombre:</strong> ${pacientesFiltrados[i].nombre} | 
-                <strong>Edad:</strong> ${pacientesFiltrados[i].edad} | 
-                <strong>Teléfono:</strong> ${pacientesFiltrados[i].telefono} | 
-                <strong>Email:</strong> ${pacientesFiltrados[i].email} | 
-                <strong>Fecha registro:</strong> ${pacientesFiltrados[i].fechaRegistro}
-            </div>
-        `
-    }
-    for (let i = 0; i < doctoresFiltrados.length; i++) {
-        contenedor.innerHTML += `
-        <div class="doctor-item">
-            <strong>ID:</strong> ${doctoresFiltrados[i].id} | 
-            <strong>Nombre:</strong> ${doctoresFiltrados[i].nombre} | 
-            <strong>Especialidad:</strong> ${doctoresFiltrados[i].especialidad} | 
-            <strong>Horario:</strong> ${doctoresFiltrados[i].horarioInicio} - ${doctoresFiltrados[i].horarioFin} | 
-            <strong>Disponibilidad:</strong> ${doctoresFiltrados[i].diasDisponibles}
-        </div>
-        `
-    }
-    for (let i = 0; i < citasFiltradas.length; i++) {
-        contenedor.innerHTML += `
-            <div class="cita-item">
-                <strong>ID:</strong> ${citasFiltradas[i].id} | 
-                <strong>Paciente ID:</strong> ${citasFiltradas[i].pacienteId} | 
-                <strong>Doctor ID:</strong> ${citasFiltradas[i].doctorId} | 
-                <strong>Fecha:</strong> ${citasFiltradas[i].fecha} | 
-                <strong>Hora:</strong> ${citasFiltradas[i].hora} | 
-                <strong>Motivo:</strong> ${citasFiltradas[i].motivo} | 
-                <strong>Estado:</strong> ${citasFiltradas[i].estado}
-            </div>`
-        
-    }
+    let html = ''
+
+    html += `
+      ${pacientesFiltrados.map(paciente => `
+          <tr>
+              <td>${paciente.id}</td>
+              <td>${paciente.nombre}</td>
+              <td>${paciente.edad}</td>
+              <td>${paciente.telefono}</td>
+              <td>${paciente.email}</td>
+              <td>${paciente.fechaRegistro}</td>
+          </tr>
+      `).join('')}
+    `
+    html += `
+      ${doctoresFiltrados.map(doctor => `
+          <tr>
+              <td>${doctor.id}</td>
+              <td>${doctor.nombre}</td>
+              <td>${doctor.especialidad}</td>
+              <td>${doctor.horarioInicio} - ${doctor.horarioFin}</td>
+              <td>${doctor.diasDisponibles}</td>
+          </tr>
+      `).join('')}
+    `
+    html += `
+      ${citasFiltradas.map(citas => `
+            <tr>
+              <td>${citas.id}</td>
+              <td>${citas.pacienteId}</td>
+              <td>${citas.doctorId}</td>
+              <td>${citas.fecha}</td>
+              <td>${citas.hora}</td>
+              <td>${citas.motivo}</td>
+              <td>${citas.estado}</td>
+          </tr>
+      `).join('')}
+    `
+    contenedor.innerHTML = `
+         <table class="pacientes-table">
+             <thead>
+                 <tr>
+                     <th>ID</th>
+                     <th>Paciente</th>
+                     <th>Doctor</th>
+                     <th>Fecha</th>
+                     <th>Hora</th>
+                     <th>Motivo</th>
+                     <th>Estado</th>
+                 </tr>
+             </thead>
+             <tbody>
+                ${html}
+             </tbody>
+         </table>
+    `;
 }
 
 async function busqueda_multiple_criterios() {
@@ -249,6 +269,7 @@ async function busqueda_multiple_criterios() {
     
     // Contadores de resultados
     let totalResultados = 0;
+    let html = ''
     
     // Mostrar resultados de pacientes
     if (pacientesFiltrados.length > 0) {
@@ -258,23 +279,36 @@ async function busqueda_multiple_criterios() {
             </div>
         `;
         
-        for (let i = 0; i < pacientesFiltrados.length; i++) {
-            contenedor.innerHTML += `
-                <div class="paciente-item resultado-item">
-                    <div class="resultado-header">
-                        <span class="badge paciente-badge">Paciente</span>
-                        <strong>ID:</strong> ${pacientesFiltrados[i].id}
-                    </div>
-                    <div class="resultado-detalles">
-                        <div><strong>Nombre:</strong> ${pacientesFiltrados[i].nombre}</div>
-                        <div><strong>Edad:</strong> ${pacientesFiltrados[i].edad}</div>
-                        <div><strong>Teléfono:</strong> ${pacientesFiltrados[i].telefono}</div>
-                        <div><strong>Email:</strong> ${pacientesFiltrados[i].email}</div>
-                        <div><strong>Fecha registro:</strong> ${pacientesFiltrados[i].fechaRegistro}</div>
-                    </div>
-                </div>
-            `;
-        }
+         html = `
+         ${pacientesFiltrados.map(paciente => `
+             <tr>
+                 <td>${paciente.id}</td>
+                 <td>${paciente.nombre}</td>
+                 <td>${paciente.edad}</td>
+                 <td>${paciente.telefono}</td>
+                 <td>${paciente.email}</td>
+                 <td>${paciente.fechaRegistro}</td>
+             </tr>
+         `).join('')}
+        `
+        contenedor.innerHTML += `
+             <table class="pacientes-table">
+                 <thead>
+                     <tr>
+                         <th>ID</th>
+                         <th>Paciente</th>
+                         <th>Doctor</th>
+                         <th>Fecha</th>
+                         <th>Hora</th>
+                         <th>Motivo</th>
+                         <th>Estado</th>
+                     </tr>
+                 </thead>
+                 <tbody>
+                    ${html}
+                 </tbody>
+             </table>
+        `;
         totalResultados += pacientesFiltrados.length;
     }
     
@@ -286,22 +320,33 @@ async function busqueda_multiple_criterios() {
             </div>
         `;
         
-        for (let i = 0; i < doctoresFiltrados.length; i++) {
-            contenedor.innerHTML += `
-                <div class="doctor-item resultado-item">
-                    <div class="resultado-header">
-                        <span class="badge doctor-badge">Doctor</span>
-                        <strong>ID:</strong> ${doctoresFiltrados[i].id}
-                    </div>
-                    <div class="resultado-detalles">
-                        <div><strong>Nombre:</strong> ${doctoresFiltrados[i].nombre}</div>
-                        <div><strong>Especialidad:</strong> ${doctoresFiltrados[i].especialidad}</div>
-                        <div><strong>Horario:</strong> ${doctoresFiltrados[i].horarioInicio} - ${doctoresFiltrados[i].horarioFin}</div>
-                        <div><strong>Días disponibles:</strong> ${doctoresFiltrados[i].diasDisponibles}</div>
-                    </div>
-                </div>
-            `;
-        }
+        html = `
+          ${doctoresFiltrados.map(doctor => `
+              <tr>
+                  <td>${doctor.id}</td>
+                  <td>${doctor.nombre}</td>
+                  <td>${doctor.especialidad}</td>
+                  <td>${doctor.horarioInicio} - ${doctor.horarioFin}</td>
+                  <td>${doctor.diasDisponibles}</td>
+              </tr>
+          `).join('')}
+        `
+        contenedor.innerHTML += `
+             <table class="pacientes-table">
+                 <thead>
+                     <tr>
+                         <th>ID</th>
+                         <th>Nombre</th>
+                         <th>Especialidad</th>
+                         <th>Horario</th>
+                         <th>Disponibilidad</th>
+                     </tr>
+                 </thead>
+                 <tbody>
+                    ${html}
+                 </tbody>
+             </table>
+        `
         totalResultados += doctoresFiltrados.length;
     }
     
@@ -312,28 +357,40 @@ async function busqueda_multiple_criterios() {
                 <h3>Citas encontradas (${citasFiltradas.length})</h3>
             </div>
         `;
-        
+        html = ''
         for (let i = 0; i < citasFiltradas.length; i++) {
             // Buscar información del paciente y doctor para esta cita
             const paciente = pacientes.data.find(p => p.id === citasFiltradas[i].pacienteId);
             const doctor = doctores.data.find(d => d.id === citasFiltradas[i].doctorId);
+            html += `
+                <tr>
+                  <td>${citasFiltradas[i].id}</td>
+                  <td>${citasFiltradas[i].fecha} ${citasFiltradas[i].hora}</td>
+                  <td>${citasFiltradas[i].motivo}</td>
+                  <td>${citasFiltradas[i].estado}</td>
+                  <td>${paciente.nombre} (ID: ${citasFiltradas[i].pacienteId})</td>
+                  <td>${doctor.nombre} (ID: ${citasFiltradas[i].doctorId})</td>
+                </tr>
+            `
             
-            contenedor.innerHTML += `
-                <div class="cita-item resultado-item">
-                    <div class="resultado-header">
-                        <span class="badge cita-badge">Cita</span>
-                        <strong>ID:</strong> ${citasFiltradas[i].id}
-                    </div>
-                    <div class="resultado-detalles">
-                        <div><strong>Fecha y hora:</strong> ${citasFiltradas[i].fecha} ${citasFiltradas[i].hora}</div>
-                        <div><strong>Motivo:</strong> ${citasFiltradas[i].motivo}</div>
-                        <div><strong>Estado:</strong> <span class="estado-${citasFiltradas[i].estado}">${citasFiltradas[i].estado}</span></div>
-                        <div><strong>Paciente:</strong> ${paciente ? paciente.nombre : 'No encontrado'} (ID: ${citasFiltradas[i].pacienteId})</div>
-                        <div><strong>Doctor:</strong> ${doctor ? doctor.nombre : 'No encontrado'} (ID: ${citasFiltradas[i].doctorId})</div>
-                    </div>
-                </div>
-            `;
         }
+        contenedor.innerHTML += `
+             <table class="pacientes-table">
+                 <thead>
+                     <tr>
+                         <th>ID</th>
+                         <th>Fecha y Hora</th>
+                         <th>Motivo</th>
+                         <th>Estado</th>
+                         <th>Paciente</th>
+                         <th>Doctor</th>
+                     </tr>
+                 </thead>
+                 <tbody>
+                    ${html}
+                 </tbody>
+             </table>
+        `
         totalResultados += citasFiltradas.length;
     }
     

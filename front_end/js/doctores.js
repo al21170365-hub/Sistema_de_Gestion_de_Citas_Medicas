@@ -19,11 +19,11 @@ const doctor_actualizar_r = document.querySelector('.doctor_actualizar_r')
 
 async function get_doctores(id) {
     let id_s
-    
+    let especialidad
     if(!id) {
         getDoctores_container.innerHTML = ''
-        const especialidad = get_doctores_especialidad.value
-        const id_s = get_doctores_id.value
+        especialidad = get_doctores_especialidad.value
+        id_s = get_doctores_id.value
     }else {
       id_s = id
     }

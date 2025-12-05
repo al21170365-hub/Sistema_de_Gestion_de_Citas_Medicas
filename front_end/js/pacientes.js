@@ -147,15 +147,30 @@ async function print_pacientes() {
     }
     
     if(id_s) {
-        getPacientes_container.innerHTML = `
-            <div class="paciente-item">
-                <strong>ID:</strong> ${pacientes.data.id} | 
-                <strong>Nombre:</strong> ${pacientes.data.nombre} | 
-                <strong>Edad:</strong> ${pacientes.data.edad} | 
-                <strong>Teléfono:</strong> ${pacientes.data.telefono} | 
-                <strong>Email:</strong> ${pacientes.data.email} | 
-                <strong>Fecha registro:</strong> ${pacientes.data.fechaRegistro}
-            </div>`
+       getPacientes_container.innerHTML = `
+            <table class="pacientes-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Edad</th>
+                        <th>Teléfono</th>
+                        <th>Email</th>
+                        <th>Fecha Registro</th>
+                    </tr>
+                </thead>
+                <tbody>
+                     <tr>
+                         <td>${pacientes.data.id}</td>
+                         <td>${pacientes.data.nombre}</td>
+                         <td>${pacientes.data.edad}</td>
+                         <td>${pacientes.data.telefono}</td>
+                         <td>${pacientes.data.email}</td>
+                         <td>${pacientes.data.fechaRegistro}</td>
+                    </tr>
+                </tbody>
+            </table>
+       `;
     } else {
        getPacientes_container.innerHTML = `
             <table class="pacientes-table">
@@ -183,17 +198,6 @@ async function print_pacientes() {
                 </tbody>
             </table>
        `;
-        // for(let i = 0; i < pacientes.data.length; i++) {
-        //     getPacientes_container.innerHTML += `
-        //         <div class="paciente-item">
-        //             <strong>ID:</strong> ${pacientes.data[i].id} | 
-        //             <strong>Nombre:</strong> ${pacientes.data[i].nombre} | 
-        //             <strong>Edad:</strong> ${pacientes.data[i].edad} | 
-        //             <strong>Teléfono:</strong> ${pacientes.data[i].telefono} | 
-        //             <strong>Email:</strong> ${pacientes.data[i].email} | 
-        //             <strong>Fecha registro:</strong> ${pacientes.data[i].fechaRegistro}
-        //         </div>`
-        // }
     }
 }
 

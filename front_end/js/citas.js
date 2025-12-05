@@ -91,17 +91,6 @@ async function post_citas() {
         }
         
         const result = await response.json();
-        getCitas_container.innerHTML = `
-            <div>
-                <strong>ID Cita:</strong> ${result.data.id} | 
-                <strong>Paciente:</strong> ${result.data.pacienteId} | 
-                <strong>Doctor:</strong> ${result.data.doctorId} | 
-                <strong>Fecha:</strong> ${result.data.fecha} | 
-                <strong>Hora:</strong> ${result.data.hora} | 
-                <strong>Motivo:</strong> ${result.data.motivo} | 
-                <strong>Estado:</strong> ${result.data.estado}
-            </div>
-            <p>${result?.message}</p>`
     } catch (error) {
         getCitas_container.innerHTML = `<div class="error">Error al actualizar paciente: ${error.message}</div>`
     }
@@ -153,7 +142,7 @@ async function print_citas(id) {
     if(!id) {
         getCitas_container.innerHTML = ''
         id_s = citas_id_input.value;
-        id_a = citas_agenda_id_input.value
+        // id_a = citas_agenda_id_input.value
     }else if(id === 1){
         if(!citas_historial_id_input.value) {
             getCitas_container.innerHTML = '<div class="error">No se encuentra historial</div>'
@@ -183,43 +172,94 @@ async function print_citas(id) {
     }
     if(id === 2) {
         getDoctores_container2.innerHTML = ''
-        for(let i = 0; i < citas.data.length; i++) {
-            getDoctores_container2.innerHTML += `
-                <div class="cita-item">
-                    <strong>ID:</strong> ${citas.data[i].id} | 
-                    <strong>Paciente ID:</strong> ${citas.data[i].pacienteId} | 
-                    <strong>Doctor ID:</strong> ${citas.data[i].doctorId} | 
-                    <strong>Fecha:</strong> ${citas.data[i].fecha} | 
-                    <strong>Hora:</strong> ${citas.data[i].hora} | 
-                    <strong>Motivo:</strong> ${citas.data[i].motivo} | 
-                    <strong>Estado:</strong> ${citas.data[i].estado}
-                </div>`
-        }
+       getDoctores_container2.innerHTML = `
+            <table class="pacientes-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Paciente</th>
+                        <th>Doctor</th>
+                        <th>Fecha</th>
+                        <th>Hora</th>
+                        <th>Motivo</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                     <tr>
+                    ${citas.data.map(cita => `
+                         <td>${cita.id}</td>
+                         <td>${cita.pacienteId}</td>
+                         <td>${cita.doctorId}</td>
+                         <td>${cita.fecha}</td>
+                         <td>${cita.hora}</td>
+                         <td>${cita.motivo}</td>
+                         <td>${cita.estado}</td>
+                    </tr>
+                    `).join('')}
+                </tbody>
+            </table>
+            <p>${citas?.message}</p>
+       `;
     }
   else if(id_s) {
-        getCitas_container.innerHTML = `
-            <div class="cita-item">
-                <strong>ID:</strong> ${citas.data.id} | 
-                <strong>Paciente ID:</strong> ${citas.data.pacienteId} | 
-                <strong>Doctor ID:</strong> ${citas.data.doctorId} | 
-                <strong>Fecha:</strong> ${citas.data.fecha} | 
-                <strong>Hora:</strong> ${citas.data.hora} | 
-                <strong>Motivo:</strong> ${citas.data.motivo} | 
-                <strong>Estado:</strong> ${citas.data.estado}
-            </div>`
+       getCitas_container.innerHTML = `
+            <table class="pacientes-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Paciente</th>
+                        <th>Doctor</th>
+                        <th>Fecha</th>
+                        <th>Hora</th>
+                        <th>Motivo</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                     <tr>
+                         <td>${citas.data.id}</td>
+                         <td>${citas.data.pacienteId}</td>
+                         <td>${citas.data.doctorId}</td>
+                         <td>${citas.data.fecha}</td>
+                         <td>${citas.data.hora}</td>
+                         <td>${citas.data.motivo}</td>
+                         <td>${citas.data.estado}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>${citas?.message}</p>
+       `;
     } else {
-        for(let i = 0; i < citas.data.length; i++) {
-            getCitas_container.innerHTML += `
-                <div class="cita-item">
-                    <strong>ID:</strong> ${citas.data[i].id} | 
-                    <strong>Paciente ID:</strong> ${citas.data[i].pacienteId} | 
-                    <strong>Doctor ID:</strong> ${citas.data[i].doctorId} | 
-                    <strong>Fecha:</strong> ${citas.data[i].fecha} | 
-                    <strong>Hora:</strong> ${citas.data[i].hora} | 
-                    <strong>Motivo:</strong> ${citas.data[i].motivo} | 
-                    <strong>Estado:</strong> ${citas.data[i].estado}
-                </div>`
-        }
+       getCitas_container.innerHTML = `
+            <table class="pacientes-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Paciente</th>
+                        <th>Doctor</th>
+                        <th>Fecha</th>
+                        <th>Hora</th>
+                        <th>Motivo</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                     <tr>
+                    ${citas.data.map(cita => `
+                         <td>${cita.id}</td>
+                         <td>${cita.pacienteId}</td>
+                         <td>${cita.doctorId}</td>
+                         <td>${cita.fecha}</td>
+                         <td>${cita.hora}</td>
+                         <td>${cita.motivo}</td>
+                         <td>${cita.estado}</td>
+                    </tr>
+                    `).join('')}
+                </tbody>
+            </table>
+            <p>${citas?.message}</p>
+       `;
     }
 }
 function mostrarResumenMensualActual(citas) {
@@ -482,18 +522,35 @@ async function get_citas_filtro() {
             throw new Error(`Error: ${results.status}`)
         }
         const datas = await results.json()
-        for(let i = 0; i < datas.data.length; i++) {
-            getCitasFiltro_container.innerHTML += `
-                <div class="cita-item">
-                    <strong>ID:</strong> ${datas.data[i].id} | 
-                    <strong>Paciente ID:</strong> ${datas.data[i].pacienteId} | 
-                    <strong>Doctor ID:</strong> ${datas.data[i].doctorId} | 
-                    <strong>Fecha:</strong> ${datas.data[i].fecha} | 
-                    <strong>Hora:</strong> ${datas.data[i].hora} | 
-                    <strong>Motivo:</strong> ${datas.data[i].motivo} | 
-                    <strong>Estado:</strong> ${datas.data[i].estado}
-                </div>`
-        }
+       getCitasFiltro_container.innerHTML = `
+            <table class="pacientes-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Paciente</th>
+                        <th>Doctor</th>
+                        <th>Fecha</th>
+                        <th>Hora</th>
+                        <th>Motivo</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                     <tr>
+                    ${datas.data.map(cita => `
+                         <td>${cita.id}</td>
+                         <td>${cita.pacienteId}</td>
+                         <td>${cita.doctorId}</td>
+                         <td>${cita.fecha}</td>
+                         <td>${cita.hora}</td>
+                         <td>${cita.motivo}</td>
+                         <td>${cita.estado}</td>
+                    </tr>
+                    `).join('')}
+                </tbody>
+            </table>
+            <p>${datas?.message}</p>
+       `;
     } catch (error) {
         console.log(`Error: ${error}`)
         getCitasFiltro_container.innerHTML = `<div class="error">Error al cargar citas: ${error.message}</div>`
@@ -517,17 +574,31 @@ async function get_doctores_disponibles() {
             throw new Error(`Error: ${results.status}`)
         }
         const datas = await results.json()
-        console.log(datas)
-        for(let i = 0; i < datas.data.length; i++) {
-            getFiltros_container.innerHTML += `
-                <div>
-                    <strong>ID:</strong> ${datas.data[i].id} | 
-                    <strong>Nombre:</strong> ${datas.data[i].nombre} | 
-                    <strong>Especialidad:</strong> ${datas.data[i].especialidad} | 
-                    <strong>Horario:</strong> ${datas.data[i].horarioInicio} - ${datas.data[i].horarioFin} | 
-                    <strong>Disponibilidad:</strong> ${datas.data[i].diasDisponibles}
-                </div>`
-        }
+       getFiltros_container.innerHTML = `
+            <table class="pacientes-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Especialidad</th>
+                        <th>Horario</th>
+                        <th>Disponibilidad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                     <tr>
+                    ${datas.data.map(doctor => `
+                         <td>${doctor.id}</td>
+                         <td>${doctor.nombre}</td>
+                         <td>${doctor.especialidad}</td>
+                         <td>${doctor.horarioInicio} - ${doctor.horarioFin}</td>
+                         <td>${doctor.diasDisponibles}</td>
+                    </tr>
+                    `).join('')}
+                </tbody>
+            </table>
+            <p>${datas?.message}</p>
+       `;
     } catch (error) {
         console.log(`Error: ${error}`)
         return null
@@ -545,18 +616,47 @@ async function citas_proximas() {
             throw new Error(`Error: ${results.status}`)
         }
         const datas = await results.json()
-        for(let i = 0; i < datas.data.length; i++) {
-            getProximas_container.innerHTML += `
-                <div class="cita-item">
-                    <strong>ID:</strong> ${datas.data[i].id} | 
-                    <strong>Paciente ID:</strong> ${datas.data[i].pacienteId} | 
-                    <strong>Doctor ID:</strong> ${datas.data[i].doctorId} | 
-                    <strong>Fecha:</strong> ${datas.data[i].fecha} | 
-                    <strong>Hora:</strong> ${datas.data[i].hora} | 
-                    <strong>Motivo:</strong> ${datas.data[i].motivo} | 
-                    <strong>Estado:</strong> ${datas.data[i].estado}
-                </div>`
-        }
+       getProximas_container.innerHTML = `
+            <table class="pacientes-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Paciente</th>
+                        <th>Doctor</th>
+                        <th>Fecha</th>
+                        <th>Hora</th>
+                        <th>Motivo</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                     <tr>
+                    ${datas.data.map(cita => `
+                         <td>${cita.id}</td>
+                         <td>${cita.pacienteId}</td>
+                         <td>${cita.doctorId}</td>
+                         <td>${cita.fecha}</td>
+                         <td>${cita.hora}</td>
+                         <td>${cita.motivo}</td>
+                         <td>${cita.estado}</td>
+                    </tr>
+                    `).join('')}
+                </tbody>
+            </table>
+            <p>${datas?.message}</p>
+       `;
+        // for(let i = 0; i < datas.data.length; i++) {
+        //     getProximas_container.innerHTML += `
+        //         <div class="cita-item">
+        //             <strong>ID:</strong> ${datas.data[i].id} | 
+        //             <strong>Paciente ID:</strong> ${datas.data[i].pacienteId} | 
+        //             <strong>Doctor ID:</strong> ${datas.data[i].doctorId} | 
+        //             <strong>Fecha:</strong> ${datas.data[i].fecha} | 
+        //             <strong>Hora:</strong> ${datas.data[i].hora} | 
+        //             <strong>Motivo:</strong> ${datas.data[i].motivo} | 
+        //             <strong>Estado:</strong> ${datas.data[i].estado}
+        //         </div>`
+        // }
     } catch (error) {
         console.log(`Error: ${error}`)
         return null
@@ -587,34 +687,41 @@ async function show_citas_programadas_hoy() {
             throw new Error(`Error: ${results.status}`)
         }
         const datas = await results.json()
-        getCitasFiltro_container_front.innerHTML = `<h2>Citas programadas hoy</h2>`
         notificationBadge.innerText = datas.data.length
+        // Primero, construimos todas las filas de la tabla
+        let filasHTML = ''
+        
         for(let i = 0; i < datas.data.length; i++) {
-            let paciente = await get_pacientes(datas.data[i].pacienteId)
-            let doctor = await get_doctores_a(datas.data[i].doctorId)
-            if(cont === 0) {
-                getCitasFiltro_container_front.innerHTML += `
-                <div class="urgente">
-                    <strong>Hora:</strong> ${datas.data[i].hora}<br>
-                    <strong>Paciente:</strong> ${paciente.data.nombre}<br>
-                    <strong>Doctor:</strong> ${doctor.data.nombre}<br>
-                    <strong>Estado:</strong> ${datas.data[i].estado}<br>
-                </div>`
-                document.querySelector('.urgente').style.color = "red"
-                cont++
-            }else {
-                getCitasFiltro_container_front.innerHTML += `
-                <div">
-                    <strong>Hora:</strong> ${datas.data[i].hora}<br>
-                    <strong>Paciente:</strong> ${paciente.data.nombre}<br>
-                    <strong>Doctor:</strong> ${doctor.data.nombre}<br>
-                    <strong>Estado:</strong> ${datas.data[i].estado}<br>
-                </div>`
-            }
-            if(i !== datas.data.length-1) {
-              getCitasFiltro_container_front.innerHTML += `<br>`
-            }
+            let paciente = await get_pacientes(datas.data[i].pacienteId);
+            let doctor = await get_doctores_a(datas.data[i].doctorId);
+            
+            filasHTML += `
+                <tr>
+                    <td>${datas.data[i].hora}</td>
+                    <td>${paciente.data.nombre}</td>
+                    <td>${doctor.data.nombre}</td>
+                    <td>${datas.data[i].estado}</td>
+                </tr>`
         }
+        
+        // Luego, creamos UNA sola tabla con todas las filas
+        getCitasFiltro_container_front.innerHTML = `
+            <h3><i class="fas fa-calendar-day"></i> Citas Programadas para Hoy</h3>
+            <table class="pacientes-table">
+                <thead>
+                    <tr>
+                        <th>Hora</th>
+                        <th>Paciente</th>
+                        <th>Doctor</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${filasHTML}
+                </tbody>
+            </table>
+            ${datas?.message ? `<p class="mensaje-info">${datas.message}</p>` : ''}
+        `
     } catch (error) {
         console.log(`Error: ${error}`)
         getCitasFiltro_container_front.innerHTML = `<div class="error">Error al cargar citas: ${error.message}</div>`
@@ -637,18 +744,47 @@ async function show_citas_proximas() {
         }
         const datas = await results.json()
         citas_pendiente_24_horas.innerHTML = `<h2>Citas pendientes proximas 24 horas</h2>`
-        for(let i = 0; i < datas.data.length; i++) {
-            citas_pendiente_24_horas.innerHTML += `
-                <div class="cita-item">
-                    <strong>ID:</strong> ${datas.data[i].id}<br> 
-                    <strong>Paciente ID:</strong> ${datas.data[i].pacienteId}<br> 
-                    <strong>Doctor ID:</strong> ${datas.data[i].doctorId}<br> 
-                    <strong>Fecha:</strong> ${datas.data[i].fecha}<br> 
-                    <strong>Hora:</strong> ${datas.data[i].hora}<br> 
-                    <strong>Motivo:</strong> ${datas.data[i].motivo}<br> 
-                    <strong>Estado:</strong> ${datas.data[i].estado}
-                </div>`
-        }
+       citas_pendiente_24_horas.innerHTML = `
+            <table class="pacientes-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Paciente</th>
+                        <th>Doctor</th>
+                        <th>Fecha</th>
+                        <th>Hora</th>
+                        <th>Motivo</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                     <tr>
+                    ${datas.data.map(cita => `
+                         <td>${cita.id}</td>
+                         <td>${cita.pacienteId}</td>
+                         <td>${cita.doctorId}</td>
+                         <td>${cita.fecha}</td>
+                         <td>${cita.hora}</td>
+                         <td>${cita.motivo}</td>
+                         <td>${cita.estado}</td>
+                    </tr>
+                    `).join('')}
+                </tbody>
+            </table>
+            <p>${datas?.message}</p>
+       `;
+        // for(let i = 0; i < datas.data.length; i++) {
+        //     citas_pendiente_24_horas.innerHTML += `
+        //         <div class="cita-item">
+        //             <strong>ID:</strong> ${datas.data[i].id}<br> 
+        //             <strong>Paciente ID:</strong> ${datas.data[i].pacienteId}<br> 
+        //             <strong>Doctor ID:</strong> ${datas.data[i].doctorId}<br> 
+        //             <strong>Fecha:</strong> ${datas.data[i].fecha}<br> 
+        //             <strong>Hora:</strong> ${datas.data[i].hora}<br> 
+        //             <strong>Motivo:</strong> ${datas.data[i].motivo}<br> 
+        //             <strong>Estado:</strong> ${datas.data[i].estado}
+        //         </div>`
+        // }
     } catch (error) {
         console.log(`Error: ${error}`)
         return null

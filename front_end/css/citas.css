@@ -209,7 +209,7 @@ main {
 
 .seccion-contenedor {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(1fr, 350px));
     gap: 2rem;
     margin-top: 1rem;
 }
@@ -416,4 +416,34 @@ main {
 
 .cita-proxima-item .info-value {
     color: var(--azul-primario);
+}
+.pacientes-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.pacientes-table th {
+    background-color: #f2f2f2;
+    padding: 12px;
+    text-align: left;
+    border-bottom: 2px solid #ddd;
+    font-weight: bold;
+}
+
+.pacientes-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+.pacientes-table tr:hover {
+    background-color: #f5f5f5;
+}
+
+.pacientes-table th, .pacientes-table td {
+    border-right: 1px solid #eee;
+}
+
+.pacientes-table th:last-child, .pacientes-table td:last-child {
+    border-right: none;
 }
