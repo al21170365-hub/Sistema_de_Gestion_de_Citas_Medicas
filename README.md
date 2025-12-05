@@ -790,5 +790,17 @@ http://localhost:9797
      "message": "Citas no encontradas"
    }
    ```
-
-<!--<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAtiaOuaFGUPWwx4wA_xvxzA0-ZmzEmReE9oXdkJD10keS0ItoSp_Jocd_pYGmMOoYXmrvgZtfPenmLiPU-8hkkAFCXIFWQDQuhGNsw52DjQ&s=10" width="100%" alt="Texto alternativo">-->
+## Imagenes de la pagina
+<img src="./img/1.png" width="100%" alt="Texto alternativo">
+<img src="./img/2.png" width="100%" alt="Texto alternativo">
+<img src="./img/3.png" width="100%" alt="Texto alternativo">
+<img src="./img/4.png" width="100%" alt="Texto alternativo">
+<img src="./img/5.png" width="100%" alt="Texto alternativo">
+<img src="./img/6.png" width="100%" alt="Texto alternativo">
+<img src="./img/7.png" width="100%" alt="Texto alternativo">
+<img src="./img/8.png" width="100%" alt="Texto alternativo">
+<img src="./img/9.png" width="100%" alt="Texto alternativo">
+<img src="./img/10.png" width="100%" alt="Texto alternativo">
+<img src="./img/11.png" width="100%" alt="Texto alternativo">
+<img src="./img/12.png" width="100%" alt="Texto alternativo">
+<img src="./img/13.png" width="100%" alt="Texto alternativo">
