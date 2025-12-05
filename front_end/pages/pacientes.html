@@ -5,73 +5,146 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="../js/pacientes.js" defer></script>
     <script src="../js/citas.js" defer></script>
+    <link rel="stylesheet" href="../css/pacientes.css">
     <title>Document</title>
 </head>
 <body>
-    <a href="../index.html">Inicio</a>
-    <!-- Gestión de Pacientes -->
-    <section class="card">
-        <h2>Gestión de Pacientes</h2>
-        <div class="form-group">
-            <label>Buscar por ID:</label>
-            <input class="paciente_id_input" type="text" placeholder="ID del paciente">
-        </div>
-        <button class="btn btn-primary getPacientes_btn" onclick="print_pacientes()">Buscar Pacientes</button>
-        <div class="results-container getPacientes_container"></div>
-        <div class="form-group">
-            <label>Buscar historial de paciente por ID:</label>
-            <input class="citas_historial_id_input" type="text" placeholder="ID del paciente">
-        </div>
-        <button class="btn btn-primary getCitas_btn" onclick="print_citas(1)">Buscar historial</button>
-        <div class="results-container getCitas_container"></div>
-    </section>
-    <!-- Nuevo Paciente -->
-    <section class="card">
-        <h2>Nuevo Paciente</h2>
-        <div class="form-group">
-            <label>Nombre:</label>
-            <input class="paciente_nombre_nuevo" type="text" placeholder="Nombre completo" required>
-        </div>
-        <div class="form-group">
-            <label>Edad:</label>
-            <input class="paciente_edad_nuevo" type="number" min="0" max="120" placeholder="Edad" required>
-        </div>
-        <div class="form-group">
-            <label>Teléfono:</label>
-            <input class="paciente_telefono_nuevo" type="tel" placeholder="Teléfono" required>
-        </div>
-        <div class="form-group">
-            <label>Email:</label>
-            <input class="paciente_email_nuevo" type="email" placeholder="Email" required>
-        </div>
-        <button class="btn btn-success" onclick="post_paciente()">Agregar Paciente</button>
-    </section>
-    <!-- Actualizar Paciente -->
-    <section class="card">
-        <h2>Actualizar Paciente</h2>
-        <div class="form-group">
-            <label>ID del paciente a actualizar:</label>
-            <input class="paciente_id_actualizar" type="text" placeholder="ID del paciente">
-        </div>
-        <button class="btn btn-secondary" onclick="get_put_paciente()">Cargar Datos</button>
-        
-        <div class="form-group">
-            <label>Nombre:</label>
-            <input class="paciente_nombre_actualizar" type="text" placeholder="Nombre completo">
-        </div>
-        <div class="form-group">
-            <label>Edad:</label>
-            <input class="paciente_edad_actualizar" type="number" min="0" max="120" placeholder="Edad">
-        </div>
-        <div class="form-group">
-            <label>Teléfono:</label>
-            <input class="paciente_telefono_actualizar" type="tel" placeholder="Teléfono">
-        </div>
-        <div class="form-group">
-            <label>Email:</label>
-            <input class="paciente_email_actualizar" type="email" placeholder="Email">
-        </div>
-        <button class="btn btn-warning" onclick="put_paciente()">Actualizar Paciente</button>
-    </section>
+  <main>
+     <div class="cabecera-pagina">
+         <div class="titulo-pagina">
+             <h1><i class="fas fa-user-injured"></i> Gestión de Pacientes</h1>
+         </div>
+         <a href="../index.html" class="enlace-inicio">
+             <i class="fas fa-home"></i> Volver al Inicio
+         </a>
+     </div>
+     
+     <div class="seccion-contenedor">
+         <!-- Gestión de Pacientes -->
+         <section class="card">
+             <h2><i class="fas fa-search"></i> Buscar Pacientes</h2>
+             <div class="form-group">
+                 <label for="buscar-paciente-id">Buscar por ID:</label>
+                 <input class="paciente_id_input" id="buscar-paciente-id" type="text" placeholder="Ingrese ID del paciente">
+             </div>
+             <button class="btn btn-primary getPacientes_btn" onclick="print_pacientes()">
+                 <i class="fas fa-search"></i> Buscar Pacientes
+             </button>
+             <div class="results-container getPacientes_container">
+                 <p class="mensaje-instruction">Los resultados de búsqueda aparecerán aquí.</p>
+             </div>
+             
+             <div class="form-group" style="margin-top: 2rem;">
+                 <label for="historial-paciente-id">Buscar historial de paciente por ID:</label>
+                 <input class="citas_historial_id_input" id="historial-paciente-id" type="text" placeholder="Ingrese ID del paciente">
+             </div>
+             <button class="btn btn-primary getCitas_btn" onclick="print_citas(1)">
+                 <i class="fas fa-history"></i> Buscar Historial
+             </button>
+             <div class="results-container getCitas_container">
+                 <p class="mensaje-instruction">El historial de citas aparecerá aquí.</p>
+             </div>
+         </section>
+         
+         <!-- Nuevo Paciente -->
+         <section class="card">
+             <h2><i class="fas fa-user-plus"></i> Nuevo Paciente</h2>
+             <div class="form-group">
+                 <label for="nombre-paciente">Nombre completo:</label>
+                 <input class="paciente_nombre_nuevo" id="nombre-paciente" type="text" placeholder="Ej: Juan Pérez" required>
+             </div>
+             <div class="form-group">
+                 <label for="edad-paciente">Edad:</label>
+                 <input class="paciente_edad_nuevo" id="edad-paciente" type="number" min="0" max="120" placeholder="Ej: 35" required>
+             </div>
+             <div class="form-group">
+                 <label for="telefono-paciente">Teléfono:</label>
+                 <input class="paciente_telefono_nuevo" id="telefono-paciente" type="tel" placeholder="Ej: 555-1234" required>
+             </div>
+             <div class="form-group">
+                 <label for="email-paciente">Email:</label>
+                 <input class="paciente_email_nuevo" id="email-paciente" type="email" placeholder="Ej: juan@email.com" required>
+             </div>
+             <button class="btn btn-success" onclick="post_paciente()">
+                 <i class="fas fa-save"></i> Agregar Paciente
+             </button>
+             
+             <!-- Mensaje de ejemplo para nuevo paciente -->
+             <div class="mensaje-estado mensaje-exito" style="margin-top: 1.5rem; display: none;" id="mensaje-exito">
+                 <i class="fas fa-check-circle"></i>
+                 <div>
+                     <strong>Paciente agregado exitosamente</strong>
+                     <p>El paciente ha sido registrado en el sistema correctamente.</p>
+                 </div>
+             </div>
+         </section>
+         
+         <!-- Actualizar Paciente -->
+         <section class="card">
+             <h2><i class="fas fa-user-edit"></i> Actualizar Paciente</h2>
+             <div class="form-group">
+                 <label for="id-actualizar">ID del paciente a actualizar:</label>
+                 <input class="paciente_id_actualizar" id="id-actualizar" type="text" placeholder="Ingrese ID del paciente">
+             </div>
+             <button class="btn btn-secondary" onclick="get_put_paciente()">
+                 <i class="fas fa-download"></i> Cargar Datos
+             </button>
+             
+             <div class="form-group" style="margin-top: 1.5rem;">
+                 <label for="nombre-actualizar">Nombre:</label>
+                 <input class="paciente_nombre_actualizar" id="nombre-actualizar" type="text" placeholder="Nuevo nombre completo">
+             </div>
+             <div class="form-group">
+                 <label for="edad-actualizar">Edad:</label>
+                 <input class="paciente_edad_actualizar" id="edad-actualizar" type="number" min="0" max="120" placeholder="Nueva edad">
+             </div>
+             <div class="form-group">
+                 <label for="telefono-actualizar">Teléfono:</label>
+                 <input class="paciente_telefono_actualizar" id="telefono-actualizar" type="tel" placeholder="Nuevo teléfono">
+             </div>
+             <div class="form-group">
+                 <label for="email-actualizar">Email:</label>
+                 <input class="paciente_email_actualizar" id="email-actualizar" type="email" placeholder="Nuevo email">
+             </div>
+             <button class="btn btn-warning" onclick="put_paciente()">
+                 <i class="fas fa-sync-alt"></i> Actualizar Paciente
+             </button>
+             
+             <!-- Mensaje de ejemplo para actualización -->
+             <div class="mensaje-estado mensaje-exito" style="margin-top: 1.5rem; display: none;" id="mensaje-actualizacion">
+                 <i class="fas fa-check-circle"></i>
+                 <div>
+                     <strong>Paciente actualizado exitosamente</strong>
+                     <p>Los datos del paciente han sido modificados correctamente.</p>
+                 </div>
+             </div>
+         </section>
+     </div>
+     
+     <!-- Ejemplo de resultados (para demostración) -->
+     <div style="display: none;" id="ejemplo-resultados">
+         <div class="paciente-item">
+             <h4><i class="fas fa-user"></i> María González</h4>
+             <div class="paciente-info">
+                 <div class="info-item">
+                     <span class="info-label">ID:</span>
+                     <span class="info-value">P-001</span>
+                 </div>
+                 <div class="info-item">
+                     <span class="info-label">Edad:</span>
+                     <span class="info-value">42 años</span>
+                 </div>
+                 <div class="info-item">
+                     <span class="info-label">Teléfono:</span>
+                     <span class="info-value">555-7890</span>
+                 </div>
+                 <div class="info-item">
+                     <span class="info-label">Email:</span>
+                     <span class="info-value">maria.g@email.com</span>
+                 </div>
+             </div>
+         </div>
+     </div>
+    </main>
 </body>
 </html>

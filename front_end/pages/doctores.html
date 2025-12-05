@@ -5,59 +5,154 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script defer src="../js/doctores.js"></script>
     <script defer src="../js/citas.js"></script>
+    <link rel="stylesheet" href="../css/doctores.css">
     <title>Document</title>
 </head>
 <body>
-    <a href="../index.html">Inicio</a>
-    <!-- Gestión de Doctores -->
-    <section class="card">
-        <h2>Gestión de Doctores</h2>
-        <div class="form-group">
-            <label>Buscar por ID:</label>
-            <input class="doctor_id_input" type="text" placeholder="ID del doctor">
-        </div>
-        <div class="form-group">
-            <label>Buscar por especialidad:</label>
-            <input class="doctor_especialidad_input" type="text" placeholder="Especialidad">
-        </div>
-        <button class="btn btn-primary getDoctores_btn" onclick="get_doctores()">Buscar Doctores</button>
-        <button class="btn btn-primary getCitas_btn" onclick="print_citas(2)">Buscar agenda</button>
-        <div class="results-container getDoctores_container"></div>
-    </section>
-    <!-- Nuevo Doctor -->
-    <section class="card">
-        <h2>Nuevo Doctor</h2>
-        <div class="form-group">
-            <label>Nombre:</label>
-            <input class="doctor_nombre_nuevo" type="text" placeholder="Nombre completo" required>
-        </div>
-        <div class="form-group">
-            <label>Especialidad:</label>
-            <input class="doctor_especialidad_nuevo" type="text" placeholder="Especialidad" required>
-        </div>
-        <div class="form-row">
-            <div class="form-group">
-                <label>Hora de Inicio:</label>
-                <input class="doctor_inicio_nuevo" type="time" required>
-            </div>
-            <div class="form-group">
-                <label>Hora Final:</label>
-                <input class="doctor_final_nuevo" type="time" required>
-            </div>
-        </div>
-        <div class="form-group">
-            <label>Días disponibles:</label>
-            <div class="checkbox-group">
-                <label><input class="doctor_dias_nuevo" type="checkbox" value="Lunes"> Lunes</label>
-                <label><input class="doctor_dias_nuevo" type="checkbox" value="Martes"> Martes</label>
-                <label><input class="doctor_dias_nuevo" type="checkbox" value="Miércoles"> Miércoles</label>
-                <label><input class="doctor_dias_nuevo" type="checkbox" value="Jueves"> Jueves</label>
-                <label><input class="doctor_dias_nuevo" type="checkbox" value="Viernes"> Viernes</label>
-                <label><input class="doctor_dias_nuevo" type="checkbox" value="Sábado"> Sábado</label>
-                <label><input class="doctor_dias_nuevo" type="checkbox" value="Domingo"> Domingo</label>
-            </div>
-        </div>
-        <button class="btn btn-success" onclick="post_doctor()">Agregar Doctor</button>
-    </section>
+  <main>
+     <div class="cabecera-pagina">
+         <div class="titulo-pagina">
+             <h1><i class="fas fa-user-md"></i> Gestión de Doctores</h1>
+         </div>
+         <a href="../index.html" class="enlace-inicio">
+             <i class="fas fa-home"></i> Volver al Inicio
+         </a>
+     </div>
+     
+     <div class="seccion-contenedor">
+         <!-- Gestión de Doctores -->
+         <section class="card">
+             <h2><i class="fas fa-search"></i> Buscar Doctores</h2>
+             <div class="form-group">
+                 <label for="buscar-doctor-id">Buscar por ID:</label>
+                 <input class="doctor_id_input" id="buscar-doctor-id" type="text" placeholder="Ingrese ID del doctor">
+             </div>
+             <div class="form-group">
+                 <label for="buscar-doctor-especialidad">Buscar por especialidad:</label>
+                 <input class="doctor_especialidad_input" id="buscar-doctor-especialidad" type="text" placeholder="Ej: Cardiología, Pediatría...">
+             </div>
+             <div class="botones-busqueda">
+                 <button class="btn btn-primary getDoctores_btn" onclick="get_doctores()">
+                     <i class="fas fa-search"></i> Buscar Doctores
+                 </button>
+                 <button class="btn btn-primary getCitas_btn" onclick="print_citas(2)">
+                     <i class="fas fa-calendar-alt"></i> Buscar Agenda
+                 </button>
+             </div>
+             <div class="results-container getDoctores_container">
+                 <div class="mensaje-info">
+                     <i class="fas fa-info-circle"></i>
+                     <div>
+                         <strong>Busque doctores por ID o especialidad</strong>
+                         <p>Los resultados aparecerán aquí. Use "Buscar Agenda" para ver las citas programadas.</p>
+                     </div>
+                 </div>
+             </div>
+         </section>
+         
+         <!-- Nuevo Doctor -->
+         <section class="card">
+             <h2><i class="fas fa-user-plus"></i> Nuevo Doctor</h2>
+             <div class="form-group">
+                 <label for="nombre-doctor">Nombre completo:</label>
+                 <input class="doctor_nombre_nuevo" id="nombre-doctor" type="text" placeholder="Ej: Dr. Juan Pérez" required>
+             </div>
+             <div class="form-group">
+                 <label for="especialidad-doctor">Especialidad:</label>
+                 <input class="doctor_especialidad_nuevo" id="especialidad-doctor" type="text" placeholder="Ej: Cardiología" required>
+             </div>
+             <div class="form-row">
+                 <div class="form-group">
+                     <label for="inicio-doctor">Hora de Inicio:</label>
+                     <input class="doctor_inicio_nuevo" id="inicio-doctor" type="time" required>
+                 </div>
+                 <div class="form-group">
+                     <label for="final-doctor">Hora Final:</label>
+                     <input class="doctor_final_nuevo" id="final-doctor" type="time" required>
+                 </div>
+             </div>
+             <div class="form-group">
+                 <label>Días disponibles:</label>
+                 <div class="checkbox-group">
+                     <label><input class="doctor_dias_nuevo" type="checkbox" value="Lunes"> <i class="far fa-calendar"></i> Lunes</label>
+                     <label><input class="doctor_dias_nuevo" type="checkbox" value="Martes"> <i class="far fa-calendar"></i> Martes</label>
+                     <label><input class="doctor_dias_nuevo" type="checkbox" value="Miércoles"> <i class="far fa-calendar"></i> Miércoles</label>
+                     <label><input class="doctor_dias_nuevo" type="checkbox" value="Jueves"> <i class="far fa-calendar"></i> Jueves</label>
+                     <label><input class="doctor_dias_nuevo" type="checkbox" value="Viernes"> <i class="far fa-calendar"></i> Viernes</label>
+                     <label><input class="doctor_dias_nuevo" type="checkbox" value="Sábado"> <i class="far fa-calendar"></i> Sábado</label>
+                     <label><input class="doctor_dias_nuevo" type="checkbox" value="Domingo"> <i class="far fa-calendar"></i> Domingo</label>
+                 </div>
+             </div>
+             <button class="btn btn-success" onclick="post_doctor()">
+                 <i class="fas fa-save"></i> Agregar Doctor
+             </button>
+             
+             <!-- Mensaje de ejemplo para nuevo doctor -->
+             <div class="mensaje-estado mensaje-exito" style="margin-top: 1.5rem; display: none;" id="mensaje-exito-doctor">
+                 <i class="fas fa-check-circle"></i>
+                 <div>
+                     <strong>Doctor agregado exitosamente</strong>
+                     <p>El doctor ha sido registrado en el sistema correctamente.</p>
+                 </div>
+             </div>
+         </section>
+         
+         <!-- Actualizar Doctor -->
+         <section class="card">
+             <h2><i class="fas fa-user-edit"></i> Actualizar Doctor</h2>
+             <div class="form-group">
+                 <label for="id-doctor-actualizar">ID del doctor a actualizar:</label>
+                 <input class="doctor_id_actualizar" id="id-doctor-actualizar" type="text" placeholder="Ingrese ID del doctor">
+             </div>
+             <button class="btn btn-secondary" onclick="get_put_doctor()">
+                 <i class="fas fa-download"></i> Cargar Datos
+             </button>
+             
+             <div class="form-group" style="margin-top: 1.5rem;">
+                 <label for="nombre-doctor-actualizar">Nombre:</label>
+                 <input class="doctor_nombre_actualizar" id="nombre-doctor-actualizar" type="text" placeholder="Nuevo nombre completo">
+             </div>
+             <div class="form-group">
+                 <label for="especialidad-doctor-actualizar">Especialidad:</label>
+                 <input class="doctor_especialidad_actualizar" id="especialidad-doctor-actualizar" type="text" placeholder="Nueva especialidad">
+             </div>
+             <div class="form-row">
+                 <div class="form-group">
+                     <label for="inicio-doctor-actualizar">Hora de Inicio:</label>
+                     <input class="doctor_horainicio_actualizar" id="inicio-doctor-actualizar" type="time" required>
+                 </div>
+                 <div class="form-group">
+                     <label for="fin-doctor-actualizar">Hora Fin:</label>
+                     <input class="doctor_horafin_actualizar" id="fin-doctor-actualizar" type="time" required>
+                 </div>
+             </div>
+             <div class="form-group">
+                 <label>Días disponibles:</label>
+                 <div class="checkbox-group">
+                     <label><input class="doctor_dias_actualizar" type="checkbox" value="Lunes"> <i class="far fa-calendar"></i> Lunes</label>
+                     <label><input class="doctor_dias_actualizar" type="checkbox" value="Martes"> <i class="far fa-calendar"></i> Martes</label>
+                     <label><input class="doctor_dias_actualizar" type="checkbox" value="Miércoles"> <i class="far fa-calendar"></i> Miércoles</label>
+                     <label><input class="doctor_dias_actualizar" type="checkbox" value="Jueves"> <i class="far fa-calendar"></i> Jueves</label>
+                     <label><input class="doctor_dias_actualizar" type="checkbox" value="Viernes"> <i class="far fa-calendar"></i> Viernes</label>
+                     <label><input class="doctor_dias_actualizar" type="checkbox" value="Sábado"> <i class="far fa-calendar"></i> Sábado</label>
+                     <label><input class="doctor_dias_actualizar" type="checkbox" value="Domingo"> <i class="far fa-calendar"></i> Domingo</label>
+                 </div>
+             </div>
+             <button class="btn btn-warning" onclick="put_doctor()">
+                 <i class="fas fa-sync-alt"></i> Actualizar Doctor
+             </button>
+             <div class="doctor_actualizar_r" style="margin-top: 1.5rem;"></div>
+             
+             <!-- Mensaje de ejemplo para actualización -->
+             <div class="mensaje-estado mensaje-exito" style="margin-top: 1.5rem; display: none;" id="mensaje-actualizacion-doctor">
+                 <i class="fas fa-check-circle"></i>
+                 <div>
+                     <strong>Doctor actualizado exitosamente</strong>
+                     <p>Los datos del doctor han sido modificados correctamente.</p>
+                 </div>
+             </div>
+         </section>
+     </div>
+    </main>
 </body>
 </html>

@@ -63,6 +63,19 @@ const crearDoctor = (nombre, especialidad, horarioInicio, horarioFin, diasDispon
     escribirDB_DOCTORES(db)
     return nuevoDoctor
 }
+const actualizarDoctor = (id, nombre, especialidad, horarioInicio, horarioFin, diasDisponibles) => {
+    const db = leerDB_DOCTORES()
+    const index = db.findIndex(u => u.id === id)
+
+    if(index === -1) return null
+    if(nombre) db[index].nombre = nombre
+    if(especialidad) db[index].especialidad = especialidad
+    if(horarioInicio) db[index].horarioInicio = horarioInicio
+    if(horarioFin) db[index].horarioFin = horarioFin
+    if(diasDisponibles) db[index].diasDisponibles = diasDisponibles
+    escribirDB_DOCTORES(db)
+    return db[index]
+}
 const agendaDoctor = (id) => {
     const db = leerDB_CITAS()
     return db.filter(u => u.doctorId === id)
@@ -160,6 +173,7 @@ module.exports = {
     obtenerDoctorNE,
     obtenerDoctoresEspecialidad,
     crearDoctor,
+    actualizarDoctor,
     obtenerPacientes,
     obtenerPacientesId,
     obtenerPacienteEmail,

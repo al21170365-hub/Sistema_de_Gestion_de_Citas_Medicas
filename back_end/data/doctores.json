@@ -4,11 +4,11 @@
     "nombre": "Dra. Laura Vidal",
     "especialidad": "Dermatóloga",
     "horarioInicio": "10:00",
-    "horarioFin": "19:00",
+    "horarioFin": "20:00",
     "diasDisponibles": [
       "Lunes",
-      "Martes",
-      "Jueves"
+      "Miércoles",
+      "Viernes"
     ]
   },
   {

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autocompletado Simple</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        
+        .autocomplete-container {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        
+        .autocomplete-list {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid #ccc;
+            border-top: none;
+            max-height: 200px;
+            overflow-y: auto;
+            display: none;
+            z-index: 1000;
+        }
+        
+        .autocomplete-item {
+            padding: 10px;
+            cursor: pointer;
+        }
+        
+        .autocomplete-item:hover {
+            background-color: #f0f0f0;
+        }
+        
+        .selected-items {
+            margin-top: 10px;
+        }
+        
+        .selected-item {
+            display: inline-block;
+            background: #e3f2fd;
+            padding: 5px 10px;
+            margin: 5px;
+            border-radius: 3px;
+        }
+        
+        .remove-btn {
+            margin-left: 8px;
+            cursor: pointer;
+            color: #ff4444;
+        }
+    </style>
+</head>
+<body>
+    <h2>Búsqueda con Autocompletado</h2>
+    
+    <div class="autocomplete-container">
+        <input type="text" 
+               id="search-input" 
+               placeholder="Escribe para buscar médicos..."
+               autocomplete="off">
+        <div id="autocomplete-list" class="autocomplete-list"></div>
+    </div>
+    
+    <div class="selected-items" id="selected-items"></div>
+    
+    <script>
+        // Datos de ejemplo - médicos disponibles
+        const medicos = [
+            { id: 1, nombre: "Dr. Juan Pérez", especialidad: "Cardiología" },
+            { id: 2, nombre: "Dra. María López", especialidad: "Pediatría" },
+            { id: 3, nombre: "Dr. Carlos Gómez", especialidad: "Dermatología" },
+            { id: 4, nombre: "Dra. Ana Torres", especialidad: "Ginecología" },
+            { id: 5, nombre: "Dr. Luis Martínez", especialidad: "Ortopedia" },
+            { id: 6, nombre: "Dra. Sofia Ramírez", especialidad: "Neurología" },
+            { id: 7, nombre: "Dr. Miguel Castro", especialidad: "Psiquiatría" },
+            { id: 8, nombre: "Dra. Laura Díaz", especialidad: "Oftalmología" },
+            { id: 9, nombre: "Dr. Jorge Ruiz", especialidad: "Urología" },
+            { id: 10, nombre: "Dra. Carmen Vega", especialidad: "Endocrinología" }
+        ];
+
+        // Elementos del DOM
+        const searchInput = document.getElementById('search-input');
+        const autocompleteList = document.getElementById('autocomplete-list');
+        const selectedItemsContainer = document.getElementById('selected-items');
+        
+        // Médicos seleccionados
+        let medicosSeleccionados = [];
+        
+        // Evento cuando se escribe en el campo de búsqueda
+        searchInput.addEventListener('input', function() {
+            const query = this.value.toLowerCase().trim();
+            
+            // Limpiar la lista anterior
+            autocompleteList.innerHTML = '';
+            
+            // Si no hay texto, ocultar la lista
+            if (!query) {
+                autocompleteList.style.display = 'none';
+                return;
+            }
+            
+            // Filtrar médicos que coincidan con la búsqueda
+            const resultados = medicos.filter(medico => {
+                return medico.nombre.toLowerCase().includes(query) || 
+                       medico.especialidad.toLowerCase().includes(query);
+            });
+            
+            // Si no hay resultados, ocultar la lista
+            if (resultados.length === 0) {
+                autocompleteList.style.display = 'none';
+                return;
+            }
+            
+            // Mostrar resultados en la lista
+            resultados.forEach(medico => {
+                const item = document.createElement('div');
+                item.className = 'autocomplete-item';
+                item.innerHTML = `
+                    <strong>${medico.nombre}</strong>
+                    <br>
+                    <small>${medico.especialidad}</small>
+                `;
+                
+                item.addEventListener('click', function() {
+                    agregarMedicoSeleccionado(medico);
+                    searchInput.value = '';
+                    autocompleteList.style.display = 'none';
+                });
+                
+                autocompleteList.appendChild(item);
+            });
+            
+            autocompleteList.style.display = 'block';
+        });
+        
+        // Ocultar la lista de autocompletado al hacer clic fuera
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('.autocomplete-container')) {
+                autocompleteList.style.display = 'none';
+            }
+        });
+        
+        // Permitir navegar con teclas (opcional)
+        searchInput.addEventListener('keydown', function(event) {
+            const items = autocompleteList.querySelectorAll('.autocomplete-item');
+            
+            if (event.key === 'ArrowDown' && items.length > 0) {
+                items[0].focus();
+                event.preventDefault();
+            }
+        });
+        
+        // Función para agregar médico seleccionado
+        function agregarMedicoSeleccionado(medico) {
+            // Verificar si ya fue seleccionado
+            if (medicosSeleccionados.some(m => m.id === medico.id)) {
+                alert('Este médico ya fue seleccionado');
+                return;
+            }
+            
+            // Agregar a la lista
+            medicosSeleccionados.push(medico);
+            actualizarListaSeleccionados();
+        }
+        
+        // Función para actualizar la lista de médicos seleccionados
+        function actualizarListaSeleccionados() {
+            selectedItemsContainer.innerHTML = '';
+            
+            medicosSeleccionados.forEach(medico => {
+                const item = document.createElement('div');
+                item.className = 'selected-item';
+                item.innerHTML = `
+                    ${medico.nombre} (${medico.especialidad})
+                    <span class="remove-btn" data-id="${medico.id}">✕</span>
+                `;
+                selectedItemsContainer.appendChild(item);
+            });
+            
+            // Agregar event listeners a los botones de eliminar
+            selectedItemsContainer.querySelectorAll('.remove-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const id = parseInt(this.getAttribute('data-id'));
+                    medicosSeleccionados = medicosSeleccionados.filter(m => m.id !== id);
+                    actualizarListaSeleccionados();
+                });
+            });
+            
+            // Mostrar mensaje si no hay médicos seleccionados
+            if (medicosSeleccionados.length === 0) {
+                selectedItemsContainer.innerHTML = '<em>No hay médicos seleccionados</em>';
+            }
+        }
+        
+        // Inicializar
+        actualizarListaSeleccionados();
+    </script>
+</body>
+</html>

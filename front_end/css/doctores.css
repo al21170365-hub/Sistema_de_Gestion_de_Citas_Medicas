@@ -1,0 +1,399 @@
+/* Variables de color - Paleta médica consistente */
+:root {
+    --azul-primario: #1a6fbb;
+    --azul-secundario: #2d8fd5;
+    --azul-claro: #e6f2ff;
+    --verde-medico: #4caf93;
+    --verde-suave: #e8f5f1;
+    --blanco: #ffffff;
+    --gris-claro: #f5f7fa;
+    --gris-medio: #e1e5eb;
+    --gris-texto: #5a677c;
+    --gris-oscuro: #333333;
+    --sombra: rgba(0, 0, 0, 0.08);
+    --sombra-fuerte: rgba(0, 0, 0, 0.12);
+    --amarillo: #ffc107;
+    --rojo: #dc3545;
+    --morado: #6f42c1;
+}
+
+/* Reset y tipografía */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--gris-claro);
+    color: var(--gris-oscuro);
+    line-height: 1.6;
+    font-size: 16px;
+    padding: 1rem;
+}
+
+/* Tipografía clara y legible */
+h1, h2, h3, h4 {
+    font-weight: 600;
+    color: var(--azul-primario);
+    margin-bottom: 1.25rem;
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+p, label, input, select, button {
+    font-size: 1rem; /* 16px equivalente */
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--gris-texto);
+}
+
+/* Enlace de inicio */
+.enlace-inicio {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: var(--blanco);
+    color: var(--azul-primario);
+    text-decoration: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 6px var(--sombra);
+    transition: all 0.3s ease;
+}
+
+.enlace-inicio:hover {
+    background-color: var(--azul-claro);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px var(--sombra-fuerte);
+}
+
+/* Tarjetas (cards) */
+.card {
+    background-color: var(--blanco);
+    border-radius: 10px;
+    padding: 1.75rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 12px var(--sombra);
+    border-top: 4px solid var(--morado);
+}
+
+/* Grupos de formularios */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Campos de entrada */
+input[type="text"],
+input[type="number"],
+input[type="tel"],
+input[type="email"],
+input[type="time"],
+select {
+    width: 100%;
+    padding: 0.875rem;
+    border: 1px solid var(--gris-medio);
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: all 0.3s;
+    font-family: inherit;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: var(--azul-primario);
+    box-shadow: 0 0 0 3px rgba(26, 111, 187, 0.1);
+}
+
+/* Checkbox group */
+.checkbox-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+    padding: 1rem;
+    background-color: var(--gris-claro);
+    border-radius: 6px;
+}
+
+.checkbox-group label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    margin-bottom: 0;
+    font-weight: normal;
+}
+
+.checkbox-group input[type="checkbox"] {
+    width: auto;
+    margin: 0;
+    accent-color: var(--verde-medico);
+}
+
+/* Botones */
+.btn {
+    border: none;
+    padding: 0.875rem 1.75rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    margin-right: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.btn-primary {
+    background-color: var(--azul-primario);
+    color: var(--blanco);
+}
+
+.btn-primary:hover {
+    background-color: var(--azul-secundario);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px var(--sombra);
+}
+
+.btn-success {
+    background-color: var(--verde-medico);
+    color: var(--blanco);
+}
+
+.btn-success:hover {
+    background-color: #3d9c82;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px var(--sombra);
+}
+
+.btn-secondary {
+    background-color: var(--gris-texto);
+    color: var(--blanco);
+}
+
+.btn-secondary:hover {
+    background-color: var(--gris-oscuro);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px var(--sombra);
+}
+
+.btn-warning {
+    background-color: var(--amarillo);
+    color: var(--gris-oscuro);
+}
+
+.btn-warning:hover {
+    background-color: #e0a800;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px var(--sombra);
+}
+
+/* Contenedores de resultados */
+.results-container {
+    background-color: var(--gris-claro);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+    border-left: 4px solid var(--morado);
+    min-height: 100px;
+}
+
+/* Layout de secciones */
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.seccion-contenedor {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .seccion-contenedor {
+        grid-template-columns: 1fr;
+    }
+    
+    h2 {
+        font-size: 1.35rem;
+    }
+    
+    .card {
+        padding: 1.5rem;
+    }
+    
+    .checkbox-group {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    }
+    
+    .btn {
+        margin-right: 0;
+        width: 100%;
+        margin-bottom: 0.75rem;
+    }
+}
+
+/* Mejoras visuales para resultados */
+.doctor-item {
+    background-color: var(--blanco);
+    border-radius: 6px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-left: 4px solid var(--morado);
+    box-shadow: 0 2px 4px var(--sombra);
+}
+
+.doctor-item h4 {
+    color: var(--azul-primario);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.doctor-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.info-label {
+    font-size: 0.875rem;
+    color: var(--gris-texto);
+    font-weight: 500;
+}
+
+.info-value {
+    font-weight: 600;
+    color: var(--gris-oscuro);
+}
+
+/* Etiqueta de especialidad */
+.especialidad-badge {
+    display: inline-block;
+    background-color: var(--verde-suave);
+    color: var(--verde-medico);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-left: 0.5rem;
+}
+
+/* Mensajes de estado */
+.mensaje-estado {
+    padding: 1rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.mensaje-exito {
+    background-color: rgba(76, 175, 147, 0.1);
+    border-left: 4px solid var(--verde-medico);
+    color: #2d7a67;
+}
+
+.mensaje-error {
+    background-color: rgba(220, 53, 69, 0.1);
+    border-left: 4px solid var(--rojo);
+    color: #a71d2a;
+}
+
+.mensaje-info {
+    background-color: rgba(26, 111, 187, 0.1);
+    border-left: 4px solid var(--azul-primario);
+    color: #1a5a96;
+}
+
+/* Cabecera de página */
+.cabecera-pagina {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.titulo-pagina {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.titulo-pagina h1 {
+    margin-bottom: 0;
+}
+
+/* Horario visual */
+.horario-display {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: var(--azul-claro);
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.875rem;
+}
+
+/* Días de la semana visual */
+.dias-display {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    margin-top: 0.5rem;
+}
+
+.dia-badge {
+    background-color: var(--gris-claro);
+    color: var(--gris-texto);
+    padding: 0.125rem 0.5rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.dia-badge.activo {
+    background-color: var(--verde-medico);
+    color: white;
+}

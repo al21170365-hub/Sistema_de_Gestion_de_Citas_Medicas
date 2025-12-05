@@ -6,6 +6,10 @@
     <script src="./js/pacientes.js" defer></script>
     <script src="./js/doctores.js" defer></script>
     <script src="./js/citas.js" defer></script>
+    <script src="./js/busquedas.js" defer></script>
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
     <title>Sistema de Gestión de Citas Médicas</title>
 </head>
 <body>
@@ -13,16 +17,137 @@
         <div class="header-content">
             <h1>Sistema de Gestión de Citas Médicas</h1>
             <p class="subtitle">Administre doctores, pacientes y citas de manera eficiente</p>
+            <input class="busqueda_global" type="text" placeholder="Busqueda global">
+            <button type="" onclick="busqueda_global()">🔎 Busqueda global</button>
         </div>
     </header>
+    <div class="contenedor-busqueda">
+        <h2>Búsqueda Avanzada</h2>
+        
+        <div class="filtros-busqueda">
+            <div class="grupo-filtros">
+                <h3>Filtros para Pacientes</h3>
+                <div class="campo-busqueda">
+                    <label for="busqueda-paciente">Buscar paciente:</label>
+                    <input type="text" id="busqueda-paciente" placeholder="Nombre, email, teléfono...">
+                </div>
+            </div>
+            
+            <div class="grupo-filtros">
+                <h3>Filtros para Doctores</h3>
+                <div class="campo-busqueda">
+                    <label for="busqueda-doctor">Buscar doctor:</label>
+                    <input type="text" id="busqueda-doctor" placeholder="Nombre, horario...">
+                </div>
+                <div class="campo-busqueda">
+                    <label for="especialidad-doctor">Especialidad:</label>
+                    <select id="especialidad-doctor">
+                        <option value="0">Ninguno</option>
+                        <option value="">Todas las especialidades</option>
+                        <option value="Cardiología">Cardiología</option>
+                        <option value="Pediatría">Pediatría</option>
+                        <option value="Dermatología">Dermatología</option>
+                        <option value="Ortopedia">Ortopedia</option>
+                        <option value="Neurología">Neurología</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="grupo-filtros">
+                <h3>Filtros para Citas</h3>
+                <div class="campo-busqueda">
+                    <label for="busqueda-cita">Buscar en citas:</label>
+                    <input type="text" id="busqueda-cita" placeholder="Motivo, notas...">
+                </div>
+                <div class="campo-busqueda">
+                    <label for="fecha-desde">Fecha desde:</label>
+                    <input type="date" id="fecha-desde">
+                </div>
+                <div class="campo-busqueda">
+                    <label for="fecha-hasta">Fecha hasta:</label>
+                    <input type="date" id="fecha-hasta">
+                </div>
+                <div class="campo-busqueda">
+                    <label for="estado-cita">Estado:</label>
+                    <select id="estado-cita">
+                        <option value="">Todos los estados</option>
+                        <option value="programada">Programada</option>
+                        <option value="completada">Completada</option>
+                        <option value="cancelada">Cancelada</option>
+                        <option value="pendiente">Pendiente</option>
+                    </select>
+                </div>
+            </div>
+            
+            <button onclick="busqueda_multiple_criterios()" class="btn-buscar">
+                🔍 Buscar
+            </button>
+            <button onclick="limpiarBusqueda()" class="btn-limpiar">
+                🗑️ Limpiar filtros
+            </button>
+            
+        </div>
+        
+    </div>
     <main>
-        <a href="./pages/pacientes.html">Pacientes</a>
-        <a href="./pages/doctores.html">Doctores</a>
-        <a href="./pages/citas.html">Citas</a>
-        <div class="pasientes_registrados"></div>
-        <div class="doctores_registrados"></div>
-        <div class="citas_programadas_hoy"></div>
-        <div class="citas_pendiente_24_horas"></div>
+        <div class="contenedor">
+            <h3><i class="fas fa-tachometer-alt"></i> Panel de Control</h3>
+            <p>Bienvenido al sistema de gestión de citas médicas. Utilice los enlaces de navegación para acceder a las diferentes secciones.</p>
+        </div>
+        
+        <div class="navegacion-principal">
+            <a href="./pages/pacientes.html">
+                <i class="fas fa-user-injured"></i> Pacientes
+            </a>
+            <a href="./pages/doctores.html">
+                <i class="fas fa-user-md"></i> Doctores
+            </a>
+            <a href="./pages/citas.html">
+                <i class="fas fa-calendar-check"></i> Citas
+            </a>
+        </div>
+        
+        <div class="pasientes_registrados">
+            <h3><i class="fas fa-users"></i> Pacientes Registrados</h3>
+            <p>Información de pacientes se cargará aquí.</p>
+        </div>
+        
+        <div class="doctores_registrados">
+            <h3><i class="fas fa-user-md"></i> Doctores Registrados</h3>
+            <p>Información de doctores se cargará aquí.</p>
+        </div>
+        
+        <div class="citas_programadas_hoy">
+            <h3><i class="fas fa-calendar-day"></i> Citas Programadas para Hoy</h3>
+            <p>Información de citas de hoy se cargará aquí.</p>
+        </div>
+        
+        <div class="badge-container">
+            <button class="icon-btn" id="notificationBtn">
+                <i class="fas fa-bell"></i>
+            </button>
+            <div class="badge pulse" id="notificationBadge">5</div>
+        </div>
+        
+        <div class="citas_pendiente_24_horas">
+            <h3><i class="fas fa-clock"></i> Citas en las Próximas 24 Horas</h3>
+            <p>Información de citas próximas se cargará aquí.</p>
+        </div>
+        
+        <div class="citas_mes">
+            <h3><i class="fas fa-chart-bar"></i> Citas por Mes</h3>
+            <canvas class="myChart" id="myChart"></canvas>
+        </div>
+        
+        <div class="estadisticas_doctores">
+            <h3><i class="fas fa-chart-pie"></i> Especialidades Más Solicitadas</h3>
+            <canvas class="myChart2" id="myChart2"></canvas>
+        </div>
+        
+        <div class="tasa_citas_canceladasR">
+            <h3><i class="fas fa-chart-line"></i> Tasa de Cancelación en Citas</h3>
+            <canvas class="tasa_citas_canceladas" id="tasa_citas_canceladas"></canvas>
+        </div>
     </main>
 </body>
 </html>

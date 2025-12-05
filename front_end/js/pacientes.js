@@ -21,7 +21,6 @@ async function get_pacientes(id_s) {
     } else {
         url = `http://localhost:9797/api/pacientes`
     }
-    
     try {
         const results = await fetch(url)
         if (!results.ok) {
@@ -111,16 +110,6 @@ async function put_paciente() {
            const errorMessage = result?.message || `Error: ${response.status} - ${response.statusText}`;
            throw new Error(errorMessage);
         }
-        getPacientes_container.innerHTML = `
-            <div class="success">
-                <strong>Paciente actualizado exitosamente:</strong><br>
-                <strong>ID:</strong> ${result.data.id} | 
-                <strong>Nombre:</strong> ${result.data.nombre} | 
-                <strong>Edad:</strong> ${result.data.edad} | 
-                <strong>Teléfono:</strong> ${result.data.telefono} | 
-                <strong>Email:</strong> ${result.data.email} | 
-                <strong>Fecha registro:</strong> ${result.data.fechaRegistro}
-            </div>`
     } catch (error) {
         console.log(`Error: ${error}`);
         getPacientes_container.innerHTML = `<div class="error">Error al actualizar paciente: ${error.message}</div>`
@@ -168,17 +157,43 @@ async function print_pacientes() {
                 <strong>Fecha registro:</strong> ${pacientes.data.fechaRegistro}
             </div>`
     } else {
-        for(let i = 0; i < pacientes.data.length; i++) {
-            getPacientes_container.innerHTML += `
-                <div class="paciente-item">
-                    <strong>ID:</strong> ${pacientes.data[i].id} | 
-                    <strong>Nombre:</strong> ${pacientes.data[i].nombre} | 
-                    <strong>Edad:</strong> ${pacientes.data[i].edad} | 
-                    <strong>Teléfono:</strong> ${pacientes.data[i].telefono} | 
-                    <strong>Email:</strong> ${pacientes.data[i].email} | 
-                    <strong>Fecha registro:</strong> ${pacientes.data[i].fechaRegistro}
-                </div>`
-        }
+       getPacientes_container.innerHTML = `
+            <table class="pacientes-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Edad</th>
+                        <th>Teléfono</th>
+                        <th>Email</th>
+                        <th>Fecha Registro</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${pacientes.data.map(paciente => `
+                        <tr>
+                            <td>${paciente.id}</td>
+                            <td>${paciente.nombre}</td>
+                            <td>${paciente.edad}</td>
+                            <td>${paciente.telefono}</td>
+                            <td>${paciente.email}</td>
+                            <td>${paciente.fechaRegistro}</td>
+                        </tr>
+                    `).join('')}
+                </tbody>
+            </table>
+       `;
+        // for(let i = 0; i < pacientes.data.length; i++) {
+        //     getPacientes_container.innerHTML += `
+        //         <div class="paciente-item">
+        //             <strong>ID:</strong> ${pacientes.data[i].id} | 
+        //             <strong>Nombre:</strong> ${pacientes.data[i].nombre} | 
+        //             <strong>Edad:</strong> ${pacientes.data[i].edad} | 
+        //             <strong>Teléfono:</strong> ${pacientes.data[i].telefono} | 
+        //             <strong>Email:</strong> ${pacientes.data[i].email} | 
+        //             <strong>Fecha registro:</strong> ${pacientes.data[i].fechaRegistro}
+        //         </div>`
+        // }
     }
 }
 

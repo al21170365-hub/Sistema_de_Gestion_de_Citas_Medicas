@@ -5,6 +5,7 @@ const {
     obtenerDoctorNE,
     obtenerDoctoresEspecialidad,
     crearDoctor,
+    actualizarDoctor,
     obtenerPacientes,
     obtenerPacientesId,
     obtenerPacienteEmail,
@@ -107,6 +108,28 @@ app.post('/api/doctores', (req,res) => {
 	success: true,
 	message: 'Doctor creado exitosamente',
 	data: nuevoDoctor
+    })
+})
+app.put('/api/doctores/:id', (req,res) => {
+    const {nombre,especialidad,horarioInicio,horarioFin,diasDisponibles} = req.body
+    const actualizar = actualizarDoctor(
+	    req.params.id,
+	    nombre,
+	    especialidad,
+	    horarioInicio,
+	    horarioFin,
+      diasDisponibles
+    )
+    if(!actualizar) {
+	return res.status(404).json({
+	    success: false,
+	    message: 'Doctor no encontrado'
+	})
+    }
+    res.status(200).json({
+	success: true,
+	message: 'Doctor actualizado exitosamente',
+	data: actualizar
     })
 })
 //=====================================================================================================================
@@ -405,7 +428,7 @@ app.get('/api/estadisticas/doctores', (req,res) => {
     res.status(200).json({
 	seccess: true,
 	mesage: 'Estadistica de daoctores extraida exitosamente',
-	data: doctores.map(u => u[0])
+	data: doctores.map(u => u)
     })
 })
 app.get('/api/estadisticas/especialidades', (req,res) => {
@@ -419,8 +442,9 @@ app.get('/api/estadisticas/especialidades', (req,res) => {
 	resultado[doctor.especialidad]++
 	return resultado
     }, {})
-    const max = Math.max(...Object.values(count))
-    const doctores = Object.entries(count).filter(([id,cantidad]) => cantidad === max)
+    // const max = Math.max(...Object.values(count))
+    // const doctores = Object.entries(count).filter(([id,cantidad]) => cantidad === max)
+    const doctores = Object.entries(count)
        
     if(doctores.length === 0) {
 	return res.status(404).json({
@@ -432,7 +456,7 @@ app.get('/api/estadisticas/especialidades', (req,res) => {
     res.status(200).json({
 	seccess: true,
 	mesage: 'Estadistica de especialidades extraida exitosamente',
-	data: doctores.map(u => u[0])
+	data: doctores.map(u => u)
     })
 })
 //=====================================================================================================================

@@ -9,10 +9,24 @@ const doctor_inicio_nuevo = document.querySelector('.doctor_inicio_nuevo')
 const doctor_final_nuevo = document.querySelector('.doctor_final_nuevo')
 const doctor_dias_nuevo = document.querySelectorAll('.doctor_dias_nuevo')
 
-async function get_doctores() {
-    getDoctores_container.innerHTML = ''
-    const especialidad = get_doctores_especialidad.value
-    const id_s = get_doctores_id.value
+const doctor_id_actualizar = document.querySelector('.doctor_id_actualizar')
+const doctor_nombre_actualizar = document.querySelector('.doctor_nombre_actualizar')
+const doctor_especialidad_actualizar = document.querySelector('.doctor_especialidad_actualizar')
+const doctor_horainicio_actualizar = document.querySelector('.doctor_horainicio_actualizar')
+const doctor_horafin_actualizar = document.querySelector('.doctor_horafin_actualizar')
+const doctor_dias_actualizar = document.querySelectorAll('.doctor_dias_actualizar')
+const doctor_actualizar_r = document.querySelector('.doctor_actualizar_r')
+
+async function get_doctores(id) {
+    let id_s
+    
+    if(!id) {
+        getDoctores_container.innerHTML = ''
+        const especialidad = get_doctores_especialidad.value
+        const id_s = get_doctores_id.value
+    }else {
+      id_s = id
+    }
     let url = ''
     
     if(id_s) {
@@ -29,6 +43,9 @@ async function get_doctores() {
             throw new Error(`Error: ${results.status}`)
         }
         const datas = await results.json()
+        if(id) {
+            return datas
+        }
         if(id_s || (datas.data && !Array.isArray(datas.data))) {
             print_doctor(datas)
         } else {
@@ -93,7 +110,82 @@ async function post_doctor() {
         getPacientes_container.innerHTML = `<div class="error">Error al actualizar paciente: ${error.message}</div>`
     }
 }
+async function put_doctor() {
 
+    doctor_actualizar_r.innerHTML = '';
+    const id_s = doctor_id_actualizar.value;
+    const nombre = doctor_nombre_actualizar.value
+    const especialidad = doctor_especialidad_actualizar.value
+    const horarioInicio = doctor_horainicio_actualizar.value
+    const horarioFin = doctor_horafin_actualizar.value
+    const dias = Array.from(doctor_dias_actualizar)
+        .filter(checkbox => checkbox.checked)
+        .map(checkbox => checkbox.value);
+
+    if (!id_s) {
+        doctor_actualizar_r.innerHTML = '<div class="error">Error: Se requiere ID del doctor</div>'
+        return;
+    }
+
+    let url = `http://localhost:9797/api/doctores/${id_s}`;
+    const updatedData = {
+        "nombre": nombre,
+        "especialidad": especialidad,
+        "horarioInicio": horarioInicio,
+        "horarioFin": horarioFin,
+        "diasDisponibles": dias
+    };
+
+    try {
+        const response = await fetch(url, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedData)
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error: ${response.status} - ${response.statusText}`);
+        }
+
+        const result = await response.json();
+        doctor_actualizar_r.innerHTML = `<div class="ok">${result?.message}</div>`
+        if (!response.ok || (result && result.success === false)) {
+           const errorMessage = result?.message || `Error: ${response.status} - ${response.statusText}`;
+           throw new Error(errorMessage);
+        }
+    } catch (error) {
+        console.log(`Error: ${error}`);
+        doctor_actualizar_r.innerHTML = `<div class="error">Error al actualizar doctor: ${error.message}</div>`
+    }
+}
+async function get_put_doctor() {
+    const id_s = doctor_id_actualizar.value;
+    if (!id_s) {
+        alert('Por favor ingrese un ID de doctor')
+        return
+    }
+    
+    const doctor = await get_doctores(id_s)
+    
+    if (!doctor || !doctor.data) {
+        alert('Doctor no encontrado')
+        return
+    }
+    
+    doctor_nombre_actualizar.value = doctor.data.nombre || ''
+    doctor_especialidad_actualizar.value = doctor.data.especialidad || ''
+    doctor_horainicio_actualizar.value = doctor.data.horarioInicio || ''
+    doctor_horafin_actualizar.value = doctor.data.horarioFin || ''
+    const dias = Array.isArray(doctor.data.diasDisponibles) 
+                ? doctor.data.diasDisponibles 
+                : doctor.data.diasDisponibles.split(',');
+    doctor_dias_actualizar.forEach(checkbox => {
+                checkbox.checked = dias.includes(checkbox.value);
+    });
+    
+}
 function print_doctores(doctores) {
     if (!doctores.data || doctores.data.length === 0) {
         getDoctores_container.innerHTML = '<div>No se encontraron doctores</div>'
