@@ -110,6 +110,18 @@ Sistema_de_Gestion_de_Citas_Medicas/
 ├── README.md                      
 └── package-lock.json                  
 
+##Paleta de colores principal
+
+```css
+:root {
+    --azul-primario: #1a6fbb;      /* Principal para títulos */
+    --azul-secundario: #2d8fd5;    /* Hover botones */
+    --verde-medico: #4caf93;       /* Acciones exitosas */
+    --rojo: #dc3545;               /* Cancelaciones/errores */
+    --amarillo: #ffc107;           /* Advertencias */
+    --gris-claro: #f5f7fa;         /* Fondos */
+    --gris-texto: #5a677c;         /* Texto secundario */
+}
 
 ### 📋 DOCTORES
 1. **Obtener todos los doctores**
