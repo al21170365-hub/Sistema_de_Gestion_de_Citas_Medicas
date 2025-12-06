@@ -37,6 +37,10 @@
 3. **Iniciar el API**
    ```bash
    nmp start dev
+4. **Iniciar la pagina**
+   ```bash
+   cd ../front_end
+   open index.html
 
 ### Pasos de Instalación con Docker(si gusta)
 
@@ -53,6 +57,10 @@
 4. **Inicializar el contenedor**
    ```bash
    docker run -p 9797:9797 node-app
+5. **Iniciar la pagina**
+   ```bash
+   cd ../front_end
+   open index.html
 
 ## Documentación de Endpoints
 
