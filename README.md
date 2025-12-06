@@ -108,9 +108,10 @@ Sistema_de_Gestion_de_Citas_Medicas/
 │   └── index.html                 
 ├── LICENSE                        
 ├── README.md                      
-└── package-lock.json                  
+└── package-lock.json
+```                  
 
-##Paleta de colores principal
+## Paleta de colores principal
 
 ```css
 :root {
@@ -122,6 +123,17 @@ Sistema_de_Gestion_de_Citas_Medicas/
     --gris-claro: #f5f7fa;         /* Fondos */
     --gris-texto: #5a677c;         /* Texto secundario */
 }
+```
+
+## Diseño responsivo
+
+```css
+@media (max-width: 574px) {
+    .seccion-contenedor { grid-template-columns: 1fr; }
+    .pacientes-table { font-size: 10px; }
+    .btn { width: 100%; }
+}
+```
 
 ### 📋 DOCTORES
 1. **Obtener todos los doctores**
