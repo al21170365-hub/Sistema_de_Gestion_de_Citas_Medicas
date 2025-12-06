@@ -37,6 +37,10 @@
 3. **Iniciar el API**
    ```bash
    nmp start dev
+4. **Iniciar la pagina**
+   ```bash
+   cd ../front_end
+   open index.html
 
 ### Pasos de Instalación con Docker(si gusta)
 
@@ -53,6 +57,10 @@
 4. **Inicializar el contenedor**
    ```bash
    docker run -p 9797:9797 node-app
+5. **Iniciar la pagina**
+   ```bash
+   cd ../front_end
+   open index.html
 
 ## Documentación de Endpoints
 
@@ -101,6 +109,19 @@ Sistema_de_Gestion_de_Citas_Medicas/
 ├── LICENSE                        
 ├── README.md                      
 └── package-lock.json                  
+
+##Paleta de colores principal
+
+```css
+:root {
+    --azul-primario: #1a6fbb;      /* Principal para títulos */
+    --azul-secundario: #2d8fd5;    /* Hover botones */
+    --verde-medico: #4caf93;       /* Acciones exitosas */
+    --rojo: #dc3545;               /* Cancelaciones/errores */
+    --amarillo: #ffc107;           /* Advertencias */
+    --gris-claro: #f5f7fa;         /* Fondos */
+    --gris-texto: #5a677c;         /* Texto secundario */
+}
 
 ### 📋 DOCTORES
 1. **Obtener todos los doctores**
