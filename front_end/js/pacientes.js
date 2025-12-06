@@ -60,6 +60,10 @@ async function post_paciente() {
         });
         
         const result = await response.json();
+        // paciente_nombre_nuevo.innerText = ''
+        // paciente_edad_nuevo.innerText = ''
+        // paciente_telefono_nuevo.innerText = ''
+        // paciente_email_nuevo.innerText = ''
         // const nuevo_p = document.querySelector('.nuevo_p')
         // nuevo_p.innerHTML = `<div class="ok">${result?.message}</div>`
         alert(`${result?.message}`)

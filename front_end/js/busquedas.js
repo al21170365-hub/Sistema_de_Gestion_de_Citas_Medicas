@@ -97,6 +97,10 @@ async function busqueda_global() {
         
         return false;
     });
+    if(pacientesFiltrados.length === 0 && doctoresFiltrados.length === 0 && citasFiltradas.length === 0) {
+        alert(`No se encontraron datos`)
+        return 
+    }
 
     let html = ''
 
@@ -214,6 +218,7 @@ async function busqueda_multiple_criterios() {
     
     // Si todos los campos están vacíos, mostrar mensaje
     if (!textoPaciente && !textoDoctor && !textoCita && !fechaDesde && !fechaHasta && !estadoCita && !especialidad) {
+        alert(`Ingrese al menos un criterio de búsqueda`)
         contenedor.innerHTML = '<p class="mensaje-info">Ingrese al menos un criterio de búsqueda</p>';
         return;
     }

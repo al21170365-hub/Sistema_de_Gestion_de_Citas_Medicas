@@ -66,6 +66,7 @@ async function get_citas(id_s,id_a,id_h,id) {
         // getCitas_btn.disable = false
         return datas
     } catch (error) {
+        alert(`${error}`)
         console.log(`Error: ${error}`)
         return error
     }
@@ -104,6 +105,7 @@ async function post_citas() {
             return
             // throw new Error(`Error: ${response.status} - ${response.statusText}`);
         }
+        alert(`${result?.message}`)
         // const nuevaa = document.querySelector('.nuevaa')
         // nuevaa.innerHTML = `${result?.message}`
     } catch (error) {
@@ -115,7 +117,8 @@ async function put_citas() {
     const id_s = citas_id_cancelar.value
 
     if (!id_s) {
-        getPacientes_container.innerHTML = '<div class="error">Error: Se requiere ID del paciente</div>'
+        alert(`Error: Se requiere ID del paciente`)
+        // getPacientes_container.innerHTML = '<div class="error">Error: Se requiere ID del paciente</div>'
         return;
     }
     
@@ -136,6 +139,7 @@ async function put_citas() {
             return
             // throw new Error(`Error: ${response.status} - ${response.statusText}`);
         }
+        alert(`${result?.message}`)
         // const form_group = document.querySelector('.canceladaa')
         // form_group.innerHTML = `${result?.message}`
     } catch (error) {
@@ -759,8 +763,10 @@ async function show_citas_proximas() {
             throw new Error(`Error: ${results.status}`)
         }
         const datas = await results.json()
-        citas_pendiente_24_horas.innerHTML = `<h2>Citas pendientes proximas 24 horas</h2>`
-       citas_pendiente_24_horas.innerHTML = `
+        citas_pendiente_24_horas.innerHTML = `
+            <h3><i class="fas fa-clock"></i> Citas en las Próximas 24 Horas</h3>
+        `
+       citas_pendiente_24_horas.innerHTML += `
             <table class="pacientes-table">
                 <thead>
                     <tr>

@@ -240,7 +240,10 @@ main {
 }
 
 /* Responsive */
-@media (max-width: 768px) {
+@media (max-width: 574px) {
+    .pacientes-table {
+      font-size: 10px
+    }
     .seccion-contenedor {
         grid-template-columns: 1fr;
     }

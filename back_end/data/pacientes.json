@@ -1,8 +1,8 @@
 [
   {
     "id": "P001",
-    "nombre": "Lazcano Monzon",
-    "edad": "42",
+    "nombre": "Lazcano M",
+    "edad": "32",
     "telefono": "555-0102",
     "email": "carlos.rodriguez@email.com",
     "fechaRegistro": "2024-10-15"
@@ -86,5 +86,21 @@
     "telefono": "1234567890",
     "email": "pepez@gmail.com",
     "fechaRegistro": "12/4/2025, 11:35:28 PM"
+  },
+  {
+    "id": "P012",
+    "nombre": "juan",
+    "edad": "21",
+    "telefono": "1234567890",
+    "email": "juan@gmail.com",
+    "fechaRegistro": "12/5/2025, 1:28:32 PM"
+  },
+  {
+    "id": "P013",
+    "nombre": "sdasdasd",
+    "edad": "21",
+    "telefono": "1234567890",
+    "email": "ASDASD@gmail.com",
+    "fechaRegistro": "12/5/2025, 9:56:31 PM"
   }
 ]

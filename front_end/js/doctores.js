@@ -113,6 +113,7 @@ async function post_doctor() {
             alert(`${result?.message}`)
             return
         }
+        alert(`${result?.message}`)
         // nuevo_d.innerHTML = `${result?.message}`
     } catch (error) {
         console.log(`Error: ${error}`);
@@ -162,6 +163,7 @@ async function put_doctor() {
             return
 
         }
+        alert(`${result?.message}`)
         // doctor_actualizar_r.innerHTML = `<div class="ok">${result?.message}</div>`
         // if (!response.ok || (result && result.success === false)) {
         //    const errorMessage = result?.message || `Error: ${response.status} - ${response.statusText}`;
@@ -270,6 +272,15 @@ async function amount_doctores() {
     try {
         const results = await fetch(url)
         const datas = await results.json()
+        option = ''
+        const especialidad_doctor = document.querySelector('#especialidad-doctor')
+        for(let i=0;i<datas.data.length;i++) {
+            if(i===0) {
+                option += `<option value="">Todas especialidades</option>`
+            }
+            option += `<option value="${datas.data[i].especialidad}">${datas.data[i].especialidad}</option>`
+        }
+        especialidad_doctor.innerHTML = `${option}`
         if (!results.ok) {
             throw new Error(`${datas?.message}`)
         }
