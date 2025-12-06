@@ -494,11 +494,15 @@ app.get('/api/doctoresf/disponibles', (req, res) => {
         })
     }
     
+    console.log(fecha)
+    console.log(hora)
+
     const filtro = doctores.filter(doctor => {
         const coincideFecha = !fecha || doctor.diasDisponibles.find(u => u === nameD(fechaN))
         const coincideHora = !hora || doctor.horarioInicio <= hora && hora <= doctor.horarioFin
         return coincideFecha && coincideHora
     })
+    console.log(filtro)
 
     if(filtro.length === 0) {
         return res.status(404).json({

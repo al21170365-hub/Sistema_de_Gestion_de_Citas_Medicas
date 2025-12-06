@@ -595,10 +595,13 @@ async function get_doctores_disponibles() {
     let url = 'http://localhost:9797/api/doctoresf/disponibles'
     const params = new URLSearchParams()
     if (fecha) params.append('fecha', fecha.replace(/\//g, '-'))
-    if (hora) params.append('estado',hora)
+    if (hora) params.append('hora',hora)
     if (params.toString()) {
         url += `?${params.toString()}`
     }
+    console.log(url)
+    console.log(fecha)
+      console.log(hora)
     
     try {
         const results = await fetch(url)
